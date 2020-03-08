@@ -1,0 +1,1512 @@
+{
+    "@context": {
+      "xml": "http://www.w3.org/XML/1998/namespace",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "owl": "http://www.w3.org/2002/07/owl#",
+      "ufo": "http://onto.fel.cvut.cz/ontologies/ufo/",
+      "doc": "http://onto.fel.cvut.cz/ontologies/documentation/",
+      "form": "http://onto.fel.cvut.cz/ontologies/form/",
+      "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/"
+    },
+    "@graph": [
+      {
+        "@id": "_:b0",
+        "@type": "form:condition",
+        "form:accepts-answer-value": [
+          "DOC",
+          "DOD"
+        ],
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/date-of-death",
+              "@type": "doc:question",
+              "rdfs:label": "Date of death (month/year)"
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/cause",
+              "@type": "doc:question",
+              "form:is-relevant-if": {
+                "@id": "_:b0"
+              },
+              "rdfs:label": "Cause"
+            }
+          ],
+          "form-lt:has-layout-class": "section",
+          "rdfs:label": "Current status"
+        }
+      },
+      {
+        "@id": "_:b1",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/pregnancy-after-primary-treatment/attempt-to-concieve",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/pregnancy-after-primary-treatment/attempt-to-concieve/more-than-6-months",
+            "@type": "doc:question",
+            "form:is-relevant-if": {
+              "@id": "_:b1"
+            },
+            "rdfs:label": "More than 6 months"
+          },
+          "form-lt:has-layout-class": [
+            "answerable",
+            "checkbox",
+            "section"
+          ],
+          "rdfs:label": "Attempt to concieve"
+        }
+      },
+      {
+        "@id": "_:b10",
+        "@type": "form:condition",
+        "form:has-valid-answer": {
+          "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-q",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-information-of-the-outcome-available-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "17:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1861149039",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "478 - UTC time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Information of the outcome available (follow-up available)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-at-least-1-year-follow-up-treatment-before-april-2015-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681-a",
+                "@type": "doc:answer",
+                "doc:has_object_value": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-454/v-63",
+                  "rdfs:comment": {
+                    "@value": "Czech Republic",
+                    "@language": "en"
+                  },
+                  "rdfs:label": {
+                    "@value": "63 - Czech Republic",
+                    "@language": "en"
+                  }
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance344766573",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "454 - State/area of occ",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "At least 1 year follow up (treatment before April 2015)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-fertility-sparing-treatment-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "19:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-145066707",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "457 - Local time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Fertility sparing treatment (any procedure, at least attempt)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-cervical-cancer-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "ACC Praha",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1419689680",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "440 - Location name",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Cervical cancer (any histology, any stage)",
+                "@language": "en"
+              }
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "wizard-step",
+            "section"
+          ],
+          "form:has-question-origin": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-1cb2b80f70e8bd625222f0d06e04c842"
+          },
+          "form:has-template": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-qt",
+            "form:has-origin-type": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model-view/section"
+            },
+            "form:has-template-origin": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005"
+            },
+            "rdfs:label": "occurrence where"
+          },
+          "rdfs:label": "Inclusion critera"
+        }
+      },
+      {
+        "@id": "_:b11",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--surgical-treatment--repeated-cervical-procedure-q",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--s-t--repeated-cervical-procedure-reason-q",
+            "@type": "doc:question",
+            "form:is-relevant-if": {
+              "@id": "_:b11"
+            },
+            "rdfs:label": "Reason"
+          },
+          "form-lt:has-layout-class": [
+            "answerable",
+            "checkbox",
+            "section"
+          ],
+          "rdfs:label": "Repeated cervical procedure"
+        }
+      },
+      {
+        "@id": "_:b12",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/pre-cancer-recurrence-during-the-follow-up",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/pre-cancer-recurrence-during-the-follow-up/pre-cancer-type",
+            "@type": "doc:question",
+            "form:is-relevant-if": {
+              "@id": "_:b12"
+            },
+            "rdfs:label": "Pre-cancer type"
+          },
+          "form-lt:has-layout-class": [
+            "checkbox",
+            "answerable",
+            "section"
+          ],
+          "rdfs:label": "Pre-cancer recurrence during the follow-up"
+        }
+      },
+      {
+        "@id": "_:b13",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/hysterectomy-or-radiation-treatment",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/hysterectomy-or-radiation-treatment/reason",
+            "@type": "doc:question",
+            "form:requires-answer-description-if": {
+              "@id": "_:b13"
+            },
+            "rdfs:label": "Reason"
+          },
+          "form-lt:has-layout-class": [
+            "checkbox",
+            "answerable",
+            "section"
+          ],
+          "rdfs:label": "Hysterectomy or radiation treatment (during the follow-up period)"
+        }
+      },
+      {
+        "@id": "_:b14",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--adjuvant-q",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--adjuvant--no-of-cycles-q",
+            "@type": "doc:question",
+            "form-lt:has-layout-class": "number",
+            "form:has-datatype": {
+              "@id": "xsd:int"
+            },
+            "form:is-relevant-if": {
+              "@id": "_:b14"
+            },
+            "rdfs:label": "no of cycles",
+            "xsd:maxInclusive": "6",
+            "xsd:minInclusive": "1"
+          },
+          "form-lt:has-layout-class": [
+            "checkbox",
+            "answerable",
+            "section"
+          ],
+          "rdfs:label": "Adjuvant (after treatment procedure)"
+        }
+      },
+      {
+        "@id": "_:b2",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/follow-up-procedure/other",
+          "@type": "doc:question",
+          "form-lt:has-layout-class": "checkbox",
+          "form:requires-answer-description-if": {
+            "@id": "_:b2"
+          },
+          "rdfs:label": "others"
+        }
+      },
+      {
+        "@id": "_:b3",
+        "@type": "form:condition",
+        "form:has-valid-answer": {
+          "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-q",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-information-of-the-outcome-available-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "17:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1861149039",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "478 - UTC time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Information of the outcome available (follow-up available)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-at-least-1-year-follow-up-treatment-before-april-2015-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681-a",
+                "@type": "doc:answer",
+                "doc:has_object_value": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-454/v-63",
+                  "rdfs:comment": {
+                    "@value": "Czech Republic",
+                    "@language": "en"
+                  },
+                  "rdfs:label": {
+                    "@value": "63 - Czech Republic",
+                    "@language": "en"
+                  }
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance344766573",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "454 - State/area of occ",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "At least 1 year follow up (treatment before April 2015)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-fertility-sparing-treatment-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "19:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-145066707",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "457 - Local time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Fertility sparing treatment (any procedure, at least attempt)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-cervical-cancer-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "ACC Praha",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1419689680",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "440 - Location name",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Cervical cancer (any histology, any stage)",
+                "@language": "en"
+              }
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "wizard-step",
+            "section"
+          ],
+          "form:has-question-origin": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-1cb2b80f70e8bd625222f0d06e04c842"
+          },
+          "form:has-template": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-qt",
+            "form:has-origin-type": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model-view/section"
+            },
+            "form:has-template-origin": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005"
+            },
+            "rdfs:label": "occurrence where"
+          },
+          "rdfs:label": "Inclusion critera"
+        }
+      },
+      {
+        "@id": "_:b4",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence/location",
+              "@type": "doc:question",
+              "form:is-relevant-if": {
+                "@id": "_:b7",
+                "@type": "form:condition",
+                "form:accepts-answer-value": true,
+                "form:has-tested-question": {
+                  "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence"
+                }
+              },
+              "rdfs:label": "Location"
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence/disease-free-interval",
+              "@type": "doc:question",
+              "form:has-datatype": {
+                "@id": "xsd:int"
+              },
+              "form:has-layout-class": "number",
+              "form:has-unit": "month",
+              "form:is-relevant-if": {
+                "@id": "_:b4"
+              },
+              "form:requires-answer-if": {
+                "@id": "_:b5",
+                "@type": "form:condition",
+                "form:accepts-answer-value": [
+                  "DOD",
+                  "AWD"
+                ],
+                "form:has-tested-question": {
+                  "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status",
+                  "@type": "doc:question",
+                  "doc:has_related_question": [
+                    {
+                      "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/date-of-death",
+                      "@type": "doc:question",
+                      "rdfs:label": "Date of death (month/year)"
+                    },
+                    {
+                      "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/cause",
+                      "@type": "doc:question",
+                      "form:is-relevant-if": {
+                        "@id": "_:b0",
+                        "@type": "form:condition",
+                        "form:accepts-answer-value": [
+                          "DOC",
+                          "DOD"
+                        ],
+                        "form:has-tested-question": {
+                          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status"
+                        }
+                      },
+                      "rdfs:label": "Cause"
+                    }
+                  ],
+                  "form-lt:has-layout-class": "section",
+                  "rdfs:label": "Current status"
+                }
+              },
+              "rdfs:label": "Disease free interval (DFI)"
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "checkbox",
+            "answerable",
+            "section"
+          ],
+          "rdfs:label": "Cancer recurrence"
+        }
+      },
+      {
+        "@id": "_:b5",
+        "@type": "form:condition",
+        "form:accepts-answer-value": [
+          "DOD",
+          "AWD"
+        ],
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/date-of-death",
+              "@type": "doc:question",
+              "rdfs:label": "Date of death (month/year)"
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/cause",
+              "@type": "doc:question",
+              "form:is-relevant-if": {
+                "@id": "_:b0",
+                "@type": "form:condition",
+                "form:accepts-answer-value": [
+                  "DOC",
+                  "DOD"
+                ],
+                "form:has-tested-question": {
+                  "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status"
+                }
+              },
+              "rdfs:label": "Cause"
+            }
+          ],
+          "form-lt:has-layout-class": "section",
+          "rdfs:label": "Current status"
+        }
+      },
+      {
+        "@id": "_:b6",
+        "@type": "form:condition",
+        "form:has-valid-answer": {
+          "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-q",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-information-of-the-outcome-available-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "17:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1861149039",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "478 - UTC time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Information of the outcome available (follow-up available)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-at-least-1-year-follow-up-treatment-before-april-2015-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681-a",
+                "@type": "doc:answer",
+                "doc:has_object_value": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-454/v-63",
+                  "rdfs:comment": {
+                    "@value": "Czech Republic",
+                    "@language": "en"
+                  },
+                  "rdfs:label": {
+                    "@value": "63 - Czech Republic",
+                    "@language": "en"
+                  }
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance344766573",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "454 - State/area of occ",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "At least 1 year follow up (treatment before April 2015)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-fertility-sparing-treatment-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "19:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-145066707",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "457 - Local time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Fertility sparing treatment (any procedure, at least attempt)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-cervical-cancer-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "ACC Praha",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1419689680",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "440 - Location name",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Cervical cancer (any histology, any stage)",
+                "@language": "en"
+              }
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "wizard-step",
+            "section"
+          ],
+          "form:has-question-origin": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-1cb2b80f70e8bd625222f0d06e04c842"
+          },
+          "form:has-template": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-qt",
+            "form:has-origin-type": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model-view/section"
+            },
+            "form:has-template-origin": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005"
+            },
+            "rdfs:label": "occurrence where"
+          },
+          "rdfs:label": "Inclusion critera"
+        }
+      },
+      {
+        "@id": "_:b7",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence/location",
+              "@type": "doc:question",
+              "form:is-relevant-if": {
+                "@id": "_:b7"
+              },
+              "rdfs:label": "Location"
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence/disease-free-interval",
+              "@type": "doc:question",
+              "form:has-datatype": {
+                "@id": "xsd:int"
+              },
+              "form:has-layout-class": "number",
+              "form:has-unit": "month",
+              "form:is-relevant-if": {
+                "@id": "_:b4",
+                "@type": "form:condition",
+                "form:accepts-answer-value": true,
+                "form:has-tested-question": {
+                  "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/reccurence/cancer-recurrence"
+                }
+              },
+              "form:requires-answer-if": {
+                "@id": "_:b5",
+                "@type": "form:condition",
+                "form:accepts-answer-value": [
+                  "DOD",
+                  "AWD"
+                ],
+                "form:has-tested-question": {
+                  "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status",
+                  "@type": "doc:question",
+                  "doc:has_related_question": [
+                    {
+                      "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/date-of-death",
+                      "@type": "doc:question",
+                      "rdfs:label": "Date of death (month/year)"
+                    },
+                    {
+                      "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status/cause",
+                      "@type": "doc:question",
+                      "form:is-relevant-if": {
+                        "@id": "_:b0",
+                        "@type": "form:condition",
+                        "form:accepts-answer-value": [
+                          "DOC",
+                          "DOD"
+                        ],
+                        "form:has-tested-question": {
+                          "@id": "http://vfn.cz/ontologies/fss-form/follow-up-and-recurrence/current-status"
+                        }
+                      },
+                      "rdfs:label": "Cause"
+                    }
+                  ],
+                  "form-lt:has-layout-class": "section",
+                  "rdfs:label": "Current status"
+                }
+              },
+              "rdfs:label": "Disease free interval (DFI)"
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "checkbox",
+            "answerable",
+            "section"
+          ],
+          "rdfs:label": "Cancer recurrence"
+        }
+      },
+      {
+        "@id": "_:b8",
+        "@type": "form:condition",
+        "form:has-valid-answer": {
+          "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-q",
+          "@type": "doc:question",
+          "doc:has_related_question": [
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-information-of-the-outcome-available-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "17:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1122843329",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1861149039",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-478",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "478 - UTC time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The UTC time of the occurrence entered using the 24 hour clock e.g. 23:59. UTC: Time scale based on the second (SI), as defined and recommended by the CCIR, and maintained by the Bureau International des Poids et Mesures (BIPM). For most practical purposes associated with the Radio Regulations, UTC is equivalent to mean solar time at the prime meridian (0° longitude), formerly expressed in GMT.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Information of the outcome available (follow-up available)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-at-least-1-year-follow-up-treatment-before-april-2015-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681-a",
+                "@type": "doc:answer",
+                "doc:has_object_value": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/vl-a-454/v-63",
+                  "rdfs:comment": {
+                    "@value": "Czech Republic",
+                    "@language": "en"
+                  },
+                  "rdfs:label": {
+                    "@value": "63 - Czech Republic",
+                    "@language": "en"
+                  }
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance124294681",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance344766573",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-454",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "454 - State/area of occ",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The identification of the State or geographical area where the occurrence occurred. N.B. the designation employed for States and geographical areas do not imply the expression of any opinion whatsoever on the part of ICAO concerning the legal status of any country, territory, city, area or of its authorities, or concerning the delineation of its frontiers and boundaries.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "At least 1 year follow up (treatment before April 2015)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-fertility-sparing-treatment-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "19:24:00",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance183199300",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-145066707",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-457",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "457 - Local time",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "The local time of the occurrence time entered using the 24 hour clock e.g. 23:59.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Fertility sparing treatment (any procedure, at least attempt)",
+                "@language": "en"
+              }
+            },
+            {
+              "@id": "http://vfn.cz/ontologies/fss-form/inclusion-criteria-cervical-cancer-q",
+              "@type": "doc:question",
+              "doc:has_answer": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471-a",
+                "@type": "doc:answer",
+                "doc:has_data_value": {
+                  "@value": "ACC Praha",
+                  "@language": "en"
+                },
+                "form:has-answer-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance1540673471",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance"
+                }
+              },
+              "form-lt:has-layout-class": "checkbox",
+              "form:has-origin-type": [
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                }
+              ],
+              "form:has-question-origin": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-1419689680",
+                "@type": [
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance",
+                  "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440"
+                ]
+              },
+              "form:has-template": {
+                "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440-qt",
+                "@type": "form:question-template",
+                "form:has-origin-type": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "form:has-template-origin": {
+                  "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/a-440",
+                  "@type": "http://onto.fel.cvut.cz/ontologies/eccairs/model/attribute"
+                },
+                "rdfs:comment": {
+                  "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                  "@language": "en"
+                },
+                "rdfs:label": {
+                  "@value": "440 - Location name",
+                  "@language": "en"
+                }
+              },
+              "rdfs:comment": {
+                "@value": "Location of occurrence should be the name of the closest settled area or geographical feature.",
+                "@language": "en"
+              },
+              "rdfs:label": {
+                "@value": "Cervical cancer (any histology, any stage)",
+                "@language": "en"
+              }
+            }
+          ],
+          "form-lt:has-layout-class": [
+            "wizard-step",
+            "section"
+          ],
+          "form:has-question-origin": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-1cb2b80f70e8bd625222f0d06e04c842"
+          },
+          "form:has-template": {
+            "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005-qt",
+            "form:has-origin-type": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model-view/section"
+            },
+            "form:has-template-origin": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/aviation-3.4.0.2/operational-full/s-1000005"
+            },
+            "rdfs:label": "occurrence where"
+          },
+          "rdfs:label": "Inclusion critera"
+        }
+      },
+      {
+        "@id": "_:b9",
+        "@type": "form:condition",
+        "form:accepts-answer-value": true,
+        "form:has-tested-question": {
+          "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--chemotherapy--neoadjuvant-q",
+          "@type": "doc:question",
+          "doc:has_related_question": {
+            "@id": "http://vfn.cz/ontologies/fss-form/primary-treatment--c--neoadjuvant--no-of-cycles-q",
+            "@type": "doc:question",
+            "doc:has_answer": {
+              "@id": "http://onto.fel.cvut.cz/ontologies/eccairs/model/instance#instance-111111111-a",
+              "@type": "doc:answer",
+              "doc:has_data_value": true
+            },
+            "form-lt:has-layout-class": "number",
+            "form:has-datatype": {
+              "@id": "xsd:int"
+            },
+            "form:is-relevant-if": {
+              "@id": "_:b9"
+            },
+            "rdfs:label": "no of cycles",
+            "xsd:maxInclusive": "6",
+            "xsd:minInclusive": "1"
+          },
+          "form-lt:has-layout-class": [
+            "section",
+            "answerable",
+            "checkbox"
+          ],
+          "rdfs:label": "Neoadjuvant (before treatment procedure)"
+        }
+      }
+    ]
+  }
+  
+  

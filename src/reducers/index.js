@@ -1,8 +1,6 @@
-import { combineReducers } from 'redux';
-import termsReducer from './termsReducer';
-import favoritesReducer from './favoritesReducer';
+import {combineReducers} from 'redux';
+import connectedAppsReducer from "./connectedAppsReducer";
 
 export default combineReducers({
-    terms: termsReducer,
-    favorites: favoritesReducer
+    connectedApps: connectedAppsReducer
 });

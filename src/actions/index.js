@@ -1,40 +1,33 @@
-import { ADD_FETCHED_DATA, ADD_FAVORITE_TERM, REMOVE_FAVORITE_TERM } from './types.js';
+import {ADD_CONNECTED_APP, FETCH_CONNECTED_APPS} from './types.js';
 import API from '../api'
+import {REMOVE_CONNECTED_APP} from "./types";
 
-export const addFavoriteTerm = (data) => {
+export const addConnectedAppToStore = name => {
     return {
-      type: ADD_FAVORITE_TERM,
-      payload: {
-        name: data.name,
-        description: data.description
-      }
+        type: ADD_CONNECTED_APP,
+        payload: {
+            name: name,
+        }
     }
 };
 
-export const removeFavoriteTerm = (name) => {
-     return {
-       type: REMOVE_FAVORITE_TERM,
-       payload: {
-         name
-       }
-     }
- }
+export const removeConnectedAppFromStore = name => ({
+    type: REMOVE_CONNECTED_APP,
+    payload: {name}
+});
 
-export const fetchData = () => {
-    return (dispatch) => {
-        return API.get("/api/data.json")
-            .then(response => {
-            console.log(response)
-                return response.data
-            })
-            .then(data => {
-                dispatch({
-                    type: ADD_FETCHED_DATA,
-                    payload: data
-                })
-            })
-            .catch(error => {
-                throw (error);
-            });
+const fetchNamesSuccess = names => ({
+    type: FETCH_CONNECTED_APPS,
+    payload: {names}
+});
+
+export const fetchConnectionNames = () => {
+    return async dispatch => {
+        try {
+            let names = await API.get("/rest/connections/names");
+            dispatch(fetchNamesSuccess(names.data));
+        } catch (e) {
+            console.log(e);
+        }
     };
 };

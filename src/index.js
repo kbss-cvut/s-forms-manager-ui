@@ -1,49 +1,50 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
+import {applyMiddleware, createStore} from 'redux';
+import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
-import { fetchData } from './actions';
+
+import 's-forms/css/s-forms.min.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import {fetchConnectionNames} from "./actions";
 
 
 const saveState = (state) => {
-  if (state.favorites.length !== 0) {
-    localStorage.setItem("state", JSON.stringify(state));
-  }
+    if (state.connectedApps.length !== 0) {
+        localStorage.setItem("state", JSON.stringify(state));
+    }
 };
 
 const getState = () => {
-  try {
-    const s = localStorage.getItem("state");
+    try {
+        const s = localStorage.getItem("state");
 
-    if (s === null) return undefined;
-    return JSON.parse(s);
-  } catch (e) {
-    return undefined;
-  }
+        if (s === null) return undefined;
+        return JSON.parse(s);
+    } catch (e) {
+        return undefined;
+    }
 };
 
 const initialState = getState();
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
-store.dispatch(fetchData());
+store.dispatch(fetchConnectionNames());
 
 store.subscribe(() => {
-  saveState({
-    favorites: store.getState().favorites
-  })
+    saveState({
+        connectedApps: store.getState().connectedApps
+    })
 })
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'));
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.getElementById('root'));
 
 serviceWorker.unregister();

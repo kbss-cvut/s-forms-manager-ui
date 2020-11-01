@@ -1,16 +1,42 @@
 import React from 'react';
-import './App.css';
-import TermsList from './components/TermsList';
+
+import 's-forms/css/s-forms.min.css'
+import 'react-datepicker/dist/react-datepicker.css';
+import {ContextList} from "./components/ContextList";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {WelcomePage} from "./components/navigation/WelcomePage";
+import HeaderNavigationBar from "./components/navigation/HeaderNavigationBar";
+import {connect} from "react-redux";
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <TermsList />
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.refForm = React.createRef();
+    }
+
+    render() {
+        return (
+            <div>
+                <Router>
+                    <HeaderNavigationBar store={this.props.store}/>
+
+                    <Switch>
+                        <Route exact path="/">
+                            <WelcomePage/>
+                        </Route>
+                        <Route path="/browse/:connectionName">
+                            <ContextList/>
+                        </Route>
+                        <Route path="/dashboard">
+                            asdasdasda
+                        </Route>
+                    </Switch>
+                </Router>
+            </div>
+        );
+    }
 }
 
-export default App;
+export default connect()(App);

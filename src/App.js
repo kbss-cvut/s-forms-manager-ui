@@ -2,11 +2,13 @@ import React from 'react';
 
 import 's-forms/css/s-forms.min.css'
 import 'react-datepicker/dist/react-datepicker.css';
-import {ContextList} from "./components/ContextList";
+import {ContextOverview} from "./components/context/ContextOverview";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {WelcomePage} from "./components/navigation/WelcomePage";
 import HeaderNavigationBar from "./components/navigation/HeaderNavigationBar";
 import {connect} from "react-redux";
+import {ConnectionsOverview} from "./components/connections/ConnectionsOverview";
+import AddConnectionForm from "./components/connections/AddConnectionForm";
 
 
 class App extends React.Component {
@@ -26,11 +28,15 @@ class App extends React.Component {
                         <Route exact path="/">
                             <WelcomePage/>
                         </Route>
-                        <Route path="/browse/:connectionName">
-                            <ContextList/>
+                        <Route exact path="/browse/forms/:connectionName" component={ContextOverview}>
                         </Route>
-                        <Route path="/dashboard">
-                            asdasdasda
+                        <Route exact path="/browse/contexts/:connectionName" component={ContextOverview}>
+                        </Route>
+                        <Route path="/connections/add"> {/* has to be in front of /connections */}
+                            <AddConnectionForm/>
+                        </Route>
+                        <Route path="/connections">
+                            <ConnectionsOverview/>
                         </Route>
                     </Switch>
                 </Router>

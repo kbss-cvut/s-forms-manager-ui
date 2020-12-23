@@ -15,7 +15,7 @@ import {fetchConnectionNames} from "./actions";
 
 
 const saveState = (state) => {
-    if (state.connectedApps.length !== 0) {
+    if (state.connections.length !== 0) {
         localStorage.setItem("state", JSON.stringify(state));
     }
 };
@@ -37,7 +37,7 @@ store.dispatch(fetchConnectionNames());
 
 store.subscribe(() => {
     saveState({
-        connectedApps: store.getState().connectedApps
+        connections: store.getState().connections
     })
 })
 

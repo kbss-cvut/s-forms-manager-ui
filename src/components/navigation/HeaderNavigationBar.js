@@ -6,20 +6,18 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
-const mapStateToProps = state => ({connectedApps: state.connectedApps})
+const mapStateToProps = state => ({connections: state.connections})
 
 class HeaderNavigationBar extends React.Component {
 
-    constructor() {
-        super();
-        this.state = {
-            connectedApps: []
-        }
-    }
-
     render() {
-        const connectedAppsLinks = this.props.connectedApps.map(app =>{
-            return <NavDropdown.Item key={app} as={Link} to={"/browse/" + app }>{app}</NavDropdown.Item>;}
+        const browseFormLinks = this.props.connections.map(app => {
+                return <NavDropdown.Item key={app} as={Link} to={"/browse/forms/" + app}>{app}</NavDropdown.Item>;
+            }
+        );
+        const browseContextLinks = this.props.connections.map(app => {
+                return <NavDropdown.Item key={app} as={Link} to={"/browse/contexts/" + app}>{app}</NavDropdown.Item>;
+            }
         );
         return (
             <Navbar bg="light" expand="lg">
@@ -27,9 +25,14 @@ class HeaderNavigationBar extends React.Component {
                 <Navbar.Toggle/>
                 <Navbar.Collapse>
                     <Nav className="mr-auto">
-                        <Nav.Link as={Link} to="/">Connected Apps</Nav.Link>
+                        <Nav.Link as={Link} to="/connections">
+                            Connections
+                        </Nav.Link>
                         <NavDropdown title="Browse Forms">
-                            {connectedAppsLinks}
+                            {browseFormLinks}
+                        </NavDropdown>
+                        <NavDropdown title="Browse Contexts">
+                            {browseContextLinks}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

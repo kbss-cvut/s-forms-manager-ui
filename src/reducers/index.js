@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import connectedAppsReducer from "./connectedAppsReducer";
+import connectionsReducer from "./connectionsReducer";
 
 export default combineReducers({
-    connectedApps: connectedAppsReducer
+    connections: connectionsReducer
 });

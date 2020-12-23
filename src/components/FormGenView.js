@@ -1,6 +1,7 @@
 import SForms from "s-forms";
 import React from "react";
 import API from "../api";
+import Alert from "react-bootstrap/Alert";
 
 // TODO: should we have one component for displaying and just changing the state or new component for each of the contexts
 
@@ -67,7 +68,9 @@ export class FormGenView extends React.Component {
                 enableForwardSkip={true}
             />;
         } else {
-            return <div>Wait...</div>;
+            return <Alert variant={"light"} className={"h-10"}>
+                Wait...
+            </Alert>;
         }
 
 

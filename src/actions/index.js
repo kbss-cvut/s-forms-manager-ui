@@ -1,23 +1,23 @@
-import {ADD_CONNECTED_APP, FETCH_CONNECTED_APPS} from './types.js';
+import {ADD_CONNECTION, FETCH_CONNECTIONS} from './types.js';
 import API from '../api'
-import {REMOVE_CONNECTED_APP} from "./types";
+import {REMOVE_CONNECTION} from "./types";
 
-export const addConnectedAppToStore = name => {
+export const addConnectionsToStore = name => {
     return {
-        type: ADD_CONNECTED_APP,
-        payload: {
-            name: name,
-        }
+        type: ADD_CONNECTION,
+        payload: name
     }
 };
 
-export const removeConnectedAppFromStore = name => ({
-    type: REMOVE_CONNECTED_APP,
-    payload: {name}
-});
+export const removeConnectionsFromStore = name => {
+    return {
+        type: REMOVE_CONNECTION,
+        payload: name
+    }
+};
 
 const fetchNamesSuccess = names => ({
-    type: FETCH_CONNECTED_APPS,
+    type: FETCH_CONNECTIONS,
     payload: {names}
 });
 

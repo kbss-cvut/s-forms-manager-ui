@@ -5,7 +5,7 @@ import Alert from "react-bootstrap/Alert";
 
 // TODO: should we have one component for displaying and just changing the state or new component for each of the contexts
 
-export class FormGenView extends React.Component {
+export class SFormsDisplay extends React.Component {
 
     constructor() {
         super();
@@ -39,6 +39,12 @@ export class FormGenView extends React.Component {
     };
 
     render() {
+        if (!this.props.contextUri) {
+            return <Alert variant={"light"} className={"h-10"}>
+                Context not specified...
+            </Alert>
+        }
+
         const modalProps = {
             onHide: () => {
             },

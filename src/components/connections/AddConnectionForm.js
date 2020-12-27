@@ -52,8 +52,8 @@ class AddConnectionForm extends React.Component {
             this.state = this.baseState
             this.setState({showError: false, showSuccess: true});
         }).catch((error) => {
-            console.log(error)
-            this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
+                console.log(error)
+                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
             }
         );
     }

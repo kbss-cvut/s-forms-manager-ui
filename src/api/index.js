@@ -9,5 +9,5 @@ if (process.env.REACT_APP_MOCK_REST_API == "true") {
 }
 
 export default axios.create({
-  baseURL: apiUrl
+    baseURL: apiUrl
 });

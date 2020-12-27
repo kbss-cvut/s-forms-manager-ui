@@ -9,6 +9,7 @@ import HeaderNavigationBar from "./components/navigation/HeaderNavigationBar";
 import {connect} from "react-redux";
 import {ConnectionsOverview} from "./components/connections/ConnectionsOverview";
 import AddConnectionForm from "./components/connections/AddConnectionForm";
+import {FormGenOverview} from "./components/form/FormGenOverview";
 
 
 class App extends React.Component {
@@ -28,7 +29,7 @@ class App extends React.Component {
                         <Route exact path="/">
                             <WelcomePage/>
                         </Route>
-                        <Route exact path="/browse/forms/:connectionName" component={ContextOverview}>
+                        <Route exact path="/browse/forms/:connectionName" component={FormGenOverview}>
                         </Route>
                         <Route exact path="/browse/contexts/:connectionName" component={ContextOverview}>
                         </Route>

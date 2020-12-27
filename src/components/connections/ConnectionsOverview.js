@@ -83,7 +83,8 @@ export class ConnectionsOverview extends React.Component {
                                 <Row>
                                     <Col>
                                         <Button variant="outline-secondary">Change</Button>{' '}
-                                        <DeleteConnectionForm connectionName={connectionName} refreshCallBack={this.refresh}/>
+                                        <DeleteConnectionForm connectionName={connectionName}
+                                                              refreshCallBack={this.refresh}/>
                                     </Col>
                                 </Row>
                             </ListGroup.Item>

@@ -11,12 +11,11 @@ import ListGroup from "react-bootstrap/ListGroup";
 export class ContextLine extends React.Component {
     constructor(props) {
         super(props);
-    }
-
-    state = {
-        formInfo: null,
-        processed: false,
-        processing: false
+        this.state = {
+            formInfo: null,
+            processing: false,
+            processed: false
+        }
     }
 
     requestFormInfo(endpoint) {
@@ -45,9 +44,8 @@ export class ContextLine extends React.Component {
     }
 
     render() {
-
         let optionalProcessButton;
-        if (this.props.context.processed || this.state.processed) {
+        if (this.props.context.processed) {
             // the context is processed
             optionalProcessButton = <div></div>;
         } else {

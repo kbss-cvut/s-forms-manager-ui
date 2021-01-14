@@ -7,8 +7,6 @@ import API from "../../api";
 import Button from "react-bootstrap/Button";
 
 
-export const DEFAULT_CONTEXT = "http://vfn.cz/ontologies/study-manager/formGen1601802887303";
-
 export class FormGenOverview extends React.Component {
 
     constructor(props) {
@@ -40,16 +38,22 @@ export class FormGenOverview extends React.Component {
     }
 
     render() {
-        let formsUploads;
+        let totalContexts;
+        let processedContexts;
         let recognizedVersions;
         let recognizedInstances;
+        let nonEmptyContexts;
         if (this.state.contextsStats) {
-            formsUploads = this.state.contextsStats.formUploads
+            totalContexts = this.state.contextsStats.totalContexts
+            processedContexts = this.state.contextsStats.processedContexts
             recognizedVersions = this.state.contextsStats.recognizedVersions;
             recognizedInstances = this.state.contextsStats.recognizedInstaces;
+            nonEmptyContexts = this.state.contextsStats.nonEmptyContexts;
         } else {
-            formsUploads = "?";
+            totalContexts = "?";
+            processedContexts = "?";
             recognizedVersions = "?";
+            nonEmptyContexts = "?";
             recognizedInstances = "?";
         }
 
@@ -61,26 +65,34 @@ export class FormGenOverview extends React.Component {
                         Processed Forms: {this.props.match.params.connectionName}
                     </h4>
                     <br/>
-                    <span>Total form uploads (including re-uploads): <b>{formsUploads}</b></span>
-                    <br/>
-                    <span>Total form instances: <b>{recognizedInstances}</b></span>
-                    <br/>
-                    <span>Recognized form versions: <b>{recognizedVersions}</b></span>
-                    <br/>
+                    <Row>
+                        <Col xs={6}>
+                            <div>
+                                <span>Total contexts: <b>{totalContexts}</b></span>
+                                <br/>
+                                <span>Processed contexts: <b>{processedContexts}</b></span>
+                                <br/>
+                                <span>Non-empty form contexts: <b>{nonEmptyContexts}</b></span>
+                                <br/>
+                            </div>
+                        </Col>
+                        <Col xs={6}>
+                            <span>Recognized form instances: <b>{recognizedInstances}</b></span>
+                            <br/>
+                            <span>Recognized form versions: <b>{recognizedVersions}</b></span>
+                            <br/>
+                        </Col>
+                    </Row>
+
                     <hr/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.requestProcessBatch()}>
-                        Show instances
+                        Show forms
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.requestProcessBatch()}>
                         Show versions
-                    </Button>
-                    {' '}
-                    <Button variant="outline-primary" type="submit"
-                            onClick={() => this.requestProcessBatch()}>
-                        Show all uploads
                     </Button>
 
                     <br/><br/>

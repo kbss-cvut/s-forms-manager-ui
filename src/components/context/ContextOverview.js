@@ -79,12 +79,17 @@ export class ContextOverview extends React.Component {
                     <br/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.requestProcessBatch()}>
-                        Update all non-processed contexts (can take long time and cannot be stopped)
+                        Process all non-processed contexts (can take long time and cannot be stopped)
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.requestProcessBatch(10)}>
-                        Update 10 non-processed contexts
+                        Process 10 new
+                    </Button>
+                    {' '}
+                    <Button variant="outline-primary" type="submit"
+                            onClick={() => this.requestProcessBatch(200)}>
+                        Process 200 new
                     </Button>
                     <hr/>
                     <ToggleButton variant="outline-primary" style={{marginBottom: "0"}} type="checkbox"

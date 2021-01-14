@@ -44,7 +44,13 @@ export class Paginator extends React.Component {
 
         let items = [];
         let firstDisplayedPage = this.state.activePage > 5 ? this.state.activePage - 4 : 1;
-        let lastDisplayedPage = this.state.activePage < this.state.numberOfPages - 5 ? this.state.activePage + 4 : this.state.numberOfPages;
+        let lastDisplayedPage;
+        if (this.state.activePage < this.state.numberOfPages - 4) {
+            lastDisplayedPage = firstDisplayedPage + 9;
+        } else {
+            lastDisplayedPage = this.state.numberOfPages;
+        }
+
         for (let pageNumber = firstDisplayedPage; pageNumber <= lastDisplayedPage; pageNumber++) {
             items.push(
                 <Pagination.Item key={pageNumber} active={pageNumber === this.state.activePage}

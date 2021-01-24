@@ -18,7 +18,7 @@ export class SFormsDisplay extends React.Component {
 
     componentDidMount() {
         if (this.props.contextUri) {
-            API.post("/rest/formGen", null, {
+            API.post("/rest/formGen/s-forms-json-ld", null, {
                 params: {
                     "connectionName": this.props.connectionName,
                     "contextUri": this.props.contextUri

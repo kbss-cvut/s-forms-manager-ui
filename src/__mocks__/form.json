@@ -107,14 +107,14 @@
     "form-lt": "http://onto.fel.cvut.cz/ontologies/form-layout/",
     "ufo": "http://onto.fel.cvut.cz/ontologies/ufo/",
     "shacl": "http://www.w3.org/ns/shacl#"
+  },
+  "@graph": [
+    {
+      "@id": "_:b0",
+      "@type": "doc:answer",
+      "has_data_value": "<http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels>\n        a       <http://topbraid.org/sparqlmotionlib#ApplyConstruct> ;\n        <http://www.w3.org/2000/01/rdf-schema#label>\n                \"filter-out-required-labels\" ;\n        <http://topbraid.org/sparqlmotion#next>\n                <http://onto.fel.cvut.cz/ontologies/vfn-form-mod/merge-modification> ;\n        <http://topbraid.org/sparqlmotionlib#constructQuery>\n                []  ;\n        <http://topbraid.org/sparqlmotionlib#replace>\n                true .\n",
+      "form:has-answer-hash": "520f19b537850b01e9ba59538fe70306347982cf"
     },
-    "@graph": [
-      {
-        "@id": "_:b0",
-        "@type": "doc:answer",
-        "has_data_value": "<http://onto.fel.cvut.cz/ontologies/vfn-form-mod/filter-required-labels>\n        a       <http://topbraid.org/sparqlmotionlib#ApplyConstruct> ;\n        <http://www.w3.org/2000/01/rdf-schema#label>\n                \"filter-out-required-labels\" ;\n        <http://topbraid.org/sparqlmotion#next>\n                <http://onto.fel.cvut.cz/ontologies/vfn-form-mod/merge-modification> ;\n        <http://topbraid.org/sparqlmotionlib#constructQuery>\n                []  ;\n        <http://topbraid.org/sparqlmotionlib#replace>\n                true .\n",
-        "form:has-answer-hash": "520f19b537850b01e9ba59538fe70306347982cf"
-      },
     {
       "@id": "_:b1",
       "@type": "doc:answer",

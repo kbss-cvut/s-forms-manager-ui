@@ -8,9 +8,6 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import {ContextList} from "./ContextList";
 
-
-export const DEFAULT_CONTEXT = "http://vfn.cz/ontologies/study-manager/formGen1601802887303";
-
 export class ContextOverview extends React.Component {
 
     constructor(props) {
@@ -37,7 +34,7 @@ export class ContextOverview extends React.Component {
         if (!numberOfUpdates) {
             numberOfUpdates = 99999;
         }
-        API.post("/rest/formGen/info/update/batch", null, {
+        API.post("/rest/formGen/processing/batch", null, {
             params: {
                 "connectionName": this.props.match.params.connectionName,
                 "numberOfUpdates": numberOfUpdates
@@ -50,7 +47,7 @@ export class ContextOverview extends React.Component {
     }
 
     requestContextsStats() {
-        API.get("/rest/formGen/info/contextStats", {
+        API.get("/rest/connection/stats/contexts", {
             params: {
                 "connectionName": this.props.match.params.connectionName
             }

@@ -5,7 +5,14 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import API from "../../api";
 import Button from "react-bootstrap/Button";
+import {FormGenVersionList} from "./FormGenVersionList";
+import {FormGenSaveList} from "./FormGenSaveList";
+import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
 
+const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
+const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
+const RIGHT_DISPLAY_VERSION_GRAPH = "DISPLAY_VERSION_GRAPH"
+const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
 
 export class FormGenOverview extends React.Component {
 
@@ -13,10 +20,11 @@ export class FormGenOverview extends React.Component {
         super(props);
         this.state = {
             contexts: [],
-            activeContext: null,
-            filterProcessed: false,
-            contextsStats: null
+            leftComponent: null,
+            rightComponent: null,
+            activeContext: null
         }
+        this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
         this.requestFormsStats = this.requestFormsStats.bind(this)
     }
 
@@ -25,8 +33,13 @@ export class FormGenOverview extends React.Component {
         this.requestFormsStats();
     }
 
+    updateActiveContextUri(contextUri) {
+        console.log(contextUri)
+        this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
+    }
+
     requestFormsStats() {
-        API.get("/rest/formGen/info/formStats", {
+        API.get("/rest/connection/stats/forms", {
             params: {
                 "connectionName": this.props.match.params.connectionName
             }
@@ -43,18 +56,48 @@ export class FormGenOverview extends React.Component {
         let recognizedVersions;
         let recognizedInstances;
         let nonEmptyContexts;
+        let emptyContexts;
         if (this.state.contextsStats) {
             totalContexts = this.state.contextsStats.totalContexts
             processedContexts = this.state.contextsStats.processedContexts
             recognizedVersions = this.state.contextsStats.recognizedVersions;
             recognizedInstances = this.state.contextsStats.recognizedInstaces;
             nonEmptyContexts = this.state.contextsStats.nonEmptyContexts;
+            emptyContexts = processedContexts - nonEmptyContexts;
         } else {
             totalContexts = "?";
             processedContexts = "?";
             recognizedVersions = "?";
             nonEmptyContexts = "?";
             recognizedInstances = "?";
+            emptyContexts = "?";
+        }
+
+        let leftComponent;
+        switch (this.state.leftComponent) {
+            case LEFT_DISPLAY_VERSIONS_LIST:
+                leftComponent = <FormGenVersionList connectionName={this.props.match.params.connectionName}
+                                                    updateActiveContextUri={this.updateActiveContextUri}/>
+                break;
+            case LEFT_DISPLAY_FORMS_LIST:
+                leftComponent = <FormGenSaveList connectionName={this.props.match.params.connectionName}
+                                                 updateActiveContextUri={this.updateActiveContextUri}/>
+                break;
+            default:
+                leftComponent = <div/>
+                break;
+        }
+        let rightComponent;
+        switch (this.state.rightComponent) {
+            case RIGHT_DISPLAY_S_FORMS:
+                rightComponent = <SFormsDisplay key={this.state.activeContext}
+                                                contextUri={this.state.activeContext}
+                                                connectionName={this.props.match.params.connectionName}/>
+                break;
+            case RIGHT_DISPLAY_VERSION_GRAPH:
+            default:
+                rightComponent = <VersionsHistogramChart connectionName={this.props.match.params.connectionName}/>
+                break;
         }
 
         return (
@@ -64,13 +107,14 @@ export class FormGenOverview extends React.Component {
                     <h4>
                         Processed Forms: {this.props.match.params.connectionName}
                     </h4>
-                    <br/>
                     <Row>
                         <Col xs={6}>
                             <div>
-                                <span>Total contexts: <b>{totalContexts}</b></span>
+                                <span>Total contexts: {totalContexts}</span>
                                 <br/>
-                                <span>Processed contexts: <b>{processedContexts}</b></span>
+                                <span>Processed contexts: {processedContexts}</span>
+                                <br/>
+                                <span>Empty form contexts: {emptyContexts}</span>
                                 <br/>
                                 <span>Non-empty form contexts: <b>{nonEmptyContexts}</b></span>
                                 <br/>
@@ -86,13 +130,21 @@ export class FormGenOverview extends React.Component {
 
                     <hr/>
                     <Button variant="outline-primary" type="submit"
-                            onClick={() => this.requestProcessBatch()}>
+                            onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>
                         Show forms
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
-                            onClick={() => this.requestProcessBatch()}>
+                            onClick={() => this.setState({
+                                leftComponent: LEFT_DISPLAY_VERSIONS_LIST,
+                                rightComponent: RIGHT_DISPLAY_VERSION_GRAPH
+                            })}>
                         Show versions
+                    </Button>
+                    {' '}
+                    <Button variant="outline-primary" type="submit"
+                            onClick={() => this.setState({rightComponent: RIGHT_DISPLAY_VERSION_GRAPH})}>
+                        Show versions graph
                     </Button>
 
                     <br/><br/>
@@ -100,17 +152,11 @@ export class FormGenOverview extends React.Component {
                 <Row>
                     <Col xs={6}>
                         <div>
-                            {/*<ContextList contexts={this.state.contexts}*/}
-                            {/*             connectionName={this.props.match.params.connectionName}*/}
-                            {/*             filterProcessed={this.state.filterProcessed}*/}
-                            {/*             updateActiveContextUri={this.updateActiveContextUri}*/}
-                            {/*/>*/}
+                            {leftComponent}
                         </div>
                     </Col>
                     <Col xs={6}>
-                        <SFormsDisplay key={this.state.activeContext}
-                                       contextUri={this.state.activeContext}
-                                       connectionName={this.props.match.params.connectionName}/>
+                        {rightComponent}
                     </Col>
                 </Row>
             </Container>)

@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import API from "../../api";
 import Button from "react-bootstrap/Button";
 import {FormGenVersionList} from "./FormGenVersionList";
-import {FormGenSaveList} from "./FormGenSaveList";
+import {FormGenList} from "./FormGenList";
 import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
@@ -34,7 +34,6 @@ export class FormGenOverview extends React.Component {
     }
 
     updateActiveContextUri(contextUri) {
-        console.log(contextUri)
         this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
     }
 
@@ -80,8 +79,8 @@ export class FormGenOverview extends React.Component {
                                                     updateActiveContextUri={this.updateActiveContextUri}/>
                 break;
             case LEFT_DISPLAY_FORMS_LIST:
-                leftComponent = <FormGenSaveList connectionName={this.props.match.params.connectionName}
-                                                 updateActiveContextUri={this.updateActiveContextUri}/>
+                leftComponent = <FormGenList connectionName={this.props.match.params.connectionName}
+                                             updateActiveContextUri={this.updateActiveContextUri}/>
                 break;
             default:
                 leftComponent = <div/>

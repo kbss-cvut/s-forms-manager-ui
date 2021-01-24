@@ -42,7 +42,7 @@ export class FormGenVersionLine extends React.Component {
                                 aria-controls="example-collapse-text"
                                 aria-expanded={this.state.collapseOpen}
                             >
-                                <FontAwesomeIcon color="black" icon={faCaretDown}/>
+                                Show detail <FontAwesomeIcon color="black" icon={faCaretDown}/>
                             </Button>
                         </Col>
                     </Row>

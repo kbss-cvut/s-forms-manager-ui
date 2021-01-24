@@ -25,7 +25,6 @@ export class FormGenVersionList extends React.Component {
         }).then(response => {
             return response.data;
         }).then(data => {
-            console.log(data)
             this.setState({
                 versions: data,
             });

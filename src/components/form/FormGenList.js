@@ -1,9 +1,9 @@
 import React from 'react';
 import API from "../../api";
 import Alert from "react-bootstrap/Alert";
-import {FormGenSaveLine} from "./FormGenSaveLine";
+import {FormGenLine} from "./FormGenLine";
 
-export class FormGenSaveList extends React.Component {
+export class FormGenList extends React.Component {
 
     constructor() {
         super();
@@ -18,14 +18,13 @@ export class FormGenSaveList extends React.Component {
     }
 
     requestFormGens() {
-        API.get("/rest/formGen/grouped", {
+        API.get("/rest/formGen/latestSaves", {
             params: {
-                "connectionName": this.props.connectionName,
+                "connectionName": this.props.connectionName
             }
         }).then(response => {
             return response.data;
         }).then(data => {
-            console.log(data)
             this.setState({
                 formGenSaves: data,
             });
@@ -42,12 +41,13 @@ export class FormGenSaveList extends React.Component {
         let i = 0;
         let formGenSaves = this.state.formGenSaves.map((formGenSaveGroupInfo) => {
             i++;
-            return <FormGenSaveLine key={i}
-                                    saveHash={formGenSaveGroupInfo.saveHash}
-                                    numberOfSaves={formGenSaveGroupInfo.count}
-                                    lastSaved={formGenSaveGroupInfo.lastSaved}
-                                    contextUri={formGenSaveGroupInfo.contextUri}
-                                    clickHandler={this.props.updateActiveContextUri}/>;
+            return <FormGenLine key={i}
+                                saveHash={formGenSaveGroupInfo.saveHash}
+                                connectionName={this.props.connectionName}
+                                numberOfSaves={formGenSaveGroupInfo.count}
+                                lastSaved={formGenSaveGroupInfo.lastSaved}
+                                contextUri={formGenSaveGroupInfo.contextUri}
+                                clickHandler={this.props.updateActiveContextUri}/>;
         });
 
         if (formGenSaves && formGenSaves.length == 0) {

@@ -1,4 +1,6 @@
 import React from "react";
+import InputGroup from "react-bootstrap/InputGroup";
+import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -7,26 +9,50 @@ import ListGroup from "react-bootstrap/ListGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons/faCaretDown";
 import Collapse from "react-bootstrap/Collapse";
+import API from "../../api";
 
 export class FormGenVersionLine extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            collapseOpen: false
+            collapseOpen: false,
+            synonym: "",
+            synonymProposal: "",
+            synonymChanged: false
         }
     }
 
+    updateVersionSynonym(versionKey, synonym) {
+        API.put("/rest/formGenVersion", null, {
+            params: {
+                "versionKey": versionKey,
+                "synonym": synonym
+            }
+        }).then(response => {
+            console.log("!" + synonym + "!")
+            this.setState({synonym: synonym, synonymChanged: true})
+        }).catch(error => {
+            console.log(error)
+        });
+    }
+
     render() {
+        let synonymDiv;
+        if ((this.props.synonym && !this.state.synonymChanged) || this.state.synonym) {
+            synonymDiv = <div>
+                <span>Synonym: <b>{this.state.synonymChanged ? this.state.synonym : this.props.synonym}</b></span>
+                <br/>
+            </div>;
+        }
 
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
                     <Row>
                         <Col xs={9}>
-                            <p>
-                            </p>
-                            <span>Internal version key: <b>{this.props.version}</b></span>
+                            {synonymDiv}
+                            <span>Internal version name: <b>{this.props.versionName}</b></span>
                             <br/>
                             <span>Number of instances: <b>{this.props.numberOfInstances}</b></span>
                             <br/>
@@ -58,6 +84,25 @@ export class FormGenVersionLine extends React.Component {
                                         <br/>
                                         <h6>Internal version URI</h6>
                                         <span>{this.props.internalUri}</span>
+                                        <br/>
+                                        <br/>
+                                        <h6>Synonym</h6>
+
+                                        <InputGroup className="mb-1">
+                                            <FormControl
+                                                placeholder="Leave out empty and hit Update to remove synonym"
+                                                aria-describedby="inputGroup-sizing-sm"
+                                                aria-label="Synonym"
+                                                aria-describedby="basic-addon2"
+                                                value={this.state.synonymProposal}
+                                                onChange={e => this.setState({synonymProposal: e.target.value})}
+                                            />
+                                            <InputGroup.Append>
+                                                <Button
+                                                    onClick={() => this.updateVersionSynonym(this.props.versionName, this.state.synonymProposal)}
+                                                    variant="outline-secondary" size="sm">Update</Button>
+                                            </InputGroup.Append>
+                                        </InputGroup>
                                     </div>
                                 </Collapse>
                             </div>

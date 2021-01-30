@@ -22,12 +22,18 @@ export class FormGenHistoryLine extends React.Component {
                         <Col xs={9}>
                             <p>
                             </p>
-                            <span>Version: <b>{this.props.version}</b></span>
+                            <span>Version: <b>{this.props.versionName}</b> {this.props.synonym ? "(" + this.props.synonym + ")" : ""}</span>
                             <br/>
-                            <span>Last modified:{' '}
+                            <span>Created:{' '}
+                                <Moment format="DD.MM.YYYY hh:mm:ss">
+                                    {this.props.created}
+                                </Moment>
+                            </span>
+                            <br/>
+                            <span>Modified:{' '}
                                 <b>
-                                <Moment format="DD.MM.YYYY">
-                                    {this.props.lastSaved}
+                                <Moment format="DD.MM.YYYY hh:mm:ss">
+                                    {this.props.modified}
                                 </Moment>
                                 </b>
                             </span>

@@ -42,11 +42,12 @@ export class FormGenVersionList extends React.Component {
         let versions = this.state.versions.map((version) => {
             i++;
             return <FormGenVersionLine key={i}
-                                       version={version.version}
+                                       versionName={version.versionName}
                                        internalUri={version.internalUri}
                                        sampleContextUri={version.sampleContextUri}
                                        connectionName={this.props.connectionName}
                                        numberOfInstances={version.numberOfInstances}
+                                       synonym={version.synonym}
                                        clickHandler={this.props.updateActiveContextUri}/>;
         });
 

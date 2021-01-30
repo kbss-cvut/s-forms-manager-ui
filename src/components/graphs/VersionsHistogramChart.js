@@ -3,21 +3,50 @@ import {Line} from "react-chartjs-2";
 import {MDBContainer} from "mdbreact";
 import API from "../../api";
 import 'chartjs-plugin-colorschemes';
+import 'chartjs-plugin-zoom';
+import Button from "react-bootstrap/Button";
 
 
 class VersionsHistogramChart extends React.Component {
+
+    ref = {
+        chart: React.createRef()
+    }
 
     state = {
         dataLine: {
             labels: [],
             datasets: []
-        }
-    }
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            // Container for pan options
+            pan: {
+                // Boolean to enable panning
+                enabled: true,
 
-    options: {
-        plugins: {
-            colorschemes: {
-                scheme: 'brewer.Paired12'
+                // Panning directions. Remove the appropriate direction to disable
+                // Eg. 'y' would only allow panning in the y direction
+                mode: 'x',
+                grab: true,
+                speed: 2,
+            },
+
+            // Container for zoom options
+            zoom: {
+                // Boolean to enable zooming
+                enabled: true,
+                // Zooming directions. Remove the appropriate direction to disable
+                // Eg. 'y' would only allow zooming in the y direction
+                mode: 'x',
+                speed: 500,
+                sensitivity: 0.5
             }
         }
     }
@@ -71,11 +100,21 @@ class VersionsHistogramChart extends React.Component {
     }
 
     render() {
+
+        const chart = <Line data={this.state.dataLine} options={this.state.options}
+                            ref={(reference) => (this.ref.chart = reference)}/>
+
         return (
-            <MDBContainer>
-                <h3 className="mt-5">Versions histogram</h3>
-                <Line data={this.state.dataLine} options={{responsive: true}}/>
-            </MDBContainer>
+            <div className="text-center">
+                <MDBContainer>
+                    <h3 className="mt-5">Versions histogram</h3>
+                    {chart}
+                </MDBContainer>
+                <br/>
+                <Button variant="outline-secondary" onClick={() => {
+                    this.ref.chart.chartInstance.resetZoom()
+                }}>Reset zoom</Button>
+            </div>
         );
     }
 }

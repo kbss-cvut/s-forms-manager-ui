@@ -25,6 +25,7 @@ export class FormGenList extends React.Component {
         }).then(response => {
             return response.data;
         }).then(data => {
+            console.log(data)
             this.setState({
                 formGenSaves: data,
             });
@@ -45,7 +46,8 @@ export class FormGenList extends React.Component {
                                 saveHash={formGenSaveGroupInfo.saveHash}
                                 connectionName={this.props.connectionName}
                                 numberOfSaves={formGenSaveGroupInfo.count}
-                                lastSaved={formGenSaveGroupInfo.lastSaved}
+                                created={formGenSaveGroupInfo.created}
+                                lastModified={formGenSaveGroupInfo.lastModified}
                                 contextUri={formGenSaveGroupInfo.contextUri}
                                 clickHandler={this.props.updateActiveContextUri}/>;
         });

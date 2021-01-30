@@ -21,7 +21,8 @@ export class FormGenLine extends React.Component {
     }
 
     render() {
-        const disableHistoryButton = this.props.numberOfSaves == 1;
+        const moreThanOneHistory = this.props.numberOfSaves > 1;
+
         let historyLine;
         if (this.state.historyCollapseOpen) {
             historyLine =
@@ -30,6 +31,18 @@ export class FormGenLine extends React.Component {
                                     clickHandler={this.props.clickHandler}/>;
         }
 
+        let modifiedDiv;
+        if (moreThanOneHistory) {
+            modifiedDiv = <div>
+                <span>Last modified:{' '}
+                    <Moment format="DD.MM.YYYY h:mm:ss">
+                        {this.props.lastModified}
+                    </Moment>
+                </span>
+            </div>;
+        }
+
+        // TODO: add created and modified
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -39,13 +52,14 @@ export class FormGenLine extends React.Component {
                             </p>
                             <span>Number of saves: <b>{this.props.numberOfSaves}</b>    </span>
                             <br/>
-                            <span>Last modified:{' '}
+                            <span>Created:{' '}
                                 <b>
-                                <Moment format="DD.MM.YYYY">
-                                    {this.props.lastSaved}
+                                <Moment format="DD.MM.YYYY h:mm:ss">
+                                    {this.props.created}
                                 </Moment>
                                 </b>
                             </span>
+                            {modifiedDiv}
                         </Col>
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
@@ -57,7 +71,7 @@ export class FormGenLine extends React.Component {
                                 onClick={() => this.setState({historyCollapseOpen: !this.state.historyCollapseOpen})}
                                 aria-controls="example-collapse-text"
                                 aria-expanded={this.state.historyCollapseOpen}
-                                disabled={disableHistoryButton}
+                                disabled={!moreThanOneHistory}
                             >
                                 Show history <FontAwesomeIcon color="black" icon={faCaretDown}/>
                             </Button>

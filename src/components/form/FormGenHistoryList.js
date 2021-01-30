@@ -41,8 +41,10 @@ export class FormGenHistoryList extends React.Component {
         let formGenSaves = this.state.formGens.map((historyFormGen) => {
             i++;
             return <FormGenHistoryLine key={i}
-                                       version={historyFormGen.version}
-                                       saved={historyFormGen.lastSaved}
+                                       versionName={historyFormGen.versionName}
+                                       synonym={historyFormGen.synonym}
+                                       created={historyFormGen.created}
+                                       modified={historyFormGen.modified}
                                        contextUri={historyFormGen.contextUri}
                                        clickHandler={this.props.clickHandler}/>;
         });

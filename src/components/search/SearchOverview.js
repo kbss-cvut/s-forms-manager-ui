@@ -3,19 +3,21 @@ import {SFormsDisplay} from "../SFormsDisplay";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import API from "../../api";
 import Button from "react-bootstrap/Button";
-import {FormGenVersionList} from "./FormGenVersionList";
-import {FormGenList} from "./FormGenList";
-import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
-import {FormGenStatistics} from "./FormGenStatistics";
+import {FormGenVersionList} from "../form/FormGenVersionList";
+import {FormGenList} from "../form/FormGenList";
+import {FormGenStatistics} from "../form/FormGenStatistics";
+import {SearchOptionsPicker} from "./SearchOptionsPicker";
+import API from "../../api";
+import "@triply/yasgui/build/yasgui.min.css";
+import YasguiEditor from "./YasguiEditor";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
 const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
-const RIGHT_DISPLAY_VERSION_GRAPH = "DISPLAY_VERSION_GRAPH"
 const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
+const RIGHT_DISPLAY_SPARQL_EDITOR = "RIGHT_DISPLAY_SPARQL_EDITOR"
 
-export class FormGenOverview extends React.Component {
+export class SearchOverview extends React.Component {
 
     constructor(props) {
         super(props);
@@ -23,21 +25,38 @@ export class FormGenOverview extends React.Component {
             contexts: [],
             leftComponent: null,
             rightComponent: null,
-            activeContext: null
+            activeContext: null,
+            searchedFormGenSaves: null,
+            yasguiEditor: null,
+            query: "",
+            isLoading: false
         }
         this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
-        this.requestLatestSavesFormGens = this.requestLatestSavesFormGens.bind(this)
+        this.changeQueryInEditor = this.changeQueryInEditor.bind(this)
+        this.runQueryFromEditor = this.runQueryFromEditor.bind(this)
+        this.yasguiRef = React.createRef();
     }
 
     updateActiveContextUri(contextUri) {
         this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
     }
 
-    requestLatestSavesFormGens() {
-        return API.get("/rest/formGen/latestSaves", {
-            params: {
-                "connectionName": this.props.match.params.connectionName
-            }
+    changeQueryInEditor(query) {
+        this.setState({query: query, rightComponent: RIGHT_DISPLAY_SPARQL_EDITOR})
+    }
+
+    runQueryFromEditor() {
+        this.setState({isLoading: true})
+        API.post("/rest/search/runQuery", {
+            query: this.yasguiRef.current.state.yasguiEditor.getTab().getQuery()
+        }).then(response => {
+            this.setState({
+                searchedFormGenSaves: response.data,
+                leftComponent: LEFT_DISPLAY_FORMS_LIST,
+                isLoading: false
+            })
+        }).catch(error => {
+            console.log(error)
         });
     }
 
@@ -51,7 +70,7 @@ export class FormGenOverview extends React.Component {
             case LEFT_DISPLAY_FORMS_LIST:
                 leftComponent = <FormGenList connectionName={this.props.match.params.connectionName}
                                              updateActiveContextUri={this.updateActiveContextUri}
-                                             requestFormGens={this.requestLatestSavesFormGens}
+                                             formGenSaves={this.state.searchedFormGenSaves}
                                              displayCount={true}/>
                 break;
             default:
@@ -60,14 +79,11 @@ export class FormGenOverview extends React.Component {
         }
         let rightComponent;
         switch (this.state.rightComponent) {
+            default:
             case RIGHT_DISPLAY_S_FORMS:
                 rightComponent = <SFormsDisplay key={this.state.activeContext}
                                                 contextUri={this.state.activeContext}
                                                 connectionName={this.props.match.params.connectionName}/>
-                break;
-            case RIGHT_DISPLAY_VERSION_GRAPH:
-            default:
-                rightComponent = <VersionsHistogramChart connectionName={this.props.match.params.connectionName}/>
                 break;
         }
 
@@ -76,30 +92,43 @@ export class FormGenOverview extends React.Component {
                 <Container>
                     <br/>
                     <h4>
-                        Processed Forms: {this.props.match.params.connectionName}
+                        Search: {this.props.match.params.connectionName}
                     </h4>
                     <FormGenStatistics connectionName={this.props.match.params.connectionName}/>
+
                     <hr/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>
-                        Show forms
+                        Search in forms
                     </Button>
-                    {' '}
-                    <Button variant="outline-primary" type="submit"
-                            onClick={() => this.setState({
-                                leftComponent: LEFT_DISPLAY_VERSIONS_LIST,
-                                rightComponent: RIGHT_DISPLAY_VERSION_GRAPH
-                            })}>
-                        Show versions
-                    </Button>
-                    {' '}
-                    <Button variant="outline-primary" type="submit"
-                            onClick={() => this.setState({rightComponent: RIGHT_DISPLAY_VERSION_GRAPH})}>
-                        Show versions graph
-                    </Button>
-
                     <br/><br/>
                 </Container>
+                <Row>
+                    <Col xs={6}>
+                        <div>
+                            <SearchOptionsPicker connectionName={this.props.match.params.connectionName}
+                                                 changeQuery={this.changeQueryInEditor}/>
+                        </div>
+                    </Col>
+                    <Col xs={6}>
+                        <div>
+                            <br/>
+                            <YasguiEditor query={this.state.query} ref={this.yasguiRef}/>
+                        </div>
+                    </Col>
+                </Row>
+
+                <div className="text-center">
+                    <Button variant="outline-primary" type="submit"
+                            onClick={() => this.runQueryFromEditor()}>
+                        Run Query
+                    </Button>
+                    {' '}
+                    {this.state.isLoading && <div>Loading...</div>}
+                </div>
+                <br/>
+                <hr/>
+                <br/>
                 <Row>
                     <Col xs={6}>
                         <div>

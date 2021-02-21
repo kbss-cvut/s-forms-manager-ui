@@ -1,0 +1,16 @@
+
+#yasgui div.controlbar {
+    display: none;
+}
+
+#yasgui div.tabsList {
+    display: none;
+}
+
+#yasgui div.yasqe_buttons {
+    display: none;
+}
+
+#yasgui div.yasr {
+    display: none;
+}

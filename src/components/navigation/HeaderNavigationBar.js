@@ -19,6 +19,10 @@ class HeaderNavigationBar extends React.Component {
                 return <NavDropdown.Item key={app} as={Link} to={"/browse/contexts/" + app}>{app}</NavDropdown.Item>;
             }
         );
+        const searchInFormsLinks = this.props.connections.map(app => {
+                return <NavDropdown.Item key={app} as={Link} to={"/search/forms/" + app}>{app}</NavDropdown.Item>;
+            }
+        );
         return (
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand as={Link} to="/">S-Forms Manager</Navbar.Brand>
@@ -33,6 +37,9 @@ class HeaderNavigationBar extends React.Component {
                         </NavDropdown>
                         <NavDropdown title="Browse Contexts">
                             {browseContextLinks}
+                        </NavDropdown>
+                        <NavDropdown title="Search in Forms">
+                            {searchInFormsLinks}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

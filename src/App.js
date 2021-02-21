@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import {ConnectionsOverview} from "./components/connections/ConnectionsOverview";
 import AddConnectionForm from "./components/connections/AddConnectionForm";
 import {FormGenOverview} from "./components/form/FormGenOverview";
-
+import {SearchOverview} from "./components/search/SearchOverview";
 
 class App extends React.Component {
 
@@ -38,6 +38,8 @@ class App extends React.Component {
                         </Route>
                         <Route path="/connections">
                             <ConnectionsOverview/>
+                        </Route>
+                        <Route exact path="/search/forms/:connectionName" component={SearchOverview}>
                         </Route>
                     </Switch>
                 </Router>

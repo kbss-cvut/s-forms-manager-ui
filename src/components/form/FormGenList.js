@@ -1,46 +1,49 @@
 import React from 'react';
-import API from "../../api";
 import Alert from "react-bootstrap/Alert";
 import {FormGenLine} from "./FormGenLine";
 
+/**
+ * FormGens:
+ *  1) are provided in this.state.props.formGenSaves
+ *  OR
+ *  2) are provided through this.props.requestFormGens callback
+ */
 export class FormGenList extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            formGenSaves: []
+            formGenSaves: null
         }
-        this.requestFormGens = this.requestFormGens.bind(this)
     }
 
     componentDidMount() {
-        this.requestFormGens()
+        this.requestFormGensFromProps();
     }
 
-    requestFormGens() {
-        API.get("/rest/formGen/latestSaves", {
-            params: {
-                "connectionName": this.props.connectionName
-            }
-        }).then(response => {
-            return response.data;
-        }).then(data => {
-            console.log(data)
-            this.setState({
-                formGenSaves: data,
+    requestFormGensFromProps() {
+        if (this.props.requestFormGens) {
+            this.props.requestFormGens().then(response => {
+                return response.data;
+            }).then(data => {
+                this.setState({
+                    formGenSaves: data,
+                });
             });
-        });
+        }
     }
 
     render() {
-        if (!this.state.formGenSaves || this.state.formGenSaves.length == 0) {
+        const formGens = this.props?.formGenSaves || this.state.formGenSaves
+
+        if (!formGens) {
             return <Alert variant={"light"} className={"h-10"}>
                 Loading forms...
             </Alert>
         }
 
         let i = 0;
-        let formGenSaves = this.state.formGenSaves.map((formGenSaveGroupInfo) => {
+        const formGenLines = formGens ? formGens.map((formGenSaveGroupInfo) => {
             i++;
             return <FormGenLine key={i}
                                 saveHash={formGenSaveGroupInfo.saveHash}
@@ -50,16 +53,16 @@ export class FormGenList extends React.Component {
                                 lastModified={formGenSaveGroupInfo.lastModified}
                                 contextUri={formGenSaveGroupInfo.contextUri}
                                 clickHandler={this.props.updateActiveContextUri}/>;
-        });
-
-        if (formGenSaves && formGenSaves.length == 0) {
-            formGenSaves = <Alert variant={"light"} className={"h-10"}>
-                The list is empty.
-            </Alert>
-        }
+        }) : <Alert variant={"light"} className={"h-10"}>
+            The list is empty.
+        </Alert>; // TODO: create a function for that
+        // TODO: introduce this concept to the whole app
 
         return <div>
-            {formGenSaves}
+            {this.props.displayCount ? (
+                <span>There is <b>{formGenLines.length}</b> results. </span>
+            ) : (<div></div>)}
+            {formGenLines}
         </div>
 
     }

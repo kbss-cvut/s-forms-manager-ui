@@ -4,10 +4,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import {FormGenVersionList} from "../form/FormGenVersionList";
-import {FormGenList} from "../form/FormGenList";
-import {FormGenStatistics} from "../form/FormGenStatistics";
+import {FormTemplateVersionList} from "../formtemplate/FormTemplateVersionList";
+import {RecordsStatistics} from "../form/RecordsStatistics";
 import {SearchOptionsPicker} from "./SearchOptionsPicker";
+import {SearchResultList} from "./SearchResultList";
 import API from "../../api";
 import "@triply/yasgui/build/yasgui.min.css";
 import YasguiEditor from "./YasguiEditor";
@@ -26,7 +26,7 @@ export class SearchOverview extends React.Component {
             leftComponent: null,
             rightComponent: null,
             activeContext: null,
-            searchedFormGenSaves: null,
+            searchResults: [],
             yasguiEditor: null,
             query: "",
             isLoading: false
@@ -48,10 +48,11 @@ export class SearchOverview extends React.Component {
     runQueryFromEditor() {
         this.setState({isLoading: true})
         API.post("/rest/search/runQuery", {
-            query: this.yasguiRef.current.state.yasguiEditor.getTab().getQuery()
+            query: this.yasguiRef.current.state.yasguiEditor.getTab().getQuery(),
+            "projectName": this.props.match.params.projectName
         }).then(response => {
             this.setState({
-                searchedFormGenSaves: response.data,
+                searchResults: response.data,
                 leftComponent: LEFT_DISPLAY_FORMS_LIST,
                 isLoading: false
             })
@@ -64,37 +65,36 @@ export class SearchOverview extends React.Component {
         let leftComponent;
         switch (this.state.leftComponent) {
             case LEFT_DISPLAY_VERSIONS_LIST:
-                leftComponent = <FormGenVersionList connectionName={this.props.match.params.connectionName}
-                                                    updateActiveContextUri={this.updateActiveContextUri}/>
+                leftComponent = <FormTemplateVersionList projectName={this.props.match.params.projectName}
+                                                         updateActiveContextUri={this.updateActiveContextUri}/>
                 break;
             case LEFT_DISPLAY_FORMS_LIST:
-                leftComponent = <FormGenList connectionName={this.props.match.params.connectionName}
-                                             updateActiveContextUri={this.updateActiveContextUri}
-                                             formGenSaves={this.state.searchedFormGenSaves}
-                                             displayCount={true}/>
+                leftComponent = <SearchResultList projectName={this.props.match.params.projectName}
+                                                  updateActiveContextUri={this.updateActiveContextUri}
+                                                  searchResults={this.state.searchResults}/>
                 break;
             default:
                 leftComponent = <div/>
                 break;
         }
-        let rightComponent;
-        switch (this.state.rightComponent) {
-            default:
-            case RIGHT_DISPLAY_S_FORMS:
-                rightComponent = <SFormsDisplay key={this.state.activeContext}
-                                                contextUri={this.state.activeContext}
-                                                connectionName={this.props.match.params.connectionName}/>
-                break;
-        }
+        // let rightComponent;
+        // switch (this.state.rightComponent) {
+        //     default:
+        //     case RIGHT_DISPLAY_S_FORMS:
+        //         rightComponent = <SFormsDisplay key={this.state.activeContext}
+        //                                         contextUri={this.state.activeContext}
+        //                                         projectName={this.props.match.params.projectName}/>
+        //         break;
+        // }
 
         return (
             <Container fluid>
                 <Container>
                     <br/>
                     <h4>
-                        Search: {this.props.match.params.connectionName}
+                        Search: {this.props.match.params.projectName}
                     </h4>
-                    <FormGenStatistics connectionName={this.props.match.params.connectionName}/>
+                    <RecordsStatistics projectName={this.props.match.params.projectName}/>
 
                     <hr/>
                     <Button variant="outline-primary" type="submit"
@@ -106,7 +106,7 @@ export class SearchOverview extends React.Component {
                 <Row>
                     <Col xs={6}>
                         <div>
-                            <SearchOptionsPicker connectionName={this.props.match.params.connectionName}
+                            <SearchOptionsPicker projectName={this.props.match.params.projectName}
                                                  changeQuery={this.changeQueryInEditor}/>
                         </div>
                     </Col>
@@ -130,14 +130,14 @@ export class SearchOverview extends React.Component {
                 <hr/>
                 <br/>
                 <Row>
-                    <Col xs={6}>
+                    <Col>
                         <div>
                             {leftComponent}
                         </div>
                     </Col>
-                    <Col xs={6}>
-                        {rightComponent}
-                    </Col>
+                    {/*<Col xs={6}>*/}
+                    {/*    {rightComponent}*/}
+                    {/*</Col>*/}
                 </Row>
             </Container>)
     }

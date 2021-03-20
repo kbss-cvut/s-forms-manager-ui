@@ -19,10 +19,10 @@ export class ContextLine extends React.Component {
 
     requestProcess() {
         this.setState({processing: true});
-        API.post("/rest/formGen/processing/single", null, {
+        API.post("/rest/remote/process/single", null, {
             params: {
                 "contextUri": this.props.context.uri,
-                "connectionName": this.props.connectionName
+                "projectName": this.props.projectName
             }
         }).then(() => {
             this.setState({processed: true, processing: false});

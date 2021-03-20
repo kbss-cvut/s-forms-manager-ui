@@ -34,9 +34,9 @@ export class ContextOverview extends React.Component {
         if (!numberOfUpdates) {
             numberOfUpdates = 99999;
         }
-        API.post("/rest/formGen/processing/batch", null, {
+        API.post("/rest/remote/process/batch", null, {
             params: {
-                "connectionName": this.props.match.params.connectionName,
+                "projectName": this.props.match.params.projectName,
                 "numberOfUpdates": numberOfUpdates
             }
         }).then(() => {
@@ -47,9 +47,9 @@ export class ContextOverview extends React.Component {
     }
 
     requestContextsStats() {
-        API.get("/rest/connection/stats/contexts", {
+        API.get("/rest/project/stats/contexts", {
             params: {
-                "connectionName": this.props.match.params.connectionName
+                "projectName": this.props.match.params.projectName
             }
         }).then((response) => {
             this.setState({contextsStats: response.data})
@@ -71,12 +71,12 @@ export class ContextOverview extends React.Component {
                 <Container>
                     <br/>
                     <h4>
-                        Contexts: {this.props.match.params.connectionName}
+                        Contexts: {this.props.match.params.projectName}
                     </h4>
                     <br/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.requestProcessBatch()}>
-                        Process all non-processed contexts (can take long time and cannot be stopped)
+                        Process all non-imported record snapshots (can take long time and cannot be stopped)
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
@@ -96,16 +96,16 @@ export class ContextOverview extends React.Component {
                     </ToggleButton>
                     <br/>
                     <br/>
-                    <span>Processed contexts: <b>{processedContextsInfo}</b></span>
+                    <span>Imported record snapshots: <b>{processedContextsInfo}</b></span>
                     <br/>
-                    <span>Total contexts: {totalContextsInfo}</span>
+                    <span>Total record snapshots: {totalContextsInfo}</span>
 
                     <br/><br/>
                 </Container>
                 <Row>
                     <Col xs={6}>
                         <div>
-                            <ContextList connectionName={this.props.match.params.connectionName}
+                            <ContextList projectName={this.props.match.params.projectName}
                                          filterProcessed={this.state.filterProcessed}
                                          updateActiveContextUri={this.updateActiveContextUri}/>
                         </div>
@@ -113,7 +113,7 @@ export class ContextOverview extends React.Component {
                     <Col xs={6}>
                         <SFormsDisplay key={this.state.activeContext}
                                        contextUri={this.state.activeContext}
-                                       connectionName={this.props.match.params.connectionName}/>
+                                       projectName={this.props.match.params.projectName}/>
                     </Col>
                 </Row>
             </Container>)

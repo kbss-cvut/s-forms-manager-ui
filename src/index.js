@@ -11,11 +11,11 @@ import rootReducer from './reducers';
 
 import 's-forms/css/s-forms.min.css'
 import 'bootstrap/dist/css/bootstrap.css';
-import {fetchConnectionNames} from "./actions";
+import {fetchProjectNames} from "./actions";
 
 
 const saveState = (state) => {
-    if (state.connections.length !== 0) {
+    if (state.projects.length !== 0) {
         localStorage.setItem("state", JSON.stringify(state));
     }
 };
@@ -33,11 +33,11 @@ const getState = () => {
 
 const initialState = getState();
 const store = createStore(rootReducer, initialState, applyMiddleware(thunk));
-store.dispatch(fetchConnectionNames());
+store.dispatch(fetchProjectNames());
 
 store.subscribe(() => {
     saveState({
-        connections: store.getState().connections
+        projects: store.getState().projects
     })
 })
 

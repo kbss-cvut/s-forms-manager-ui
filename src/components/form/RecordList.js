@@ -1,0 +1,73 @@
+import React from 'react';
+import Alert from "react-bootstrap/Alert";
+import {RecordLine} from "./RecordLine";
+
+/**
+ * FormGens:
+ *  1) are provided in this.state.props.formGenSaves
+ *  OR
+ *  2) are provided through this.props.requestFormGens callback
+ */
+export class RecordList extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            records: null
+        }
+    }
+
+    componentDidMount() {
+        this.requestRecordsFromProps();
+    }
+
+    requestRecordsFromProps() {
+        if (this.props.requestRecords) {
+            this.props.requestRecords().then(response => {
+                return response.data;
+            }).then(data => {
+                this.setState({
+                    records: data
+                });
+            }).catch(error => {
+                console.log(error)
+            });
+        }
+    }
+
+    render() {
+        const records = this.props?.records || this.state.records
+
+        if (!records) {
+            return <Alert variant={"light"} className={"h-10"}>
+                Loading forms...
+            </Alert>
+        }
+
+        const versionLines = records ? records.map((record, i) => {
+            i++;
+            return <RecordLine key={i}
+                               recordURI={record.recordURI}
+                               recordCreated={record.recordCreated}
+                               internalKey={record.internalKey}
+                               remoteSampleContextURI={record.remoteSampleContextURI}
+                               numberOfRecordSnapshots={record.numberOfRecordSnapshots}
+                               numberOfRecordVersions={record.numberOfRecordVersions}
+                               projectName={this.props.projectName}
+                               clickHandler={this.props.updateActiveContextUri}/>;
+        }) : <Alert variant={"light"} className={"h-10"}>
+            The list is empty.
+        </Alert>; // TODO: create a function for that
+        // TODO: introduce this concept to the whole app
+
+        return <div>
+            {this.props.displayCount ? (
+                <span>There is <b>{versionLines.length}</b>{' '}
+                    results from total of <b>{this.props?.totalFormGens || this.state.totalFormGens}</b> formGens that fit the criteria{' '}
+                    <b>({Number((versionLines.length / (this.props?.totalFormGens || this.state.totalFormGens) * 100).toFixed(0))}%)</b>. </span>
+            ) : (<div></div>)}
+            {versionLines}
+        </div>
+
+    }
+}

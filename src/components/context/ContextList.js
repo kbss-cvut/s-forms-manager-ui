@@ -23,9 +23,9 @@ export class ContextList extends React.Component {
 
     requestPaginatedContexts(offset, limit) {
         this.setState({loading: true})
-        API.get("/rest/contexts/paginated", {
+        API.get("/rest/remote/paginated", {
             params: {
-                "connectionName": this.props.connectionName,
+                "projectName": this.props.projectName,
                 "offset": offset,
                 "limit": limit
             }
@@ -48,19 +48,18 @@ export class ContextList extends React.Component {
             </Alert>
         }
 
-        let i = 0;
         let contexts = this.state.contexts.filter((context) => {
             if (this.props.filterProcessed) {
                 return !context.processed
             } else {
                 return true;
             }
-        }).map((context) => {
+        }).map((context, i) => {
             i++;
             return (
                 <ContextLine key={i}
                              context={context}
-                             connectionName={this.props.connectionName}
+                             projectName={this.props.projectName}
                              clickHandler={this.props.updateActiveContextUri}/>);
         });
 

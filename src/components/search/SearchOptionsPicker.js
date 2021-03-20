@@ -27,7 +27,7 @@ export class SearchOptionsPicker extends React.Component {
     updateQueryEditor() {
         API.get("/rest/search/updateQuery", {
             params: {
-                connectionName: this.props.connectionName,
+                projectName: this.props.projectName,
                 versions: this.state.selectedVersions.reduce((f, s) => `${f},${s}`),
                 saveHashes: this.state.selectedSaveHashes.reduce((f, s) => `${f},${s}`),
                 latestSaves: this.state.latestSaves
@@ -77,8 +77,6 @@ export class SearchOptionsPicker extends React.Component {
             <Form.Control type="text" placeholder="saveHash" key={idx}
                           onChange={this.handleSelectedSaveHashesChange(idx)}/>
         ));
-
-        console.log(this.state.selectedSaveHashes)
 
         return <div>
             <Form>

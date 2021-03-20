@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import connectionsReducer from "./connectionsReducer";
+import projectsReducer from "./projectsReducer";
 
 export default combineReducers({
-    connections: connectionsReducer
+    projects: projectsReducer
 });

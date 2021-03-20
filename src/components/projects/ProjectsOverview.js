@@ -7,58 +7,58 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import DeleteConnectionForm from "./DeleteConnectionForm";
+import DeleteProjectForm from "./DeleteProjectForm";
 import Container from "react-bootstrap/Container";
 
-const mapStateToProps = state => ({connections: state.connections})
+const mapStateToProps = state => ({projects: state.projects})
 
-export class ConnectionsOverview extends React.Component {
+export class ProjectsOverview extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            connections: null,
+            projects: null,
             isLoading: true
         }
         this.refresh = this.refresh.bind(this);
     }
 
-    fetchConnections() {
-        API.get("/rest/connections/all").then(response => {
+    fetchProjects() {
+        API.get("/rest/projects/all").then(response => {
             return response.data;
         }).then(data => {
             this.setState({
-                connections: data,
+                projects: data,
                 isLoading: false
             });
         });
     }
 
     componentDidMount() {
-        this.fetchConnections()
+        this.fetchProjects()
     }
 
     refresh() {
         this.setState({isLoading: true})
-        this.fetchConnections()
+        this.fetchProjects()
     }
 
     render() {
 
-        let connectionsView;
+        let projectLines;
         if (this.state.isLoading) {
-            connectionsView = <div>Loading...</div>
+            projectLines = <div>Loading...</div>
         } else {
-            connectionsView = this.state.connections.map(app => {
-                const {formGenRepositoryUrl, formGenServiceUrl, appRepositoryUrl, connectionName} = app;
+            projectLines = this.state.projects.map(app => {
+                const {formGenRepositoryUrl, formGenServiceUrl, appRepositoryUrl, projectName: projectName} = app;
 
-                return <div key={connectionName}>
+                return <div key={projectName}>
                     <Card>
                         <ListGroup variant="flush">
                             <ListGroup.Item>
                                 <Row>
-                                    <Col xs={3}><p className="font-weight-bold"> Connection Name </p></Col>
-                                    <Col>{connectionName}</Col>
+                                    <Col xs={3}><p className="font-weight-bold"> Project Name </p></Col>
+                                    <Col>{projectName}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
@@ -83,8 +83,8 @@ export class ConnectionsOverview extends React.Component {
                                 <Row>
                                     <Col>
                                         <Button variant="outline-secondary">Change</Button>{' '}
-                                        <DeleteConnectionForm connectionName={connectionName}
-                                                              refreshCallBack={this.refresh}/>
+                                        <DeleteProjectForm projectName={projectName}
+                                                           refreshCallBack={this.refresh}/>
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
@@ -99,19 +99,19 @@ export class ConnectionsOverview extends React.Component {
             <Container>
                 <br/>
                 <h3>
-                    Connections
+                    Projects
                 </h3>
                 <br/>
                 <div>
-                    <Button as={Link} to="/connections/add" variant="outline-success">Add new</Button>{' '}
+                    <Button as={Link} to="/projects/add" variant="outline-success">Add new</Button>{' '}
                 </div>
                 <br/>
                 <div>
-                    {connectionsView}
+                    {projectLines}
                 </div>
             </Container>
         );
     }
 }
 
-export default connect(mapStateToProps)(ConnectionsOverview);
+export default connect(mapStateToProps)(ProjectsOverview);

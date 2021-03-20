@@ -3,34 +3,34 @@ import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import API from "../../api"
-import {removeConnectionsFromStore} from "../../actions";
+import {removeProjectsFromStore} from "../../actions";
 
 const mapStateToProps = state => {
-    return ({connections: state.connections})
+    return ({projects: state.projects})
 }
 
 const mapDispatchToProps = dispatch => {
     return ({
-        removeConn: (name) => {
-            dispatch(removeConnectionsFromStore(name))
+        removeProject: (name) => {
+            dispatch(removeProjectsFromStore(name))
         }
     })
 }
 
-class DeleteConnectionForm extends React.Component {
+class DeleteProjectForm extends React.Component {
     constructor() {
         super();
         this.state = {
             show: false
         }
-        this.deleteConnection = this.deleteConnection.bind(this);
+        this.deleteProject = this.deleteProject.bind(this);
     }
 
-    deleteConnection() {
-        API.delete("/rest/connections", {
-            data: this.props.connectionName
+    deleteProject() {
+        API.delete("/rest/projects", {
+            data: this.props.projectName
         }).then(response => {
-            this.props.removeConn(this.props.connectionName)
+            this.props.removeProject(this.props.projectName)
             this.props.refreshCallBack()
         }).catch(error => {
             console.log(error)
@@ -45,10 +45,10 @@ class DeleteConnectionForm extends React.Component {
                     <Alert variant="danger" onClose={() => this.setState({show: false})} dismissible>
                         <Alert.Heading>Warning!</Alert.Heading>
                         <p>
-                            You are about to delete a connection. Are you sure want to do it?
+                            You are about to delete a project. Are you sure want to do it?
                         </p>
                         <Button variant="outline-danger"
-                                onClick={() => this.deleteConnection()}>Delete</Button>
+                                onClick={() => this.deleteProject()}>Delete</Button>
                     </Alert>
                 </div>
             );
@@ -57,4 +57,4 @@ class DeleteConnectionForm extends React.Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeleteConnectionForm);
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteProjectForm);

@@ -1,30 +1,30 @@
-import {ADD_CONNECTION, FETCH_CONNECTIONS} from './types.js';
+import {ADD_PROJECT, FETCH_PROJECTS} from './types.js';
 import API from '../api'
-import {REMOVE_CONNECTION} from "./types";
+import {REMOVE_PROJECT} from "./types";
 
-export const addConnectionsToStore = name => {
+export const addProjectsToStore = name => {
     return {
-        type: ADD_CONNECTION,
+        type: ADD_PROJECT,
         payload: name
     }
 };
 
-export const removeConnectionsFromStore = name => {
+export const removeProjectsFromStore = name => {
     return {
-        type: REMOVE_CONNECTION,
+        type: REMOVE_PROJECT,
         payload: name
     }
 };
 
 const fetchNamesSuccess = names => ({
-    type: FETCH_CONNECTIONS,
+    type: FETCH_PROJECTS,
     payload: {names}
 });
 
-export const fetchConnectionNames = () => {
+export const fetchProjectNames = () => {
     return async dispatch => {
         try {
-            let names = await API.get("/rest/connections/names");
+            let names = await API.get("/rest/projects/names");
             dispatch(fetchNamesSuccess(names.data));
         } catch (e) {
             console.log(e);

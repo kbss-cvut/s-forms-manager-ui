@@ -5,17 +5,19 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import API from "../../api";
 import Button from "react-bootstrap/Button";
-import {FormGenVersionList} from "./FormGenVersionList";
-import {FormGenList} from "./FormGenList";
+import {FormTemplateVersionList} from "../formtemplate/FormTemplateVersionList";
+import {RecordList} from "./RecordList";
 import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
-import {FormGenStatistics} from "./FormGenStatistics";
+import {RecordsStatistics} from "./RecordsStatistics";
+import {FormTemplateVersionCompareBoard} from "../formtemplate/FormTemplateVersionCompareBoard";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
 const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
 const RIGHT_DISPLAY_VERSION_GRAPH = "DISPLAY_VERSION_GRAPH"
 const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
+const RIGHT_COMPARE_VERSIONS = "RIGHT_COMPARE_VERSIONS"
 
-export class FormGenOverview extends React.Component {
+export class RecordsOverview extends React.Component {
 
     constructor(props) {
         super(props);
@@ -26,17 +28,17 @@ export class FormGenOverview extends React.Component {
             activeContext: null
         }
         this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
-        this.requestLatestSavesFormGens = this.requestLatestSavesFormGens.bind(this)
+        this.requestRecords = this.requestRecords.bind(this)
     }
 
     updateActiveContextUri(contextUri) {
         this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
     }
 
-    requestLatestSavesFormGens() {
-        return API.get("/rest/formGen/latestSaves", {
+    requestRecords() {
+        return API.get("/rest/record", {
             params: {
-                "connectionName": this.props.match.params.connectionName
+                "projectName": this.props.match.params.projectName
             }
         });
     }
@@ -45,14 +47,14 @@ export class FormGenOverview extends React.Component {
         let leftComponent;
         switch (this.state.leftComponent) {
             case LEFT_DISPLAY_VERSIONS_LIST:
-                leftComponent = <FormGenVersionList connectionName={this.props.match.params.connectionName}
-                                                    updateActiveContextUri={this.updateActiveContextUri}/>
+                leftComponent = <FormTemplateVersionList projectName={this.props.match.params.projectName}
+                                                         updateActiveContextUri={this.updateActiveContextUri}/>
                 break;
             case LEFT_DISPLAY_FORMS_LIST:
-                leftComponent = <FormGenList connectionName={this.props.match.params.connectionName}
-                                             updateActiveContextUri={this.updateActiveContextUri}
-                                             requestFormGens={this.requestLatestSavesFormGens}
-                                             displayCount={true}/>
+                leftComponent = <RecordList projectName={this.props.match.params.projectName}
+                                            updateActiveContextUri={this.updateActiveContextUri}
+                                            requestRecords={this.requestRecords}
+                                            displayCount={true}/>
                 break;
             default:
                 leftComponent = <div/>
@@ -61,13 +63,18 @@ export class FormGenOverview extends React.Component {
         let rightComponent;
         switch (this.state.rightComponent) {
             case RIGHT_DISPLAY_S_FORMS:
-                rightComponent = <SFormsDisplay key={this.state.activeContext}
-                                                contextUri={this.state.activeContext}
-                                                connectionName={this.props.match.params.connectionName}/>
+                rightComponent = <SFormsDisplay contextUri={this.state.activeContext}
+                                                projectName={this.props.match.params.projectName}/>
+                break;
+            case RIGHT_COMPARE_VERSIONS:
+                rightComponent =
+                    <FormTemplateVersionCompareBoard key={this.state.activeContext} // TODO: remove this key???
+                                                     contextUri={this.state.activeContext}
+                                                     projectName={this.props.match.params.projectName}/>
                 break;
             case RIGHT_DISPLAY_VERSION_GRAPH:
             default:
-                rightComponent = <VersionsHistogramChart connectionName={this.props.match.params.connectionName}/>
+                rightComponent = <VersionsHistogramChart projectName={this.props.match.params.projectName}/>
                 break;
         }
 
@@ -76,13 +83,13 @@ export class FormGenOverview extends React.Component {
                 <Container>
                     <br/>
                     <h4>
-                        Processed Forms: {this.props.match.params.connectionName}
+                        Processed Forms: {this.props.match.params.projectName}
                     </h4>
-                    <FormGenStatistics connectionName={this.props.match.params.connectionName}/>
+                    <RecordsStatistics projectName={this.props.match.params.projectName}/>
                     <hr/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>
-                        Show forms
+                        Show records
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
@@ -90,14 +97,18 @@ export class FormGenOverview extends React.Component {
                                 leftComponent: LEFT_DISPLAY_VERSIONS_LIST,
                                 rightComponent: RIGHT_DISPLAY_VERSION_GRAPH
                             })}>
-                        Show versions
+                        Show form versions
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.setState({rightComponent: RIGHT_DISPLAY_VERSION_GRAPH})}>
                         Show versions graph
                     </Button>
-
+                    {' '}
+                    <Button variant="outline-primary" type="submit"
+                            onClick={() => this.setState({rightComponent: RIGHT_COMPARE_VERSIONS})}>
+                        Compare versions
+                    </Button>
                     <br/><br/>
                 </Container>
                 <Row>

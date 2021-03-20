@@ -56,9 +56,9 @@ class VersionsHistogramChart extends React.Component {
     }
 
     requestHistogram() {
-        API.get("/rest/formGenVersion/histogram", {
+        API.get("/rest/formTemplate/version/histogram", {
             params: {
-                "connectionName": this.props.connectionName,
+                "projectName": this.props.projectName,
             }
         }).then(response => {
             const {earliestYear, earliestMonth, latestYear, latestMonth, histogramData} = response.data;

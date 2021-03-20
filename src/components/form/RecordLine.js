@@ -8,9 +8,9 @@ import Moment from 'react-moment';
 import Collapse from "react-bootstrap/Collapse";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretDown} from "@fortawesome/free-solid-svg-icons/faCaretDown";
-import {FormGenHistoryList} from "./FormGenHistoryList";
+import {RecordSnapshotList} from "./RecordSnapshotList";
 
-export class FormGenLine extends React.Component {
+export class RecordLine extends React.Component {
 
     constructor() {
         super();
@@ -21,28 +21,6 @@ export class FormGenLine extends React.Component {
     }
 
     render() {
-        const moreThanOneHistory = this.props.numberOfSaves > 1;
-
-        let historyLine;
-        if (this.state.historyCollapseOpen) {
-            historyLine =
-                <FormGenHistoryList saveHash={this.props.saveHash}
-                                    connectionName={this.props.connectionName}
-                                    clickHandler={this.props.clickHandler}/>;
-        }
-
-        let modifiedDiv;
-        if (moreThanOneHistory) {
-            modifiedDiv = <div>
-                <span>Last modified:{' '}
-                    <Moment format="DD.MM.YYYY h:mm:ss">
-                        {this.props.lastModified}
-                    </Moment>
-                </span>
-            </div>;
-        }
-
-        // TODO: add created and modified
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -50,20 +28,19 @@ export class FormGenLine extends React.Component {
                         <Col xs={9}>
                             <p>
                             </p>
-                            <span>Number of saves: <b>{this.props.numberOfSaves}</b>    </span>
-                            <br/>
+                            <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b><br/></span>
                             <span>Created:{' '}
                                 <b>
                                 <Moment format="DD.MM.YYYY h:mm:ss">
-                                    {this.props.created}
+                                    {this.props.recordCreated}
                                 </Moment>
                                 </b>
                             </span>
-                            {modifiedDiv}
+                            {/*{modifiedDiv}*/}
                         </Col>
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
-                                    onClick={() => this.props.clickHandler(this.props.contextUri)}>
+                                    onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
                                 Display
                             </Button>
                             <Button
@@ -71,7 +48,6 @@ export class FormGenLine extends React.Component {
                                 onClick={() => this.setState({historyCollapseOpen: !this.state.historyCollapseOpen})}
                                 aria-controls="example-collapse-text"
                                 aria-expanded={this.state.historyCollapseOpen}
-                                disabled={!moreThanOneHistory}
                             >
                                 Show history <FontAwesomeIcon color="black" icon={faCaretDown}/>
                             </Button>
@@ -91,14 +67,20 @@ export class FormGenLine extends React.Component {
                                 <Collapse in={this.state.detailCollapseOpen}>
                                     <div id="example-collapse-text">
                                         <hr/>
-                                        <span>Context uri: {this.props.contextUri}</span>
+                                        <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>
+                                        <br/>
+                                        <span>Sample remote context URI: {this.props.remoteSampleContextURI}</span>
+                                        <br/>
+                                        <span>Internal URI: {this.props.recordURI}</span>
                                         <br/>
                                     </div>
                                 </Collapse>
                                 <Collapse in={this.state.historyCollapseOpen}>
                                     <div id="example-collapse-text">
                                         <hr/>
-                                        {historyLine}
+                                        <RecordSnapshotList recordURI={this.props.recordURI}
+                                                            projectName={this.props.projectName}
+                                                            clickHandler={this.props.clickHandler}/>
                                     </div>
                                 </Collapse>
                             </div>

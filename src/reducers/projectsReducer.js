@@ -1,15 +1,15 @@
-import {ADD_CONNECTION, FETCH_CONNECTIONS, REMOVE_CONNECTION} from "../actions/types";
+import {ADD_PROJECT, FETCH_PROJECTS, REMOVE_PROJECT} from "../actions/types";
 
-export default function connectionsReducer(state = [], action) {
+export default function projectsReducer(state = [], action) {
 
     switch (action.type) {
-        case ADD_CONNECTION: {
+        case ADD_PROJECT: {
             return state.concat(action.payload);
         }
-        case REMOVE_CONNECTION: {
+        case REMOVE_PROJECT: {
             return state.filter((data) => data !== action.payload);
         }
-        case FETCH_CONNECTIONS: {
+        case FETCH_PROJECTS: {
             return action.payload.names
         }
         default:

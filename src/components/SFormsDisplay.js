@@ -17,11 +17,35 @@ export class SFormsDisplay extends React.Component {
     }
 
     componentDidMount() {
+        this.requestFormGenJson()
+    }
+
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+        if (prevProps !== this.props) {
+            this.requestFormGenJson()
+        }
+    }
+
+    requestFormGenJson() {
         if (this.props.contextUri) {
-            API.post("/rest/formGen/s-forms-json-ld", null, {
+            API.post("/rest/sforms/s-forms-json-ld", null, {
                 params: {
-                    "connectionName": this.props.connectionName,
+                    "projectName": this.props.projectName,
                     "contextUri": this.props.contextUri
+                }
+            }).then(response => {
+                return response.data;
+            }).then(data => {
+                return JSON.parse(data);
+            }).then(data => {
+                this.setState({rawJsonForm: data});
+            });
+        } else if (this.props.version1 && this.props.version2) {
+            API.get("/rest/formGenVersion/compare", {
+                params: {
+                    "projectName": this.props.projectName,
+                    "version1": this.props.version1,
+                    "version2": this.props.version2
                 }
             }).then(response => {
                 return response.data;
@@ -33,15 +57,16 @@ export class SFormsDisplay extends React.Component {
         }
     }
 
+
     fetchTypeAheadValues = (query) => {
         const possibleValues = require('../__mocks__/possibleValues.json');
         return new Promise((resolve) => setTimeout(() => resolve(possibleValues), 1500));
     };
 
     render() {
-        if (!this.props.contextUri) {
+        if (!this.props.contextUri && (!this.props.version1 || !this.props.version2)) {
             return <Alert variant={"light"} className={"h-10"}>
-                Context not specified...
+                Form not specified...
             </Alert>
         }
 
@@ -64,7 +89,7 @@ export class SFormsDisplay extends React.Component {
             modalProps,
             horizontalWizardNav: true
         };
-        if (this.props.contextUri && this.state.rawJsonForm) {
+        if ((this.props.contextUri && this.state.rawJsonForm) || (this.props.version1 && this.props.version2 && this.state.rawJsonForm)) {
             return <SForms
                 ref={this.refForm}
                 form={this.state.rawJsonForm}

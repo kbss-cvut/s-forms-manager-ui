@@ -4,25 +4,25 @@ import Form from "react-bootstrap/Form";
 import API from "../../api";
 import Alert from "react-bootstrap/Alert";
 import {connect} from "react-redux";
-import {addConnectionsToStore} from "../../actions";
+import {addProjectsToStore} from "../../actions";
 import Container from "react-bootstrap/Container";
 
-const mapStateToProps = state => ({connections: state.connections})
+const mapStateToProps = state => ({projects: state.projects})
 
 const mapDispatchToProps = dispatch => {
     return ({
-        addConn: (name) => {
-            dispatch(addConnectionsToStore(name))
+        addProject: (name) => {
+            dispatch(addProjectsToStore(name))
         }
     })
 }
 
-class AddConnectionForm extends React.Component {
+class AddProjectForm extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            connectionName: '',
+            projectName: '',
             formGenRepositoryUrl: '',
             serviceUrl: '',
             appRepositoryUrl: '',
@@ -31,7 +31,7 @@ class AddConnectionForm extends React.Component {
         }
         this.baseState = this.state
         this.onChangeSetState = this.onChangeSetState.bind(this);
-        this.onSubmitConnection = this.onSubmitConnection.bind(this);
+        this.onSubmitProject = this.onSubmitProject.bind(this);
     }
 
     onChangeSetState(e) {
@@ -39,15 +39,15 @@ class AddConnectionForm extends React.Component {
         this.setState(prevState => ({...prevState, [name]: value}));
     }
 
-    onSubmitConnection(e) {
+    onSubmitProject(e) {
         e.preventDefault();
-        API.post("/rest/connections", {
-            connectionName: this.state.connectionName,
+        API.post("/rest/projects", {
+            projectName: this.state.projectName,
             formGenRepositoryUrl: this.state.formGenRepositoryUrl,
             formGenServiceUrl: this.state.serviceUrl,
             appRepositoryUrl: this.state.appRepositoryUrl
         }).then(() => {
-            this.props.addConn(this.state.connectionName)
+            this.props.addProject(this.state.projectName)
             this.messageForm.reset();
             this.state = this.baseState
             this.setState({showError: false, showSuccess: true});
@@ -62,17 +62,17 @@ class AddConnectionForm extends React.Component {
         return <Container>
             <br/>
             <h3>
-                Add Connection
+                Add Project
             </h3>
             <br/>
             <div>
-                <Form onSubmit={this.onSubmitConnection} ref={form => this.messageForm = form}>
-                    <Form.Group controlId="formBasicConnectionName">
-                        <Form.Label>Connection name</Form.Label>
-                        <Form.Control type="text" placeholder="Connection name" name="connectionName"
+                <Form onSubmit={this.onSubmitProject} ref={form => this.messageForm = form}>
+                    <Form.Group controlId="formBasicProjectName">
+                        <Form.Label>Projectname</Form.Label>
+                        <Form.Control type="text" placeholder="Project name" name="projectName"
                                       onChange={this.onChangeSetState}/>
                         <Form.Text className="text-muted">
-                            Please choose a suitable connection name without whitespaces. Something like
+                            Please choose a suitable project name without whitespaces. Something like
                             "study-manager".
                         </Form.Text>
                     </Form.Group>
@@ -106,7 +106,7 @@ class AddConnectionForm extends React.Component {
             <br/>
             <Alert variant="danger" onClose={() => this.setState({showError: false})} dismissible>
                 <Alert.Heading>Warning!</Alert.Heading>
-                Creating connection was not successful.
+                Creating project was not successful.
             </Alert>
         </div>
     }
@@ -116,10 +116,10 @@ class AddConnectionForm extends React.Component {
             <br/>
             <Alert variant="success" onClose={() => this.setState({showSuccess: false})} dismissible>
                 <Alert.Heading>Success!</Alert.Heading>
-                Creating connection was not successful.
+                Creating projectName was not successful.
             </Alert>
         </div>
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddConnectionForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddProjectForm);

@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Moment from 'react-moment';
 
-export class FormGenHistoryLine extends React.Component {
+export class RecordSnapshotLine extends React.Component {
 
     constructor() {
         super();
@@ -20,27 +20,23 @@ export class FormGenHistoryLine extends React.Component {
                 <ListGroup.Item>
                     <Row>
                         <Col xs={9}>
-                            <p>
-                            </p>
-                            <span>Version: <b>{this.props.versionName}</b> {this.props.synonym ? "(" + this.props.synonym + ")" : ""}</span>
+                            <span>FormTemplateVersion: <b>{this.props?.formTemplateVersionKey || "none"}</b> {this.props.formTemplateVersionInternalName ? "(" + this.props.formTemplateVersionInternalName + ")" : ""}</span>
                             <br/>
-                            <span>Created:{' '}
+                            <span>Snapshot created:{' '}
                                 <Moment format="DD.MM.YYYY hh:mm:ss">
-                                    {this.props.created}
+                                    {this.props.recordSnapshotCreated}
                                 </Moment>
                             </span>
                             <br/>
-                            <span>Modified:{' '}
-                                <b>
-                                <Moment format="DD.MM.YYYY hh:mm:ss">
-                                    {this.props.modified}
-                                </Moment>
-                                </b>
-                            </span>
+                            <span>Number of answers: <b>{this.props.numberOfAnswers}</b></span>
+                            <br/>
+                            <span>Internal key: {this.props.internalKey}</span>
+                            <br/>
+
                         </Col>
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
-                                    onClick={() => this.props.clickHandler(this.props.contextUri)}>
+                                    onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
                                 Display
                             </Button>
                             {' '}

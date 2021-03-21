@@ -78,6 +78,10 @@ export class FormTemplateVersionLine extends React.Component {
                                 <Collapse in={this.state.collapseOpen}>
                                     <div id="example-collapse-text">
                                         <hr/>
+                                        <h6>Question template snapshots:</h6>
+                                        <span>{this.props.numberOfQuestionTemplateSnapshots}</span>
+                                        <br/>
+                                        <br/>
                                         <h6>Sample remote context URI</h6>
                                         <span>{this.props.sampleRemoteContextUri}</span>
                                         <br/>

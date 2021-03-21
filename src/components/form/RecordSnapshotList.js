@@ -54,7 +54,7 @@ export class RecordSnapshotList extends React.Component {
         </Alert>
 
         return <div>
-            <h5>History</h5>
+            <h5>History snapshots</h5>
             {recordVersionsLines}
         </div>
 

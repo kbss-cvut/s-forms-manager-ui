@@ -11,6 +11,8 @@ export class RecordsStatistics extends React.Component {
             totalContexts: "?",
             recordVersions: "?",
             recordSnapshots: "?",
+            emptyRecordSnapshots: "?",
+            nonEmptyRecordSnapshots: "?",
             records: "?",
             formTemplates: "?",
             formTemplateVersions: "?",
@@ -37,6 +39,8 @@ export class RecordsStatistics extends React.Component {
                 totalContexts: data.totalContexts,
                 recordVersions: data.recordVersions,
                 recordSnapshots: data.recordSnapshots,
+                emptyRecordSnapshots: data.emptyRecordSnapshots,
+                nonEmptyRecordSnapshots: data.nonEmptyRecordSnapshots,
                 records: data.records,
                 formTemplates: data.formTemplates,
                 formTemplateVersions: data.formTemplateVersions,
@@ -58,6 +62,8 @@ export class RecordsStatistics extends React.Component {
                     <br/>
                     <span>Record snapshots (imported contexts): {this.state.recordSnapshots}</span>
                     <br/>
+                    <span>Non-empty record snapshots: {this.state.nonEmptyRecordSnapshots}</span>
+                    <br/>
                 </div>
             </Col>
             <Col xs={6}>
@@ -65,6 +71,8 @@ export class RecordsStatistics extends React.Component {
                     <span>Record versions: {this.state.recordVersions}</span>
                     <br/>
                     <span>Records: {this.state.records}</span>
+                    <br/>
+                    <span>Empty record snapshots: {this.state.emptyRecordSnapshots}</span>
                     <br/>
                 </div>
             </Col>

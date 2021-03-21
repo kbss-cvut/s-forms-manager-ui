@@ -45,6 +45,7 @@ export class FormTemplateVersionList extends React.Component {
                                             internalName={version.internalName}
                                             internalUri={version.internalUri}
                                             sampleRemoteContextUri={version.sampleRemoteContextUri}
+                                            numberOfQuestionTemplateSnapshots={version.numberOfQuestionTemplateSnapshots}
                                             projectName={this.props.projectName}
                                             internalKey={version.key}
                                             clickHandler={this.props.updateActiveContextUri}/>;

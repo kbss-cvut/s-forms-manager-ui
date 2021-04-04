@@ -1,21 +1,20 @@
 import React from 'react';
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import API from "../../api";
 import Row from "react-bootstrap/Row";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Form from "react-bootstrap/Form";
+import {ExtensibleAutocompleteFields} from "./ExtensibleAutocompleteFields";
+import {DagDemo, TreeDemo} from "./AutocompleteTextField";
+
 
 export class SearchOptionsPicker extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            latestSaves: false,
             query: "",
-            selectedVersions: [""],
-            selectedSaveHashes: [""]
         }
         this.updateQueryEditor = this.updateQueryEditor.bind(this)
     }
@@ -24,13 +23,13 @@ export class SearchOptionsPicker extends React.Component {
         this.updateQueryEditor()
     }
 
-    updateQueryEditor() {
+    updateQueryEditor(queryId, parameter1, parameter2) {
         API.get("/rest/search/updateQuery", {
             params: {
                 projectName: this.props.projectName,
-                versions: this.state.selectedVersions.reduce((f, s) => `${f},${s}`),
-                saveHashes: this.state.selectedSaveHashes.reduce((f, s) => `${f},${s}`),
-                latestSaves: this.state.latestSaves
+                queryId: queryId,
+                parameter1: parameter1 || "",
+                parameter2: parameter2 || ""
             }
         }).then((response) => {
             this.setState({query: response.data})
@@ -42,96 +41,126 @@ export class SearchOptionsPicker extends React.Component {
         );
     }
 
-    handleSelectedVersionChange = idx => evt => {
-        let newVersions = this.state.selectedVersions
-        newVersions[idx] = evt.target.value
-        this.setState({selectedVersions: newVersions});
-    };
-
-    handleSelectedSaveHashesChange = idx => evt => {
-        let newSaveHashes = this.state.selectedSaveHashes
-        newSaveHashes[idx] = evt.target.value
-        this.setState({selectedSaveHashes: newSaveHashes});
-    };
-
-
-    handleAddSelectedVersion = () => {
-        this.setState({
-            selectedVersions: this.state.selectedVersions.concat("")
-        });
-    };
-
-    handleAddSelectedSaveHashes = () => {
-        this.setState({
-            selectedSaveHashes: this.state.selectedSaveHashes.concat("")
-        });
-    };
+    getAutocompleteValues() {
+        API.get("/rest/search/getAutocomplete", {
+            params: {
+                projectName: this.props.projectName,
+                depth: 0,
+                questionOriginPath: "http://vfn.cz/ontologies/fss-form/primary-treatment--d-h--size-of-the-tumor--latero-lateral-q-qo"
+            }
+        }).then((response) => {
+            // this.setState({query: response.data})
+            // this.props.changeQuery(response.data);
+            console.log(response)
+        }).catch((error) => {
+                console.log(error)
+                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
+            }
+        );
+    }
 
     render() {
 
-        let selectedVersionControls = this.state.selectedVersions.map((v, idx) => (
-            <Form.Control type="text" placeholder="version or version synonym" key={idx}
-                          onChange={this.handleSelectedVersionChange(idx)}/>
-        ));
-        let selectedSaveHashControls = this.state.selectedSaveHashes.map((v, idx) => (
-            <Form.Control type="text" placeholder="saveHash" key={idx}
-                          onChange={this.handleSelectedSaveHashesChange(idx)}/>
-        ));
-
-        return <div>
-            <Form>
+        return <ListGroup>
+            <ListGroup.Item>
                 <Row>
-                    <Col xs={6}>
-
-                        <Form.Group controlId="formVersionFilter">
-                            <Form.Label>
-                                Select only specific version of forms
-
-                                <Button
-                                    variant="link" size="sm" className="float-right"
-                                    onClick={this.handleAddSelectedVersion}>
-                                    <FontAwesomeIcon style={{position: "absolute"}} color="blue" icon={faPlus}/>
-                                </Button>
-
-                            </Form.Label>
-
-                            {selectedVersionControls}
-
-                            <Form.Text className="text-muted">
-                                Filter by version
-                            </Form.Text>
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Include only latest saves in the result // TODO"
-                                        onChangeCapture={e => {
-                                            this.setState({latestSaves: e.currentTarget.checked})
-                                        }}/>
-                        </Form.Group>
-
-                    </Col>
-                    <Col xs={6}>
-                        <Form.Group controlId="formSaveHashFilter">
-                            <Form.Label>Select specific form and it's history
-                                <Button
-                                    variant="link" size="sm" className="float-right"
-                                    onClick={this.handleAddSelectedSaveHashes}>
-                                    <FontAwesomeIcon style={{position: "absolute"}} color="blue" icon={faPlus}/>
-                                </Button>
-                            </Form.Label>
-
-                            {selectedSaveHashControls}
-
-                            <Form.Text className="text-muted">
-                                Filter by saveHash
-                            </Form.Text>
-                        </Form.Group>
+                    <Col xs={10}>
+                        <h5>Autocomplete</h5>
+                        <DagDemo/>
                     </Col>
                 </Row>
-                <Button variant="primary" onClick={() => this.updateQueryEditor()}>
-                    Update SPARQL
-                </Button>
-            </Form>
-        </div>;
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+                <Row>
+                    <Col xs={10}>
+                        <h5>Use Case 1</h5>
+                        <span>For <b>any FormTemplateVersion</b>, what question have <b>always the same answer</b>?</span>
+                        <br/>
+
+                    </Col>
+                    <Col>
+                        <Button variant="primary" onClick={() => this.updateQueryEditor("usecase1")}>
+                            Load SPARQL
+                        </Button>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Row>
+                    <Col xs={10}>
+                        <h5>Use Case 2</h5>
+                        <span>For <b>specific FormTemplateVersion</b>, what question have <b>always the same answer</b>?</span>
+                        <br/>
+                        <br/>
+                        <Form.Group controlId="useCase2Parameter1FG">
+                            <Form.Control type="text" placeholder="versionKey"
+                                          onChange={(event) => {
+                                              this.setState({usecase1Parameter1: event.target.value});
+                                              this.getAutocompleteValues()
+                                          }
+                                          }/>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Button variant="primary"
+                                onClick={() => this.updateQueryEditor("usecase2", this.state.usecase1Parameter1)}>
+                            Load SPARQL
+                        </Button>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Row>
+                    <Col xs={10}>
+                        <h5>Use Case 3</h5>
+                        <span>Find all records where <b>latest answer</b> conforms <b>certain condition</b>.</span>
+                        <br/>
+                        <br/>
+                    </Col>
+                    <Col>
+                        <Button variant="primary"
+                                onClick={() => this.updateQueryEditor("usecase3")}>
+                            Load SPARQL
+                        </Button>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Row>
+                    <Col xs={10}>
+                        <h5>Use Case 4</h5>
+                        <span>Find all records where <b>2 latest answers</b> conform <b>certain condition</b>.</span>
+                        <br/>
+                        <br/>
+                    </Col>
+                    <Col>
+                        <Button variant="primary"
+                                onClick={() => this.updateQueryEditor("usecase4")}>
+                            Load SPARQL
+                        </Button>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+            <ListGroup.Item>
+                <Row>
+                    <Col xs={10}>
+                        <h5>Use Case with autocomplete</h5>
+                        <span>Find all records where <b>2 latest answers</b> conform <b>certain condition</b>.</span>
+                        <br/>
+                        <br/>
+                        <ExtensibleAutocompleteFields projectName={this.props.projectName}/>
+                    </Col>
+                    <Col>
+                        <Button variant="primary"
+                                onClick={() => this.updateQueryEditor("usecase4")}>
+                            Load SPARQL
+                        </Button>
+                    </Col>
+                </Row>
+            </ListGroup.Item>
+
+
+        </ListGroup>
     }
 }

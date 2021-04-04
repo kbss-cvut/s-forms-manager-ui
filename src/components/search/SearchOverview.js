@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {FormTemplateVersionList} from "../formtemplate/FormTemplateVersionList";
-import {RecordsStatistics} from "../form/RecordsStatistics";
+import {ProjectStatistics} from "../form/ProjectStatistics";
 import {SearchOptionsPicker} from "./SearchOptionsPicker";
 import {SearchResultList} from "./SearchResultList";
 import API from "../../api";
@@ -93,13 +93,13 @@ export class SearchOverview extends React.Component {
                     <h4>
                         Search: {this.props.match.params.projectName}
                     </h4>
-                    <RecordsStatistics projectName={this.props.match.params.projectName}/>
+                    <ProjectStatistics projectName={this.props.match.params.projectName}/>
 
                     <hr/>
-                    <Button variant="outline-primary" type="submit"
-                            onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>
-                        Search in forms
-                    </Button>
+                    {/*<Button variant="outline-primary" type="submit"*/}
+                    {/*        onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>*/}
+                    {/*    Search in forms*/}
+                    {/*</Button>*/}
                     <br/><br/>
                 </Container>
                 <Row>
@@ -111,7 +111,7 @@ export class SearchOverview extends React.Component {
                     </Col>
                     <Col xs={6}>
                         <div>
-                            <br/>
+                            {/*<br/>*/}
                             <YasguiEditor query={this.state.query} ref={this.yasguiRef}/>
                         </div>
                     </Col>

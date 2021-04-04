@@ -19,6 +19,7 @@
     "chartjs-plugin-colorschemes": "^0.4.0",
     "chartjs-plugin-zoom": "^0.7.7",
     "inputmask-core": "^2.1.1",
+    "intelligent-dag-select": "^0.7.6",
     "jquery": "^3.4.1",
     "mdbreact": "^5.0.1",
     "moment": "^2.29.1",

@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import {FormTemplateVersionList} from "../formtemplate/FormTemplateVersionList";
 import {RecordList} from "./RecordList";
 import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
-import {RecordsStatistics} from "./RecordsStatistics";
+import {ProjectStatistics} from "./ProjectStatistics";
 import {FormTemplateVersionCompareBoard} from "../formtemplate/FormTemplateVersionCompareBoard";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
@@ -85,7 +85,7 @@ export class RecordsOverview extends React.Component {
                     <h4>
                         Processed Forms: {this.props.match.params.projectName}
                     </h4>
-                    <RecordsStatistics projectName={this.props.match.params.projectName}/>
+                    <ProjectStatistics projectName={this.props.match.params.projectName}/>
                     <hr/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>

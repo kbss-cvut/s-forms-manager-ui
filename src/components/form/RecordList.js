@@ -44,7 +44,7 @@ export class RecordList extends React.Component {
             </Alert>
         }
 
-        const versionLines = records ? records.map((record, i) => {
+        const recordLines = records ? records.map((record, i) => {
             i++;
             return <RecordLine key={i}
                                recordURI={record.recordURI}
@@ -61,12 +61,9 @@ export class RecordList extends React.Component {
         // TODO: introduce this concept to the whole app
 
         return <div>
-            {this.props.displayCount ? (
-                <span>There is <b>{versionLines.length}</b>{' '}
-                    results from total of <b>{this.props?.totalFormGens || this.state.totalFormGens}</b> formGens that fit the criteria{' '}
-                    <b>({Number((versionLines.length / (this.props?.totalFormGens || this.state.totalFormGens) * 100).toFixed(0))}%)</b>. </span>
-            ) : (<div></div>)}
-            {versionLines}
+            <h4>Records</h4>
+            <span><b>({records.length})</b> All non-empty records and their views history. </span>
+            {recordLines}
         </div>
 
     }

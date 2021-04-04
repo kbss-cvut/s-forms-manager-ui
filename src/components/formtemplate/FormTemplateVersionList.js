@@ -54,6 +54,7 @@ export class FormTemplateVersionList extends React.Component {
         </Alert>;
 
         return <div>
+            <h4>Form template versions ({versions.length})</h4>
             {versions}
         </div>
 

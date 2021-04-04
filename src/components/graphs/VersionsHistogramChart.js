@@ -108,6 +108,7 @@ class VersionsHistogramChart extends React.Component {
             <div className="text-center">
                 <MDBContainer>
                     <h3 className="mt-5">Versions histogram</h3>
+                    <span>The graph shows number of form views per month for recognized form template versions.</span>
                     {chart}
                 </MDBContainer>
                 <br/>

@@ -37,14 +37,17 @@ export class RecordSnapshotLine extends React.Component {
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
                                     onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
+                                {/*TODO: change everywhere to "update s-forms context" */}
                                 Display
                             </Button>
                             {' '}
-                            <Button
-                                variant="outline-primary" size="sm" className="float-right"
-                                onClick={() => console.log("versions are supposed to be compared now!")}>
-                                Compare to previous version
-                            </Button>
+                            {this.props.order <= 0 ? <div/> :
+                                <Button
+                                    variant="outline-primary" size="sm" className="float-right"
+                                    onClick={() => this.props.compareRecordSnapshotsFunction(this.props.order)}>
+                                    Compare to previous version
+                                </Button>
+                            }
                         </Col>
                     </Row>
                 </ListGroup.Item>

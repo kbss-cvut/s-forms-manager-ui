@@ -28,7 +28,10 @@ export class RecordLine extends React.Component {
                         <Col xs={9}>
                             <p>
                             </p>
-                            <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b><br/></span>
+                            <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b></span>
+                            <br/>
+                            <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>
+                            <br/>
                             <span>Created:{' '}
                                 <b>
                                 <Moment format="DD.MM.YYYY h:mm:ss">
@@ -36,7 +39,6 @@ export class RecordLine extends React.Component {
                                 </Moment>
                                 </b>
                             </span>
-                            {/*{modifiedDiv}*/}
                         </Col>
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
@@ -67,8 +69,6 @@ export class RecordLine extends React.Component {
                                 <Collapse in={this.state.detailCollapseOpen}>
                                     <div id="example-collapse-text">
                                         <hr/>
-                                        <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>
-                                        <br/>
                                         <span>Sample remote context URI: {this.props.remoteSampleContextURI}</span>
                                         <br/>
                                         <span>Internal URI: {this.props.recordURI}</span>
@@ -80,7 +80,9 @@ export class RecordLine extends React.Component {
                                         <hr/>
                                         <RecordSnapshotList recordURI={this.props.recordURI}
                                                             projectName={this.props.projectName}
-                                                            clickHandler={this.props.clickHandler}/>
+                                                            clickHandler={this.props.clickHandler}
+                                                            displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
+                                        />
                                     </div>
                                 </Collapse>
                             </div>

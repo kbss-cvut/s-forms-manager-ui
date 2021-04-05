@@ -7,6 +7,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import {ContextList} from "./ContextList";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 
 export class ContextOverview extends React.Component {
 
@@ -96,10 +100,30 @@ export class ContextOverview extends React.Component {
                     </ToggleButton>
                     <br/>
                     <br/>
-                    <span>Imported record snapshots: <b>{processedContextsInfo}</b></span>
-                    <br/>
-                    <span>Total record snapshots: {totalContextsInfo}</span>
-
+                    <div>
+                    <span>
+                        Total form views{' '}
+                        <OverlayTrigger
+                            placement="bottom"
+                            overlay={<Tooltip id="button-tooltip-2">All known form views in the remote formGen
+                                repository. 1 Form view corresponds to 1 Record snapshot. </Tooltip>}>
+                            <FontAwesomeIcon color="grey" icon={faQuestionCircle}/>
+                        </OverlayTrigger>
+                        {' '}: <b>{totalContextsInfo}</b>
+                    </span>
+                        <br/>
+                        <span>
+                        Processed form views{' '}
+                            <OverlayTrigger
+                                placement="bottom"
+                                overlay={<Tooltip id="button-tooltip-2">
+                                    Record snapshots that has been processed with s-forms-manager.
+                                </Tooltip>}>
+                            <FontAwesomeIcon color="grey" icon={faQuestionCircle}/>
+                        </OverlayTrigger>
+                            {' '}:<b>{processedContextsInfo}</b></span>
+                        <br/>
+                    </div>
                     <br/><br/>
                 </Container>
                 <Row>

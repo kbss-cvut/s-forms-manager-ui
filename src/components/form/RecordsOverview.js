@@ -10,12 +10,14 @@ import {RecordList} from "./RecordList";
 import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
 import {ProjectStatistics} from "./ProjectStatistics";
 import {FormTemplateVersionCompareBoard} from "../formtemplate/FormTemplateVersionCompareBoard";
+import {AnswersCompareBoard} from "./AnswersCompareBoard";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
 const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
 const RIGHT_DISPLAY_VERSION_GRAPH = "DISPLAY_VERSION_GRAPH"
 const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
 const RIGHT_COMPARE_VERSIONS = "RIGHT_COMPARE_VERSIONS"
+const RIGHT_COMPARE_ANSWERS = "RIGHT_COMPARE_ANSWERS"
 
 export class RecordsOverview extends React.Component {
 
@@ -23,16 +25,27 @@ export class RecordsOverview extends React.Component {
         super(props);
         this.state = {
             contexts: [],
+            recordSnapshotContextUri1: null,
+            recordSnapshotContextUri2: null,
             leftComponent: null,
             rightComponent: null,
             activeContext: null
         }
         this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
         this.requestRecords = this.requestRecords.bind(this)
+        this.displayComparedAnswers = this.displayComparedAnswers.bind(this)
     }
 
     updateActiveContextUri(contextUri) {
         this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
+    }
+
+    displayComparedAnswers(comparedSnapshotUri1, comparedSnapshotUri2) {
+        this.setState({
+            recordSnapshotContextUri1: comparedSnapshotUri1,
+            recordSnapshotContextUri2: comparedSnapshotUri2,
+            rightComponent: RIGHT_COMPARE_ANSWERS
+        })
     }
 
     requestRecords() {
@@ -54,6 +67,7 @@ export class RecordsOverview extends React.Component {
                 leftComponent = <RecordList projectName={this.props.match.params.projectName}
                                             updateActiveContextUri={this.updateActiveContextUri}
                                             requestRecords={this.requestRecords}
+                                            displayComparedAnswersFunction={this.displayComparedAnswers}
                                             displayCount={true}/>
                 break;
             default:
@@ -71,6 +85,15 @@ export class RecordsOverview extends React.Component {
                     <FormTemplateVersionCompareBoard key={this.state.activeContext} // TODO: remove this key???
                                                      contextUri={this.state.activeContext}
                                                      projectName={this.props.match.params.projectName}/>
+                break;
+            case RIGHT_COMPARE_ANSWERS:
+                console.log("adasjld")
+                console.log(this.state.recordSnapshotContextUri1)
+                console.log(this.state.recordSnapshotContextUri2)
+                rightComponent =
+                    <AnswersCompareBoard comparedSnapshotUri1={this.state.recordSnapshotContextUri1}
+                                         comparedSnapshotUri2={this.state.recordSnapshotContextUri2}
+                                         projectName={this.props.match.params.projectName}/>
                 break;
             case RIGHT_DISPLAY_VERSION_GRAPH:
             default:

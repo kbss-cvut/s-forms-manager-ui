@@ -54,7 +54,9 @@ export class RecordList extends React.Component {
                                numberOfRecordSnapshots={record.numberOfRecordSnapshots}
                                numberOfRecordVersions={record.numberOfRecordVersions}
                                projectName={this.props.projectName}
-                               clickHandler={this.props.updateActiveContextUri}/>;
+                               clickHandler={this.props.updateActiveContextUri}
+                               displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
+            />;
         }) : <Alert variant={"light"} className={"h-10"}>
             The list is empty.
         </Alert>; // TODO: create a function for that
@@ -62,7 +64,7 @@ export class RecordList extends React.Component {
 
         return <div>
             <h4>Records</h4>
-            <span><b>({records.length})</b> All non-empty records and their views history. </span>
+            <span><b>({records.length})</b> All non-empty records and their viewing history. </span>
             {recordLines}
         </div>
 

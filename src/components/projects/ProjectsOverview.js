@@ -82,7 +82,6 @@ export class ProjectsOverview extends React.Component {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>
-                                        <Button variant="outline-secondary">Change</Button>{' '}
                                         <DeleteProjectForm projectName={projectName}
                                                            refreshCallBack={this.refresh}/>
                                     </Col>

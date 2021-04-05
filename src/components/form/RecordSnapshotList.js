@@ -11,6 +11,7 @@ export class RecordSnapshotList extends React.Component {
             recordSnapshots: null
         }
         this.requestRecordVersions = this.requestRecordVersions.bind(this)
+        this.compareRecordSnapshotAnswers = this.compareRecordSnapshotAnswers.bind(this)
     }
 
     componentDidMount() {
@@ -32,6 +33,19 @@ export class RecordSnapshotList extends React.Component {
         });
     }
 
+    compareRecordSnapshotAnswers(recordSnapshotIndex) {
+        if (recordSnapshotIndex <= 0 || recordSnapshotIndex >= this.state.recordSnapshots.length) {
+            console.error("Index out of bounds!");
+            return;
+        }
+        // alert("as a second snapshot, hardcoded value (sm498150982) is used due to lack of usable examples");
+
+        const recordSnapshotContextUri1 = this.state.recordSnapshots[recordSnapshotIndex].internalKey;
+        const recordSnapshotContextUri2 =  this.state.recordSnapshots[recordSnapshotIndex - 1].internalKey; // TODO: when there's records with actual history
+        // const recordSnapshotContextUri2 = "sm498150982"
+        this.props.displayComparedAnswersFunction(recordSnapshotContextUri1, recordSnapshotContextUri2)
+    }
+
     render() {
         if (!this.state.recordSnapshots) {
             return <Alert variant={"light"} className={"h-10"}>
@@ -41,6 +55,7 @@ export class RecordSnapshotList extends React.Component {
 
         let recordVersionsLines = this.state.recordSnapshots ? this.state.recordSnapshots.map((recordSnapshot, i) => {
             return <RecordSnapshotLine key={i}
+                                       order={i}
                                        recordSnapshotURI={recordSnapshot.recordSnapshotURI}
                                        internalKey={recordSnapshot.internalKey}
                                        formTemplateVersionKey={recordSnapshot.formTemplateVersionKey}
@@ -48,7 +63,8 @@ export class RecordSnapshotList extends React.Component {
                                        recordSnapshotCreated={recordSnapshot.recordSnapshotCreated}
                                        remoteSampleContextURI={recordSnapshot.remoteSampleContextURI}
                                        numberOfAnswers={recordSnapshot.numberOfAnswers}
-                                       clickHandler={this.props.clickHandler}/>;
+                                       clickHandler={this.props.clickHandler}
+                                       compareRecordSnapshotsFunction={this.compareRecordSnapshotAnswers}/>;
         }) : <Alert variant={"light"} className={"h-10"}>
             The list is empty.
         </Alert>

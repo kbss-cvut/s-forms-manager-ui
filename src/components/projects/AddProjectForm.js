@@ -116,7 +116,7 @@ class AddProjectForm extends React.Component {
             <br/>
             <Alert variant="success" onClose={() => this.setState({showSuccess: false})} dismissible>
                 <Alert.Heading>Success!</Alert.Heading>
-                Creating projectName was not successful.
+                Creating project was successful.
             </Alert>
         </div>
     }

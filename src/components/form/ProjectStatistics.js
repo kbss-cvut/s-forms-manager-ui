@@ -173,7 +173,7 @@ export class ProjectStatistics extends React.Component {
                         <OverlayTrigger
                             placement="bottom"
                             overlay={<Tooltip id="button-tooltip-2">
-                                Represents unique set of questions and the answers for a specific record.
+                                Represents unique set of questions and answers for a specific record.
                                 <br/>
                                 <br/>
                                 Is always different for different records.

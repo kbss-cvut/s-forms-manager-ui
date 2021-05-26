@@ -26,6 +26,7 @@ class AddProjectForm extends React.Component {
             formGenRepositoryUrl: '',
             serviceUrl: '',
             appRepositoryUrl: '',
+            recordRecognitionSPARQL: '',
             showSuccess: false,
             showError: false
         }
@@ -45,7 +46,8 @@ class AddProjectForm extends React.Component {
             projectName: this.state.projectName,
             formGenRepositoryUrl: this.state.formGenRepositoryUrl,
             formGenServiceUrl: this.state.serviceUrl,
-            appRepositoryUrl: this.state.appRepositoryUrl
+            appRepositoryUrl: this.state.appRepositoryUrl,
+            recordRecognitionSPARQL: this.state.recordRecognitionSPARQL
         }).then(() => {
             this.props.addProject(this.state.projectName)
             this.messageForm.reset();
@@ -89,6 +91,13 @@ class AddProjectForm extends React.Component {
                     <Form.Group controlId="formBasicAppRepositoryUrl">
                         <Form.Label>App Repository URL</Form.Label>
                         <Form.Control type="text" placeholder="App Repository URL" name="appRepositoryUrl"
+                                      onChange={this.onChangeSetState}/>
+                    </Form.Group>
+                    <Form.Group controlId="formBasicAppRecordRecognitionSPARQL">
+                        <Form.Label>Record recognition SPARQL</Form.Label>
+                        <Form.Control as="textarea"
+                                      placeholder="SELECT ?recordCreateDate ?recordModifiedDate ?remoteRecordURI ?question"
+                                      name="recordRecognitionSPARQL" rows={5}
                                       onChange={this.onChangeSetState}/>
                     </Form.Group>
                     <Button variant="primary" type="submit">

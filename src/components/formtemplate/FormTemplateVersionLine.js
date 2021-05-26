@@ -54,7 +54,7 @@ export class FormTemplateVersionLine extends React.Component {
                             {internalNameDiv}
                             <span>Internal version key: <b>{this.props.internalKey}</b></span>
                             <br/>
-                            <span>Number of instances: <b>{"todo"}</b></span>
+                            <span>Number of instances: <b>{this.props.numberOfRecordSnapshots}</b></span>
                             <br/>
                         </Col>
                         <Col xs={3}>

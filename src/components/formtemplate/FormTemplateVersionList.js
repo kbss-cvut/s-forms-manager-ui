@@ -48,6 +48,7 @@ export class FormTemplateVersionList extends React.Component {
                                             numberOfQuestionTemplateSnapshots={version.numberOfQuestionTemplateSnapshots}
                                             projectName={this.props.projectName}
                                             internalKey={version.key}
+                                            numberOfRecordSnapshots={version.numberOfRecordSnapshots}
                                             clickHandler={this.props.updateActiveContextUri}/>;
         }) : <Alert variant={"light"} className={"h-10"}>
             The list is empty.

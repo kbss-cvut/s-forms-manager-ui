@@ -20,7 +20,9 @@ export class RecordSnapshotLine extends React.Component {
                 <ListGroup.Item>
                     <Row>
                         <Col xs={9}>
-                            <span>FormTemplateVersion: <b>{this.props?.formTemplateVersionKey || "none"}</b> {this.props.formTemplateVersionInternalName ? "(" + this.props.formTemplateVersionInternalName + ")" : ""}</span>
+                            <span>RecordVersion: <b>{this.props.recordVersionKey}</b></span>
+                            <br/>
+                            <span>FormTemplateVersion: {this.props?.formTemplateVersionKey || "none"} {this.props.formTemplateVersionInternalName ? "(" + this.props.formTemplateVersionInternalName + ")" : ""}</span>
                             <br/>
                             <span>Snapshot created:{' '}
                                 <Moment format="DD.MM.YYYY hh:mm:ss">
@@ -45,7 +47,7 @@ export class RecordSnapshotLine extends React.Component {
                                 <Button
                                     variant="outline-primary" size="sm" className="float-right"
                                     onClick={() => this.props.compareRecordSnapshotsFunction(this.props.order)}>
-                                    Compare to previous version
+                                    Compare to previous snapshot
                                 </Button>
                             }
                         </Col>

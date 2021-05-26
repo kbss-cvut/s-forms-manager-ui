@@ -6,7 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import {ExtensibleAutocompleteFields} from "./ExtensibleAutocompleteFields";
-import {DagDemo, TreeDemo} from "./AutocompleteTextField";
+import {DagDemo} from "./AutocompleteTextField";
 
 
 export class SearchOptionsPicker extends React.Component {

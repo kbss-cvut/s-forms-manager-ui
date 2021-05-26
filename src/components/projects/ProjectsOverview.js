@@ -49,8 +49,8 @@ export class ProjectsOverview extends React.Component {
         if (this.state.isLoading) {
             projectLines = <div>Loading...</div>
         } else {
-            projectLines = this.state.projects.map(app => {
-                const {formGenRepositoryUrl, formGenServiceUrl, appRepositoryUrl, projectName: projectName} = app;
+            projectLines = this.state.projects.map(project => {
+                const {formGenRepositoryUrl, formGenServiceUrl, appRepositoryUrl, projectName: projectName, recordRecognitionSPARQL: recordRecognitionSPARQL} = project;
 
                 return <div key={projectName}>
                     <Card>
@@ -77,6 +77,12 @@ export class ProjectsOverview extends React.Component {
                                 <Row>
                                     <Col xs={3}><p className="font-weight-bold"> App Repository URL </p></Col>
                                     <Col>{appRepositoryUrl}</Col>
+                                </Row>
+                            </ListGroup.Item>
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col xs={3}><p className="font-weight-bold"> Record recognition SPARQL </p></Col>
+                                    <Col>{recordRecognitionSPARQL}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>

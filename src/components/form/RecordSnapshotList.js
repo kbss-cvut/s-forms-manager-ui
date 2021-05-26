@@ -41,7 +41,7 @@ export class RecordSnapshotList extends React.Component {
         // alert("as a second snapshot, hardcoded value (sm498150982) is used due to lack of usable examples");
 
         const recordSnapshotContextUri1 = this.state.recordSnapshots[recordSnapshotIndex].internalKey;
-        const recordSnapshotContextUri2 =  this.state.recordSnapshots[recordSnapshotIndex - 1].internalKey; // TODO: when there's records with actual history
+        const recordSnapshotContextUri2 = this.state.recordSnapshots[recordSnapshotIndex - 1].internalKey; // TODO: when there's records with actual history
         // const recordSnapshotContextUri2 = "sm498150982"
         this.props.displayComparedAnswersFunction(recordSnapshotContextUri1, recordSnapshotContextUri2)
     }
@@ -60,6 +60,7 @@ export class RecordSnapshotList extends React.Component {
                                        internalKey={recordSnapshot.internalKey}
                                        formTemplateVersionKey={recordSnapshot.formTemplateVersionKey}
                                        formTemplateVersionInternalName={recordSnapshot.formTemplateVersionInternalName}
+                                       recordVersionKey={recordSnapshot.recordVersionKey}
                                        recordSnapshotCreated={recordSnapshot.recordSnapshotCreated}
                                        remoteSampleContextURI={recordSnapshot.remoteSampleContextURI}
                                        numberOfAnswers={recordSnapshot.numberOfAnswers}

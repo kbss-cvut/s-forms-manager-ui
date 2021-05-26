@@ -210,7 +210,8 @@ export class ProjectStatistics extends React.Component {
                         <OverlayTrigger
                             placement="bottom"
                             overlay={<Tooltip id="button-tooltip-2">
-                                Record snapshots that are associated with at least some questions (user has seen the form).
+                                Record snapshots that are associated with at least some questions (user has seen the
+                                form).
                             </Tooltip>}>
                             <FontAwesomeIcon color="grey" icon={faQuestionCircle}/>
                         </OverlayTrigger>

@@ -57,11 +57,16 @@ export class SFormsDisplay extends React.Component {
         }
     }
 
-
-    fetchTypeAheadValues = (query) => {
-        const possibleValues = require('../__mocks__/possibleValues.json');
-        return new Promise((resolve) => setTimeout(() => resolve(possibleValues), 1500));
-    };
+    fetchTypeAheadValues = async (query) => {
+        return await API.post("/rest/sforms/s-forms-possible-values", null, {
+            params: {
+                "query": query
+            }
+        }).then(response => {
+            console.log(response.data)
+            return response;
+        });
+    }
 
     render() {
         if (!this.props.contextUri && (!this.props.version1 || !this.props.version2)) {
@@ -87,6 +92,8 @@ export class SFormsDisplay extends React.Component {
             },
             modalView: false,
             modalProps,
+            wizardStepButtons: true,
+            enableForwardSkip: true,
             horizontalWizardNav: true
         };
         if ((this.props.contextUri && this.state.rawJsonForm) || (this.props.version1 && this.props.version2 && this.state.rawJsonForm)) {
@@ -96,7 +103,6 @@ export class SFormsDisplay extends React.Component {
                 options={options}
                 fetchTypeAheadValues={this.fetchTypeAheadValues}
                 isFormValid={(isFormValid) => this.setState({isFormValid})}
-                enableForwardSkip={true}
             />;
         } else {
             return <Alert variant={"light"} className={"h-10"}>

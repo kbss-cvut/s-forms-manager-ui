@@ -21,6 +21,15 @@ export class RecordLine extends React.Component {
     }
 
     render() {
+        let historyDiv;
+        if (this.state.historyCollapseOpen) {
+            historyDiv = <RecordSnapshotList recordURI={this.props.recordURI}
+                                             projectName={this.props.projectName}
+                                             clickHandler={this.props.clickHandler}
+                                             displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
+            />;
+        }
+
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -78,11 +87,7 @@ export class RecordLine extends React.Component {
                                 <Collapse in={this.state.historyCollapseOpen}>
                                     <div id="example-collapse-text">
                                         <hr/>
-                                        <RecordSnapshotList recordURI={this.props.recordURI}
-                                                            projectName={this.props.projectName}
-                                                            clickHandler={this.props.clickHandler}
-                                                            displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
-                                        />
+                                        {historyDiv}
                                     </div>
                                 </Collapse>
                             </div>

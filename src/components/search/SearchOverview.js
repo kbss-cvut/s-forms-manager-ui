@@ -10,6 +10,7 @@ import {SearchResultList} from "./SearchResultList";
 import API from "../../api";
 import "@triply/yasgui/build/yasgui.min.css";
 import YasguiEditor from "./YasguiEditor";
+import {IntelligentQuestionSelector} from "./IntelligentQuestionSelector";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
 const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
@@ -100,6 +101,8 @@ export class SearchOverview extends React.Component {
                     {/*        onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>*/}
                     {/*    Search in forms*/}
                     {/*</Button>*/}
+                    <h5>Question smart search</h5>
+                    <IntelligentQuestionSelector projectName={this.props.match.params.projectName}/>
                     <br/><br/>
                 </Container>
                 <Row>

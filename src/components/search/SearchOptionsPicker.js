@@ -6,7 +6,6 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import {ExtensibleAutocompleteFields} from "./ExtensibleAutocompleteFields";
-import {DagDemo} from "./AutocompleteTextField";
 
 
 export class SearchOptionsPicker extends React.Component {
@@ -62,14 +61,14 @@ export class SearchOptionsPicker extends React.Component {
     render() {
 
         return <ListGroup>
-            <ListGroup.Item>
-                <Row>
-                    <Col xs={10}>
-                        <h5>Autocomplete</h5>
-                        <DagDemo/>
-                    </Col>
-                </Row>
-            </ListGroup.Item>
+            {/*<ListGroup.Item>*/}
+            {/*    <Row>*/}
+            {/*        <Col xs={10}>*/}
+            {/*            <h5>Autocomplete</h5>*/}
+            {/*            <IntelligentQuestionSelector projectName={this.props.projectName}/>*/}
+            {/*        </Col>*/}
+            {/*    </Row>*/}
+            {/*</ListGroup.Item>*/}
 
             <ListGroup.Item>
                 <Row>

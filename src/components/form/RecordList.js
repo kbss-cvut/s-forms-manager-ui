@@ -17,24 +17,6 @@ export class RecordList extends React.Component {
         }
     }
 
-    componentDidMount() {
-        this.requestRecordsFromProps();
-    }
-
-    requestRecordsFromProps() {
-        if (this.props.requestRecords) {
-            this.props.requestRecords().then(response => {
-                return response.data;
-            }).then(data => {
-                this.setState({
-                    records: data
-                });
-            }).catch(error => {
-                console.log(error)
-            });
-        }
-    }
-
     render() {
         const records = this.props?.records || this.state.records
 

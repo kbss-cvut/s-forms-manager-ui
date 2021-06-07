@@ -23,6 +23,10 @@ class HeaderNavigationBar extends React.Component {
                 return <NavDropdown.Item key={app} as={Link} to={"/search/forms/" + app}>{app}</NavDropdown.Item>;
             }
         );
+        const browseTicketsLinks = this.props.projects.map(app => {
+                return <NavDropdown.Item key={app} as={Link} to={"/browse/tickets/" + app}>{app}</NavDropdown.Item>;
+            }
+        );
         return (
             <Navbar bg="light" expand="lg">
                 <Navbar.Brand as={Link} to="/">S-Forms Manager</Navbar.Brand>
@@ -40,6 +44,9 @@ class HeaderNavigationBar extends React.Component {
                         </NavDropdown>
                         <NavDropdown title="Search in Forms">
                             {searchInFormsLinks}
+                        </NavDropdown>
+                        <NavDropdown title="Browse Tickets">
+                            {browseTicketsLinks}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

@@ -30,71 +30,73 @@ export class RecordLine extends React.Component {
             />;
         }
 
-        return <Card>
-            <ListGroup variant="flush">
-                <ListGroup.Item>
-                    <Row>
-                        <Col xs={9}>
-                            <p>
-                            </p>
-                            <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b></span>
-                            <br/>
-                            <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>
-                            <br/>
-                            <span>Created:{' '}
-                                <b>
+        return <div>
+            <Card>
+                <ListGroup variant="flush">
+                    <ListGroup.Item>
+                        <Row>
+                            <Col xs={9}>
+                                <p>
+                                </p>
+                                <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b></span>
+                                <br/>
+                                <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>
+                                <br/>
+                                <span>Created:{' '}
+                                    <b>
                                 <Moment format="DD.MM.YYYY h:mm:ss">
                                     {this.props.recordCreated}
                                 </Moment>
                                 </b>
                             </span>
-                        </Col>
-                        <Col xs={3}>
-                            <Button variant="outline-primary" type="submit" size="sm" className="float-right"
-                                    onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
-                                Display
-                            </Button>
-                            <Button
-                                variant="link" size="sm" className="float-right"
-                                onClick={() => this.setState({historyCollapseOpen: !this.state.historyCollapseOpen})}
-                                aria-controls="example-collapse-text"
-                                aria-expanded={this.state.historyCollapseOpen}
-                            >
-                                Show history <FontAwesomeIcon color="black" icon={faCaretDown}/>
-                            </Button>
-                            <Button
-                                variant="link" size="sm" className="float-right"
-                                onClick={() => this.setState({detailCollapseOpen: !this.state.detailCollapseOpen})}
-                                aria-controls="example-collapse-text"
-                                aria-expanded={this.state.detailCollapseOpen}
-                            >
-                                Show detail <FontAwesomeIcon color="black" icon={faCaretDown}/>
-                            </Button>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <div>
-                                <Collapse in={this.state.detailCollapseOpen}>
-                                    <div id="example-collapse-text">
-                                        <hr/>
-                                        <span>Sample remote context URI: {this.props.remoteSampleContextURI}</span>
-                                        <br/>
-                                        <span>Internal URI: {this.props.recordURI}</span>
-                                        <br/>
-                                    </div>
-                                </Collapse>
-                                <Collapse in={this.state.historyCollapseOpen}>
-                                    <div id="example-collapse-text">
-                                        <hr/>
-                                        {historyDiv}
-                                    </div>
-                                </Collapse>
-                            </div>
-                        </Col>
-                    </Row>
-                </ListGroup.Item>
-            </ListGroup>
-        </Card>
+                            </Col>
+                            <Col xs={3}>
+                                <Button variant="outline-primary" type="submit" size="sm" className="float-right"
+                                        onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
+                                    Display
+                                </Button>
+                                <Button
+                                    variant="link" size="sm" className="float-right"
+                                    onClick={() => this.setState({historyCollapseOpen: !this.state.historyCollapseOpen})}
+                                    aria-controls="example-collapse-text"
+                                    aria-expanded={this.state.historyCollapseOpen}
+                                >
+                                    Show history <FontAwesomeIcon color="black" icon={faCaretDown}/>
+                                </Button>
+                                <Button
+                                    variant="link" size="sm" className="float-right"
+                                    onClick={() => this.setState({detailCollapseOpen: !this.state.detailCollapseOpen})}
+                                    aria-controls="example-collapse-text"
+                                    aria-expanded={this.state.detailCollapseOpen}
+                                >
+                                    Show detail <FontAwesomeIcon color="black" icon={faCaretDown}/>
+                                </Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <div>
+                                    <Collapse in={this.state.detailCollapseOpen}>
+                                        <div id="example-collapse-text">
+                                            <hr/>
+                                            <span>Sample remote context URI: {this.props.remoteSampleContextURI}</span>
+                                            <br/>
+                                            <span>Internal URI: {this.props.recordURI}</span>
+                                            <br/>
+                                        </div>
+                                    </Collapse>
+                                    <Collapse in={this.state.historyCollapseOpen}>
+                                        <div id="example-collapse-text">
+                                            <hr/>
+                                            {historyDiv}
+                                        </div>
+                                    </Collapse>
+                                </div>
+                            </Col>
+                        </Row>
+                    </ListGroup.Item>
+                </ListGroup>
+            </Card>
+        </div>
     }
 }

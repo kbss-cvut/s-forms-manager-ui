@@ -11,6 +11,7 @@ import {ProjectsOverview} from "./components/projects/ProjectsOverview";
 import AddProjectForm from "./components/projects/AddProjectForm";
 import {RecordsOverview} from "./components/form/RecordsOverview";
 import {SearchOverview} from "./components/search/SearchOverview";
+import {TicketsOverview} from "./components/ticket/TicketsOverview";
 
 class App extends React.Component {
 
@@ -40,6 +41,8 @@ class App extends React.Component {
                             <ProjectsOverview/>
                         </Route>
                         <Route exact path="/search/forms/:projectName" component={SearchOverview}>
+                        </Route>
+                        <Route exact path="/browse/tickets/:projectName" component={TicketsOverview}>
                         </Route>
                     </Switch>
                 </Router>

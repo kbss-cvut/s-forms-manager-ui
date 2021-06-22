@@ -1,6 +1,5 @@
 import React from 'react';
 import API from "../../api";
-import {SFormsDisplay} from "../SFormsDisplay";
 import Button from "react-bootstrap/Button";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Row from "react-bootstrap/Row";
@@ -11,6 +10,7 @@ import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import {SFormsDisplay} from "../SFormsDisplay";
 
 export class ContextOverview extends React.Component {
 
@@ -135,8 +135,7 @@ export class ContextOverview extends React.Component {
                         </div>
                     </Col>
                     <Col xs={6}>
-                        <SFormsDisplay key={this.state.activeContext}
-                                       contextUri={this.state.activeContext}
+                        <SFormsDisplay contextUri={this.state.activeContext}
                                        projectName={this.props.match.params.projectName}/>
                     </Col>
                 </Row>

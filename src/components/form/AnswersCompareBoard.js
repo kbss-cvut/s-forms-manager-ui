@@ -119,7 +119,7 @@ export class AnswersCompareBoard extends React.Component {
     render() {
         if (!this.state.isInitialized) {
             return <Alert variant={"light"} className={"h-10"}>
-                Parameters for comparation not specified.
+                Parameters for comparison not specified.
             </Alert>
         }
 

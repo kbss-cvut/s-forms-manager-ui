@@ -21,11 +21,11 @@ export class TicketLine extends React.Component {
                                     <br/>
                                     <span>Link: <a href={this.props.url} target="_blank">link</a></span>
                                     <br/>
-                                    <span>Form version identifier: <b>{this.props?.customFields["SpecificFormVersionID"]}</b></span>
+                                    <span>Form version identifier: <b>{this.props?.customFields["SpecificFormVersionKEY"]}</b></span>
                                     <br/>
-                                    <span>Form identifier: <b>{this.props?.customFields["SpecificFormID"]}</b></span>
+                                    <span>Form identifier: <b>{this.props?.customFields["SpecificFormCU"]}</b></span>
                                     <br/>
-                                    <span>Question: <b>{this.props?.customFields["SpecificQuestion"]}</b></span>
+                                    <span>Question: <b>{this.props?.customFields["SpecificQuestionQO"]}</b></span>
                                     <br/>
 
                                 </div>

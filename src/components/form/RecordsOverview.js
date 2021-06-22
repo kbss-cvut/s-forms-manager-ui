@@ -1,5 +1,4 @@
 import React from 'react';
-import {SFormsDisplay} from "../SFormsDisplay";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -11,6 +10,7 @@ import VersionsHistogramChart from "../graphs/VersionsHistogramChart";
 import {ProjectStatistics} from "./ProjectStatistics";
 import {FormTemplateVersionCompareBoard} from "../formtemplate/FormTemplateVersionCompareBoard";
 import {AnswersCompareBoard} from "./AnswersCompareBoard";
+import {TicketsWithSFormsBoard} from "../TicketsWithSFormsBoard";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
 const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
@@ -77,8 +77,8 @@ export class RecordsOverview extends React.Component {
         let rightComponent;
         switch (this.state.rightComponent) {
             case RIGHT_DISPLAY_S_FORMS:
-                rightComponent = <SFormsDisplay contextUri={this.state.activeContext}
-                                                projectName={this.props.match.params.projectName}/>
+                rightComponent = <TicketsWithSFormsBoard contextUri={this.state.activeContext}
+                                                         projectName={this.props.match.params.projectName}/>
                 break;
             case RIGHT_COMPARE_VERSIONS:
                 rightComponent =

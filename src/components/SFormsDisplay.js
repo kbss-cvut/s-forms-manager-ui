@@ -78,6 +78,10 @@ export class SFormsDisplay extends React.Component {
             return <Alert variant={"light"} className={"h-10"}>
                 Form not specified...
             </Alert>
+        } else if (!this.state.rawJsonForm) {
+            return <Alert variant={"light"} className={"h-10"}>
+                Wait...
+            </Alert>;
         }
 
         const modalProps = {
@@ -101,21 +105,16 @@ export class SFormsDisplay extends React.Component {
             enableForwardSkip: true,
             horizontalWizardNav: true
         };
-        if ((this.props.contextUri && this.state.rawJsonForm) || (this.props.version1 && this.props.version2 && this.state.rawJsonForm)) {
-            return <SForms
+
+        return <div>
+            <SForms
                 ref={this.refForm}
                 form={this.state.rawJsonForm}
                 options={options}
                 fetchTypeAheadValues={this.fetchTypeAheadValues}
                 isFormValid={(isFormValid) => this.setState({isFormValid})}
             />;
-        } else {
-            return <Alert variant={"light"} className={"h-10"}>
-                Wait...
-            </Alert>;
-        }
-
-
+        </div>
     }
 }
 

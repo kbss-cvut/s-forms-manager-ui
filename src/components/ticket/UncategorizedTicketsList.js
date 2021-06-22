@@ -3,7 +3,7 @@ import Alert from "react-bootstrap/Alert";
 import API from "../../api";
 import {TicketLine} from "./TicketLine";
 
-export class TicketsList extends React.Component {
+export class UncategorizedTicketsList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -22,7 +22,6 @@ export class TicketsList extends React.Component {
                 "projectName": this.props.projectName,
             }
         }).then(response => {
-            console.log(response.data);
             this.setState({tickets: response.data});
         });
     }

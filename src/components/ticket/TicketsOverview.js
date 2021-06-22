@@ -3,7 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import API from "../../api";
-import {TicketsList} from "./TicketsList";
+import {UncategorizedTicketsList} from "./UncategorizedTicketsList";
 
 export class TicketsOverview extends React.Component {
 
@@ -41,7 +41,7 @@ export class TicketsOverview extends React.Component {
                     <Row>
                         <Col>
                             <div>
-                                <TicketsList projectName={this.props.match.params.projectName}/>
+                                <UncategorizedTicketsList projectName={this.props.match.params.projectName}/>
                             </div>
                         </Col>
                     </Row>

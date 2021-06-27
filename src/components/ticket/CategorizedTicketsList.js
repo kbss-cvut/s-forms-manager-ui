@@ -11,7 +11,7 @@ function createTicketLines(tickets) {
                            name={ticket.name}
                            description={ticket.description}
                            url={ticket.url}
-                           customFields={ticket.customFields}
+                           relations={ticket.relations}
         />;
     }) : <Alert variant={"light"} className={"h-10"}>
         The list is empty.
@@ -42,6 +42,7 @@ export class CategorizedTicketsList extends React.Component {
         }).then(response => {
             return response.data;
         }).then(ticketsInCategories => {
+            console.log(ticketsInCategories)
             this.setState({
                 formTickets: ticketsInCategories.formTickets,
                 formVersionTickets: ticketsInCategories.formVersionTickets,

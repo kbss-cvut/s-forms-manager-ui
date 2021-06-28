@@ -24,9 +24,12 @@ export class IntelligentQuestionSelector extends React.Component {
     }
 
     getAutocompleteValues = async () => {
-        return API.get("/rest/search/select/options", {
+
+        const endpoint = this.props.singleFormOnly ? "/rest/search/select/options/version" : "/rest/search/select/options/all";
+        return API.get(endpoint, {
             params: {
-                projectName: this.props.projectName
+                projectName: this.props.projectName,
+                recordContextUri: this.props?.contextUri
             }
         }).then((response) => {
             return response.data;

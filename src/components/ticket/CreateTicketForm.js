@@ -106,7 +106,11 @@ export class CreateTicketForm extends React.Component {
                                         </ToggleButton>
                                         {this.state.relateToQuestion ?
                                             <IntelligentQuestionSelector projectName={this.props.projectName}
-                                                                         ref={this.questionSelectorRef}/> : <div/>}
+                                                                         ref={this.questionSelectorRef}
+                                                                         singleFormOnly={true}
+                                                                         contextUri={this.props.contextUri}
+
+                                            /> : <div/>}
                                         <br/>
                                         <Button variant="primary" type="submit">
                                             Submit

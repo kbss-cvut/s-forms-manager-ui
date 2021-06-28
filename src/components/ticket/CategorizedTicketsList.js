@@ -12,7 +12,7 @@ function createTicketLines(tickets) {
                            name={ticket.name}
                            description={ticket.description}
                            url={ticket.url}
-                           relations={ticket.relations}
+                           projectRelations={ticket.projectRelations}
         />;
     }) : <Alert variant={"light"} className={"h-10"}>
         The list is empty.
@@ -25,7 +25,7 @@ export class CategorizedTicketsList extends React.Component {
         super(props);
         this.state = {
             loading: true,
-            formTickets: null,
+            recordTickets: null,
             formVersionTickets: null,
             questionTickets: null
         }
@@ -48,7 +48,7 @@ export class CategorizedTicketsList extends React.Component {
             console.log(ticketsInCategories)
             this.setState({
                 loading: false,
-                formTickets: ticketsInCategories.formTickets,
+                recordTickets: ticketsInCategories.recordTickets,
                 formVersionTickets: ticketsInCategories.formVersionTickets,
                 questionTickets: ticketsInCategories.questionTickets
             });
@@ -56,30 +56,30 @@ export class CategorizedTicketsList extends React.Component {
     }
 
     render() {
-        const formTickets = this.state.formTickets
+        const recordTickets = this.state.recordTickets
         const formVersionTickets = this.state.formVersionTickets
         const questionTickets = this.state.questionTickets
 
-        if (this.state.loading || !(formTickets && formVersionTickets && questionTickets)) {
+        if (this.state.loading || !(recordTickets && formVersionTickets && questionTickets)) {
             return <Alert variant={"light"} className={"h-10"}>
                 Loading tickets...
             </Alert>
         }
 
-        const formTicketsLines = createTicketLines(formTickets);
-        const versionTicketsLines = createTicketLines(formVersionTickets);
+        const recordTicketsLines = createTicketLines(recordTickets);
+        const formVersionTicketsLines = createTicketLines(formVersionTickets);
         const questionTicketsLines = createTicketLines(questionTickets);
 
         return <div>
             <Button className={"float-right"} variant="link" onClick={() => this.requestTickets()}>refresh</Button>
             <Tabs defaultActiveKey="#" transition={false} id="ticket-tabs">
-                <Tab eventKey="form" title={"Form related (" + formTickets.length + ")"}>
+                <Tab eventKey="record" title={"Record snapshot related (" + recordTickets.length + ")"}>
                     <br/>
-                    {formTicketsLines}
+                    {recordTicketsLines}
                 </Tab>
                 <Tab eventKey="formVersion" title={"Form version related (" + formVersionTickets.length + ")"}>
                     <br/>
-                    {versionTicketsLines}
+                    {formVersionTicketsLines}
                 </Tab>
                 <Tab eventKey="question" title={"Question related (" + questionTickets.length + ")"}>
                     <br/>

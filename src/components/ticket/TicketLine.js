@@ -8,7 +8,6 @@ export class TicketLine extends React.Component {
 
     render() {
 
-
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -16,20 +15,19 @@ export class TicketLine extends React.Component {
                         <Row>
                             <Col>
                                 <div>
-                                    <span>Name: <b>{this.props.name}</b></span>
+                                    <span>Name: <b>{this.props.name}</b> (<a href={this.props.url}
+                                                                             target="_blank">link</a>)</span>
                                     <br/>
                                     <span>Description: {this.props.description}</span>
                                     <br/>
                                     <br/>
-                                    <span>Link: <a href={this.props.url} target="_blank">link</a></span>
+                                    <span>Form version identifier: <b>{this.props.projectRelations?.relatedForm || "-"}</b></span>
                                     <br/>
-                                    <span>Form version identifier: <b>{this.props.relations?.relatedForm}</b></span>
+                                    <span>Form identifier: <b>{this.props.projectRelations?.relatedFormVersion || "-"}</b></span>
                                     <br/>
-                                    <span>Form identifier: <b>{this.props.relations?.relatedFormVersion}</b></span>
+                                    <span>Question origin path: {this.props.projectRelations?.relatedQuestionOriginPath || "-"}</span>
                                     <br/>
-                                    <span>Question origin path: {this.props.relations?.relatedQuestionOriginPath}</span>
-                                    <br/>
-                                    <span>Question label: <b>{this.props.relations?.relatedQuestionLabel}</b></span>
+                                    <span>Question label: <b>{this.props.projectRelations?.relatedQuestionLabel || "-"}</b></span>
 
                                 </div>
                             </Col>

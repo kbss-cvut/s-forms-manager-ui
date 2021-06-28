@@ -4,6 +4,7 @@ import API from "../../api";
 import {TicketLine} from "./TicketLine";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
+import Button from "react-bootstrap/Button";
 
 function createTicketLines(tickets) {
     return (tickets && tickets.length !== 0) ? tickets.map((ticket, i) => {
@@ -23,6 +24,7 @@ export class CategorizedTicketsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: true,
             formTickets: null,
             formVersionTickets: null,
             questionTickets: null
@@ -34,6 +36,7 @@ export class CategorizedTicketsList extends React.Component {
     }
 
     requestTickets() {
+        this.setState({loading: true})
         API.post("/rest/ticket/category", null, {
             params: {
                 "projectName": this.props.projectName,
@@ -44,6 +47,7 @@ export class CategorizedTicketsList extends React.Component {
         }).then(ticketsInCategories => {
             console.log(ticketsInCategories)
             this.setState({
+                loading: false,
                 formTickets: ticketsInCategories.formTickets,
                 formVersionTickets: ticketsInCategories.formVersionTickets,
                 questionTickets: ticketsInCategories.questionTickets
@@ -52,12 +56,11 @@ export class CategorizedTicketsList extends React.Component {
     }
 
     render() {
-
         const formTickets = this.state.formTickets
         const formVersionTickets = this.state.formVersionTickets
         const questionTickets = this.state.questionTickets
 
-        if (!(formTickets && formVersionTickets && questionTickets)) {
+        if (this.state.loading || !(formTickets && formVersionTickets && questionTickets)) {
             return <Alert variant={"light"} className={"h-10"}>
                 Loading tickets...
             </Alert>
@@ -68,6 +71,7 @@ export class CategorizedTicketsList extends React.Component {
         const questionTicketsLines = createTicketLines(questionTickets);
 
         return <div>
+            <Button className={"float-right"} variant="link" onClick={() => this.requestTickets()}>refresh</Button>
             <Tabs defaultActiveKey="#" transition={false} id="ticket-tabs">
                 <Tab eventKey="form" title={"Form related (" + formTickets.length + ")"}>
                     <br/>

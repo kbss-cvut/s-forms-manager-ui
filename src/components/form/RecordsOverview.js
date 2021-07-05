@@ -13,7 +13,7 @@ import {AnswersCompareBoard} from "./AnswersCompareBoard";
 import {TicketsWithSFormsBoard} from "../TicketsWithSFormsBoard";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
-const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
+const LEFT_DISPLAY_RECORDS_LIST = "DISPLAY_RECORDS_LIST";
 const RIGHT_DISPLAY_VERSION_GRAPH = "DISPLAY_VERSION_GRAPH"
 const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
 const RIGHT_COMPARE_VERSIONS = "RIGHT_COMPARE_VERSIONS"
@@ -29,15 +29,47 @@ export class RecordsOverview extends React.Component {
             recordSnapshotContextUri2: null,
             leftComponent: null,
             rightComponent: null,
-            activeContext: null
+            activeContext: null,
+            highlightRecordKey: null
         }
         this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
         this.requestRecords = this.requestRecords.bind(this)
         this.displayComparedAnswers = this.displayComparedAnswers.bind(this)
     }
 
+    componentDidMount() {
+        if (this.props.match.params?.versionKey) {
+            this.setState({leftComponent: LEFT_DISPLAY_VERSIONS_LIST});
+            API.get("/rest/formTemplate/version/find", {
+                params: {
+                    "projectName": this.props.match.params.projectName,
+                    "formTemplateVersionKey": this.props.match.params.versionKey,
+                }
+            }).then(response => {
+                this.updateActiveContextUri(response.data.sampleRemoteContextUri)
+            })
+        } else if (this.props.match.params?.recordSnapshotKey) { // TODO
+            this.setState({leftComponent: LEFT_DISPLAY_RECORDS_LIST});
+            API.get("/rest/record/find", {
+                params: {
+                    "projectName": this.props.match.params.projectName,
+                    "recordSnapshotKey": this.props.match.params.recordSnapshotKey,
+                }
+            }).then(response => {
+                this.updateActiveContextUri(response.data.remoteSampleContextURI)
+                this.setState({highlightRecordKey: response.data.internalKey});
+            })
+        } else {
+            this.setState({rightComponent: RIGHT_DISPLAY_VERSION_GRAPH});
+        }
+    }
+
     updateActiveContextUri(contextUri) {
-        this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS})
+        this.setState({
+            activeContext: contextUri,
+            rightComponent: RIGHT_DISPLAY_S_FORMS,
+            highlightRecordKey: null
+        })
     }
 
     displayComparedAnswers(comparedSnapshotUri1, comparedSnapshotUri2) {
@@ -61,14 +93,17 @@ export class RecordsOverview extends React.Component {
         switch (this.state.leftComponent) {
             case LEFT_DISPLAY_VERSIONS_LIST:
                 leftComponent = <FormTemplateVersionList projectName={this.props.match.params.projectName}
-                                                         updateActiveContextUri={this.updateActiveContextUri}/>
+                                                         updateActiveContextUri={this.updateActiveContextUri}
+                                                         highlightVersionKey={this.props.match.params.versionKey}/>
                 break;
-            case LEFT_DISPLAY_FORMS_LIST:
+            case LEFT_DISPLAY_RECORDS_LIST:
                 leftComponent = <RecordList projectName={this.props.match.params.projectName}
                                             updateActiveContextUri={this.updateActiveContextUri}
                                             requestRecords={this.requestRecords}
                                             displayComparedAnswersFunction={this.displayComparedAnswers}
-                                            displayCount={true}/>
+                                            displayCount={true}
+                                            highlightRecordKey={this.state.highlightRecordKey}
+                                            highlightRecordSnapshotKey={this.props.match.params.recordSnapshotKey}/>
                 break;
             default:
                 leftComponent = <div/>
@@ -87,17 +122,16 @@ export class RecordsOverview extends React.Component {
                                                      projectName={this.props.match.params.projectName}/>
                 break;
             case RIGHT_COMPARE_ANSWERS:
-                console.log("adasjld")
-                console.log(this.state.recordSnapshotContextUri1)
-                console.log(this.state.recordSnapshotContextUri2)
                 rightComponent =
                     <AnswersCompareBoard comparedSnapshotUri1={this.state.recordSnapshotContextUri1}
                                          comparedSnapshotUri2={this.state.recordSnapshotContextUri2}
                                          projectName={this.props.match.params.projectName}/>
                 break;
             case RIGHT_DISPLAY_VERSION_GRAPH:
-            default:
                 rightComponent = <VersionsHistogramChart projectName={this.props.match.params.projectName}/>
+                break;
+            default:
+                rightComponent = <div/>;
                 break;
         }
 
@@ -111,7 +145,7 @@ export class RecordsOverview extends React.Component {
                     <ProjectStatistics projectName={this.props.match.params.projectName}/>
                     <hr/>
                     <Button variant="outline-primary" type="submit"
-                            onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>
+                            onClick={() => this.setState({leftComponent: LEFT_DISPLAY_RECORDS_LIST})}>
                         Show records
                     </Button>
                     {' '}

@@ -56,6 +56,7 @@ export class RecordSnapshotList extends React.Component {
         let recordVersionsLines = this.state.recordSnapshots ? this.state.recordSnapshots.map((recordSnapshot, i) => {
             return <RecordSnapshotLine key={i}
                                        order={i}
+                                       isHighlighted={this.props.recordSnapshotKey === recordSnapshot.internalKey}
                                        recordSnapshotURI={recordSnapshot.recordSnapshotURI}
                                        internalKey={recordSnapshot.internalKey}
                                        formTemplateVersionKey={recordSnapshot.formTemplateVersionKey}

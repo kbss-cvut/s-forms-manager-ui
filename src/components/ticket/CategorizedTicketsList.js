@@ -45,7 +45,6 @@ export class CategorizedTicketsList extends React.Component {
         }).then(response => {
             return response.data;
         }).then(ticketsInCategories => {
-            console.log(ticketsInCategories)
             this.setState({
                 loading: false,
                 recordTickets: ticketsInCategories.recordTickets,

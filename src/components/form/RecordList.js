@@ -38,15 +38,16 @@ export class RecordList extends React.Component {
     render() {
         const records = this.props?.records || this.state.records
 
-        if (!records) {
+        if (!records || (records && records.length === 0)) {
             return <Alert variant={"light"} className={"h-10"}>
                 Loading forms...
             </Alert>
         }
 
         const recordLines = records ? records.map((record, i) => {
-            i++;
             return <RecordLine key={i}
+                               isHighlighted={this.props.highlightRecordKey === record.internalKey}
+                               hightlightRecordSnapshotKey={this.props.recordSnapshotKey}
                                recordURI={record.recordURI}
                                recordCreated={record.recordCreated}
                                internalKey={record.internalKey}

@@ -18,7 +18,7 @@ export class TicketLine extends React.Component {
                                     <span>Name: <b>{this.props.name}</b> (<a href={this.props.url}
                                                                              target="_blank">link</a>)</span>
                                     <br/>
-                                    <span>Description: {this.props.description}</span>
+                                    <span style={{whiteSpace: "pre-line"}}>Description: {this.props.description}</span>
                                     <br/>
                                     <br/>
                                     <span>Form version identifier: <b>{this.props.projectRelations?.relatedForm || "-"}</b></span>

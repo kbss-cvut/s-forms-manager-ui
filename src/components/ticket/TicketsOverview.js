@@ -24,7 +24,6 @@ export class TicketsOverview extends React.Component {
                 "projectName": this.props.match.params.projectName,
             }
         }).then(response => {
-            console.log(response.data);
             this.setState({tickets: response.data});
         });
     }

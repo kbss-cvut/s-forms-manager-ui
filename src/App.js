@@ -30,9 +30,17 @@ class App extends React.Component {
                         <Route exact path="/">
                             <WelcomePage/>
                         </Route>
-                        <Route exact path="/browse/forms/:projectName" component={RecordsOverview}>
+                        <Route exact path="/browse/forms/:projectName?"
+                               component={RecordsOverview}>
                         </Route>
-                        <Route exact path="/browse/contexts/:projectName" component={ContextOverview}>
+                        <Route exact path="/browse/forms/:projectName/version/:versionKey?"
+                               component={RecordsOverview}>
+                        </Route>
+                        <Route exact path="/browse/forms/:projectName/record/:recordSnapshotKey?"
+                               component={RecordsOverview}>
+                        </Route>
+                        <Route exact path="/browse/contexts/:projectName"
+                               component={ContextOverview}>
                         </Route>
                         <Route path="/projects/add"> {/* has to be in front of /projects */}
                             <AddProjectForm/>
@@ -40,9 +48,11 @@ class App extends React.Component {
                         <Route path="/projects">
                             <ProjectsOverview/>
                         </Route>
-                        <Route exact path="/search/forms/:projectName" component={SearchOverview}>
+                        <Route exact path="/search/forms/:projectName"
+                               component={SearchOverview}>
                         </Route>
-                        <Route exact path="/browse/tickets/:projectName" component={TicketsOverview}>
+                        <Route exact path="/browse/tickets/:projectName"
+                               component={TicketsOverview}>
                         </Route>
                     </Switch>
                 </Router>

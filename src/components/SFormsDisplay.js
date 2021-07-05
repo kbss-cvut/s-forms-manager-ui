@@ -21,8 +21,9 @@ export class SFormsDisplay extends React.Component {
     }
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
-        if (prevProps !== this.props) {
+        if (prevProps.contextUri !== this.props.contextUri) {
             this.requestFormGenJson()
+            this.setState({rawJsonForm: null})
         }
     }
 
@@ -68,7 +69,6 @@ export class SFormsDisplay extends React.Component {
                 "query": query
             }
         }).then(response => {
-            console.log(response.data)
             return response;
         });
     }
@@ -113,7 +113,7 @@ export class SFormsDisplay extends React.Component {
                 options={options}
                 fetchTypeAheadValues={this.fetchTypeAheadValues}
                 isFormValid={(isFormValid) => this.setState({isFormValid})}
-            />;
+            />
         </div>
     }
 }

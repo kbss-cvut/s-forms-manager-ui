@@ -13,7 +13,7 @@ import YasguiEditor from "./YasguiEditor";
 import {IntelligentQuestionSelector} from "./IntelligentQuestionSelector";
 
 const LEFT_DISPLAY_VERSIONS_LIST = "DISPLAY_VERSIONS_LIST";
-const LEFT_DISPLAY_FORMS_LIST = "DISPLAY_FORMS_LIST";
+const LEFT_DISPLAY_RECORDS_LIST = "DISPLAY_RECORDS_LIST";
 const RIGHT_DISPLAY_S_FORMS = "RIGHT_DISPLAY_S_FORMS"
 const RIGHT_DISPLAY_SPARQL_EDITOR = "RIGHT_DISPLAY_SPARQL_EDITOR"
 
@@ -53,7 +53,7 @@ export class SearchOverview extends React.Component {
         }).then(response => {
             this.setState({
                 searchResults: response.data,
-                leftComponent: LEFT_DISPLAY_FORMS_LIST,
+                leftComponent: LEFT_DISPLAY_RECORDS_LIST,
                 isLoading: false
             })
         }).catch(error => {
@@ -68,7 +68,7 @@ export class SearchOverview extends React.Component {
                 leftComponent = <FormTemplateVersionList projectName={this.props.match.params.projectName}
                                                          updateActiveContextUri={this.updateActiveContextUri}/>
                 break;
-            case LEFT_DISPLAY_FORMS_LIST:
+            case LEFT_DISPLAY_RECORDS_LIST:
                 leftComponent = <SearchResultList projectName={this.props.match.params.projectName}
                                                   updateActiveContextUri={this.updateActiveContextUri}
                                                   searchResults={this.state.searchResults}/>
@@ -98,7 +98,7 @@ export class SearchOverview extends React.Component {
 
                     <hr/>
                     {/*<Button variant="outline-primary" type="submit"*/}
-                    {/*        onClick={() => this.setState({leftComponent: LEFT_DISPLAY_FORMS_LIST})}>*/}
+                    {/*        onClick={() => this.setState({leftComponent: LEFT_DISPLAY_RECORDS_LIST})}>*/}
                     {/*    Search in forms*/}
                     {/*</Button>*/}
                     <h5>Question smart search</h5>

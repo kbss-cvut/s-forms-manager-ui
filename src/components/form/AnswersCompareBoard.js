@@ -22,13 +22,7 @@ export class AnswersCompareBoard extends React.Component {
 
     componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
         if (prevProps !== this.props) {
-            console.log("old")
-            console.log(prevProps)
-            console.log("new")
-            console.log(this.props)
             this.requestRecordSnapshotsAnswersCompare()
-        } else {
-            console.log("could not")
         }
     }
 

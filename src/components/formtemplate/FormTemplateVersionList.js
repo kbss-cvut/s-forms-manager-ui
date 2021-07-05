@@ -18,7 +18,7 @@ export class FormTemplateVersionList extends React.Component {
     }
 
     requestVersions() {
-        API.get("/rest/formTemplate/version", {
+        API.get("/rest/formTemplate/version/all", {
             params: {
                 "projectName": this.props.projectName,
             }
@@ -34,7 +34,7 @@ export class FormTemplateVersionList extends React.Component {
     render() {
         let versions = this.state.versions
 
-        if (!versions) {
+        if (!versions || (versions && versions.length === 0)) {
             return <Alert variant={"light"} className={"h-10"}>
                 Loading versions...
             </Alert>
@@ -42,12 +42,13 @@ export class FormTemplateVersionList extends React.Component {
 
         versions = versions ? versions.map((version, i) => {
             return <FormTemplateVersionLine key={i}
+                                            isHighlighted={version.internalKey === this.props.highlightVersionKey}
                                             internalName={version.internalName}
                                             internalUri={version.internalUri}
                                             sampleRemoteContextUri={version.sampleRemoteContextUri}
                                             numberOfQuestionTemplateSnapshots={version.numberOfQuestionTemplateSnapshots}
                                             projectName={this.props.projectName}
-                                            internalKey={version.key}
+                                            internalKey={version.internalKey}
                                             numberOfRecordSnapshots={version.numberOfRecordSnapshots}
                                             clickHandler={this.props.updateActiveContextUri}/>;
         }) : <Alert variant={"light"} className={"h-10"}>

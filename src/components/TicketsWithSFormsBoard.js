@@ -18,6 +18,16 @@ export class TicketsWithSFormsBoard extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps: Readonly<P>, prevState: Readonly<S>, snapshot: SS) {
+        if (prevProps.contextUri !== this.props.contextUri) {
+            this.setState({
+                relatedTicketsCollapseOpen: false,
+                createTicketCollapseOpen: false,
+                displayFormCollapseOpen: true,
+            })
+        }
+    }
+
     render() {
         return <div>
             <h5>
@@ -76,7 +86,6 @@ export class TicketsWithSFormsBoard extends React.Component {
             </Collapse>
             <br/>
         </div>
-            ;
     }
 }
 

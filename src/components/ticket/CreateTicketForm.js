@@ -1,14 +1,14 @@
 import React from "react";
+import API from "../../api";
+import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import {IntelligentQuestionSelector} from "../search/IntelligentQuestionSelector";
 import Button from "react-bootstrap/Button";
-import API from "../../api";
 import Alert from "react-bootstrap/Alert";
+import Col from "react-bootstrap/Col";
 
 export class CreateTicketForm extends React.Component {
 
@@ -17,16 +17,18 @@ export class CreateTicketForm extends React.Component {
         this.state = {
             name: "",
             description: "",
-            relateToForm: false,
+            relateToRecordSnapshot: false,
             relateToFormVersion: false,
-            relateToQuestion: false
+            relateToQuestion: false,
+            formTemplateVersionKey: null,
+            ticketUrl: null
         }
         this.onChangeSetState = this.onChangeSetState.bind(this);
         this.onSubmitProject = this.onSubmitProject.bind(this);
         this.errorMessage = this.errorMessage.bind(this);
+        this.getTicketUrl = this.getTicketUrl.bind(this);
         this.questionSelectorRef = React.createRef();
     }
-
 
     onChangeSetState(e) {
         const {name, value} = e.target;
@@ -39,8 +41,8 @@ export class CreateTicketForm extends React.Component {
             projectName: this.props.projectName,
             recordContextUri: this.props.contextUri,
             name: this.state.name,
-            description: this.state.description,
-            relateToForm: this.state.relateToForm,
+            description: this.getDescriptionWithTicketUrl(),
+            relateToRecordSnapshot: this.state.relateToRecordSnapshot,
             relateToFormVersion: this.state.relateToFormVersion,
             relateToQuestion: this.state.relateToQuestion,
             questionOriginPath: this.questionSelectorRef?.current?.state.activeQuestionOriginPath,
@@ -50,7 +52,7 @@ export class CreateTicketForm extends React.Component {
                 showError: false,
                 showSuccess: true,
                 ticketLink: response.data,
-                relateToForm: false,
+                relateToRecordSnapshot: false,
                 relateToFormVersion: false,
                 relateToQuestion: false
             });
@@ -61,7 +63,51 @@ export class CreateTicketForm extends React.Component {
         );
     }
 
+    componentDidMount() {
+        this.requestRecordSnapshot()
+        this.requestFormTemplateVersion()
+    }
+
+    requestFormTemplateVersion() {
+        return API.get("/rest/record/snapshot/find/version", {
+            params: {
+                "projectName": this.props.projectName,
+                "recordSnapshotContextUri": this.props.contextUri,
+            }
+        }).then(response => {
+            this.setState({formTemplateVersionKey: response.data.internalKey});
+        });
+    }
+
+    requestRecordSnapshot() {
+        return API.get("/rest/record/snapshot/find", {
+            params: {
+                "projectName": this.props.projectName,
+                "recordSnapshotContextUri": this.props.contextUri,
+            }
+        }).then(response => {
+            this.setState({recordSnapshotKey: response.data.internalKey});
+        });
+    }
+
+    getDescriptionWithTicketUrl() {
+        return this.state.description + "\n\n" + this.getTicketUrl();
+    }
+
+    getTicketUrl() {
+        const baseUrl = `http://${window.location.host}/browse/forms/${this.props.projectName}`;
+        if (this.state.relateToRecordSnapshot) {
+            return `${baseUrl}/record/${this.state.recordSnapshotKey}`;
+        } else if (this.state.relateToFormVersion || this.state.relateToQuestion) {
+            return `${baseUrl}/version/${this.state.formTemplateVersionKey}`;
+        } else {
+            return baseUrl;
+        }
+    }
+
     render() {
+        const ticketUrl = this.getTicketUrl();
+
         return <Card>
             <ListGroup variant="flush">
                 <ListGroup.Item>
@@ -84,10 +130,15 @@ export class CreateTicketForm extends React.Component {
                                                           name="description" rows={3}
                                                           onChange={this.onChangeSetState}/>
                                         </Form.Group>
+                                        <Form.Group>
+                                            <Form.Label>Ticket URL (added to description after submission)</Form.Label>
+                                            <br/>
+                                            <a target="_blank" href={ticketUrl}>{ticketUrl}</a>
+                                        </Form.Group>
                                         <ToggleButton variant="light" style={{marginBottom: "0"}} type="checkbox"
-                                                      checked={this.state.relateToForm}
+                                                      checked={this.state.relateToRecordSnapshot}
                                                       value="1"
-                                                      onChange={e => this.setState({relateToForm: e.currentTarget.checked})}>
+                                                      onChange={e => this.setState({relateToRecordSnapshot: e.currentTarget.checked})}>
                                             {' '} Relate to form
                                         </ToggleButton>
                                         {' '}

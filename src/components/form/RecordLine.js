@@ -26,18 +26,21 @@ export class RecordLine extends React.Component {
             historyDiv = <RecordSnapshotList recordURI={this.props.recordURI}
                                              projectName={this.props.projectName}
                                              clickHandler={this.props.clickHandler}
+                                             hightlightRecordSnapshotKey={this.props.recordSnapshotKey}
                                              displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
             />;
         }
 
         return <div>
-            <Card>
+            <Card className={this.props.isHighlighted ? "bg-warning" : ""}>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
                         <Row>
                             <Col xs={9}>
                                 <p>
                                 </p>
+                                <span>Internal record key: {this.props.internalKey}</span>
+                                <br/>
                                 <span>Number of versions: <b>{this.props.numberOfRecordVersions}</b></span>
                                 <br/>
                                 <span>Number of snapshots: <b>{this.props.numberOfRecordSnapshots}</b></span>

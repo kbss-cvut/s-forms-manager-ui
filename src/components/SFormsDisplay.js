@@ -103,7 +103,9 @@ export class SFormsDisplay extends React.Component {
             modalProps,
             wizardStepButtons: true,
             enableForwardSkip: true,
-            horizontalWizardNav: true
+            horizontalWizardNav: true,
+            // TODO: add "startingQuestionId" parameter to focus on question from ticket (implement at BE first)
+            // is dependant on caching formGen locally so that the ID of the question does not change everytime it is used
         };
 
         return <div>

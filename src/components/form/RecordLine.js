@@ -26,7 +26,7 @@ export class RecordLine extends React.Component {
             historyDiv = <RecordSnapshotList recordURI={this.props.recordURI}
                                              projectName={this.props.projectName}
                                              clickHandler={this.props.clickHandler}
-                                             hightlightRecordSnapshotKey={this.props.recordSnapshotKey}
+                                             highlightRecordSnapshotKey={this.props.highlightRecordSnapshotKey}
                                              displayComparedAnswersFunction={this.props.displayComparedAnswersFunction}
             />;
         }

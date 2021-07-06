@@ -15,7 +15,7 @@ export class RecordSnapshotLine extends React.Component {
 
     render() {
 
-        return <Card>
+        return <Card className={this.props.isHighlighted ? "bg-warning" : ""}>
             <ListGroup variant="flush">
                 <ListGroup.Item>
                     <Row>

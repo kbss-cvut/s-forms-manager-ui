@@ -55,11 +55,14 @@ export class IntelligentQuestionSelector extends React.Component {
             onChange={opt => {
                 this.refSelector.current._addSelectedOption(opt);
 
-                this.setState({
-                    activeLabel: opt["label"],
-                    activeQuestionOrigin: opt["questionOrigin"],
-                    activeQuestionOriginPath: opt["questionOriginPath"]
-                })
+                if (opt) {
+                    this.setState({
+                        activeLabel: opt["label"],
+                        activeQuestionOrigin: opt["questionOrigin"],
+                        activeQuestionOriginPath: opt["questionOriginPath"]
+                    })
+
+                }
             }}
         />;
 

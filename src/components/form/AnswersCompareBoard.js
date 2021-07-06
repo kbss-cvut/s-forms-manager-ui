@@ -37,8 +37,6 @@ export class AnswersCompareBoard extends React.Component {
         }).then(response => {
             return response.data
         }).then(data => {
-            console.log(data)
-
             this.setState({
                 leftAnswers: data.leftAnswers,
                 rightAnswers: data.rightAnswers,
@@ -60,9 +58,9 @@ export class AnswersCompareBoard extends React.Component {
             </Alert>
         }
 
-        const answerLines = answers.sort((a, b) => a.question > b.question ? 1 : -1).map((item, index) => {
+        const answerLines = answers.sort((a, b) => a.questionLabel > b.questionLabel ? 1 : -1).map((item, index) => {
             return <tr key={index}>
-                <td>{item.question}</td>
+                <td>{item.questionLabel}</td>
                 <td><b>{item.answerValue}</b></td>
             </tr>;
         });
@@ -87,11 +85,11 @@ export class AnswersCompareBoard extends React.Component {
             </Alert>
         }
 
-        const answerLines = changedAnswers.sort((a, b) => a.question > b.question ? 1 : -1).map((item, index) => {
+        const answerLines = changedAnswers.sort((a, b) => a.questionLabel > b.questionLabel ? 1 : -1).map((item, index) => {
             return <tr key={index}>
-                <td>{item.question}</td>
-                <td><p className="text-warning">{item.leftAnswerValue}</p></td>
-                <td><p className="text-success">{item.rightAnswerValue}</p></td>
+                <td>{item.questionLabel}</td>
+                <td><p className="text-success">{item.leftAnswerValue}</p></td>
+                <td><p className="text-warning">{item.rightAnswerValue}</p></td>
             </tr>
         });
 
@@ -99,8 +97,8 @@ export class AnswersCompareBoard extends React.Component {
             <thead>
             <tr>
                 <th>Question</th>
-                <th>Old answer</th>
                 <th>New answer</th>
+                <th>Old answer</th>
             </tr>
             </thead>
             <tbody>
@@ -134,10 +132,10 @@ export class AnswersCompareBoard extends React.Component {
             <h5>Changed answers ({this.state.changedAnswers.length})</h5>
             {changedAnswersTable}
             <br/>
-            <h5>New answers ({this.state.rightAnswers.length})</h5>
+            <h5>Removed old answers ({this.state.rightAnswers.length})</h5>
             {rightAnswersTable}
             <br/>
-            <h5>Removed old answers ({this.state.leftAnswers.length})</h5>
+            <h5>New answers ({this.state.leftAnswers.length})</h5>
             {leftAnswersTable}
         </div>
     }

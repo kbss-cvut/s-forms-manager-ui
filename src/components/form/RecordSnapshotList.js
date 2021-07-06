@@ -10,15 +10,15 @@ export class RecordSnapshotList extends React.Component {
         this.state = {
             recordSnapshots: null
         }
-        this.requestRecordVersions = this.requestRecordVersions.bind(this)
+        this.requestRecordSnapshots = this.requestRecordSnapshots.bind(this)
         this.compareRecordSnapshotAnswers = this.compareRecordSnapshotAnswers.bind(this)
     }
 
     componentDidMount() {
-        this.requestRecordVersions()
+        this.requestRecordSnapshots()
     }
 
-    requestRecordVersions() {
+    requestRecordSnapshots() {
         API.get("/rest/record/snapshot", {
             params: {
                 "projectName": this.props.projectName,
@@ -53,10 +53,10 @@ export class RecordSnapshotList extends React.Component {
             </Alert>
         }
 
-        let recordVersionsLines = this.state.recordSnapshots ? this.state.recordSnapshots.map((recordSnapshot, i) => {
+        let recordSnapshotsLines = this.state.recordSnapshots ? this.state.recordSnapshots.map((recordSnapshot, i) => {
             return <RecordSnapshotLine key={i}
                                        order={i}
-                                       isHighlighted={this.props.recordSnapshotKey === recordSnapshot.internalKey}
+                                       isHighlighted={this.props.highlightRecordSnapshotKey === recordSnapshot.internalKey}
                                        recordSnapshotURI={recordSnapshot.recordSnapshotURI}
                                        internalKey={recordSnapshot.internalKey}
                                        formTemplateVersionKey={recordSnapshot.formTemplateVersionKey}
@@ -73,7 +73,7 @@ export class RecordSnapshotList extends React.Component {
 
         return <div>
             <h5>History snapshots</h5>
-            {recordVersionsLines}
+            {recordSnapshotsLines}
         </div>
 
     }

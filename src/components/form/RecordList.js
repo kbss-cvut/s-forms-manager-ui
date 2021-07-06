@@ -47,7 +47,7 @@ export class RecordList extends React.Component {
         const recordLines = records ? records.map((record, i) => {
             return <RecordLine key={i}
                                isHighlighted={this.props.highlightRecordKey === record.internalKey}
-                               hightlightRecordSnapshotKey={this.props.recordSnapshotKey}
+                               highlightRecordSnapshotKey={this.props.highlightRecordSnapshotKey}
                                recordURI={record.recordURI}
                                recordCreated={record.recordCreated}
                                internalKey={record.internalKey}

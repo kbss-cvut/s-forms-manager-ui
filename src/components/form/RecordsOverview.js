@@ -30,7 +30,8 @@ export class RecordsOverview extends React.Component {
             leftComponent: null,
             rightComponent: null,
             activeContext: null,
-            highlightRecordKey: null
+            highlightRecordKey: null,
+            highlightRecordSnapshotKey: this.props.match.params.recordSnapshotKey
         }
         this.updateActiveContextUri = this.updateActiveContextUri.bind(this)
         this.requestRecords = this.requestRecords.bind(this)
@@ -57,7 +58,10 @@ export class RecordsOverview extends React.Component {
                 }
             }).then(response => {
                 this.updateActiveContextUri(response.data.remoteSampleContextURI)
-                this.setState({highlightRecordKey: response.data.internalKey});
+                this.setState({
+                    highlightRecordKey: response.data.internalKey,
+                    highlightRecordSnapshotKey: this.props.match.params.recordSnapshotKey
+                });
             })
         } else {
             this.setState({rightComponent: RIGHT_DISPLAY_VERSION_GRAPH});
@@ -65,11 +69,10 @@ export class RecordsOverview extends React.Component {
     }
 
     updateActiveContextUri(contextUri) {
-        this.setState({
-            activeContext: contextUri,
-            rightComponent: RIGHT_DISPLAY_S_FORMS,
-            highlightRecordKey: null
-        })
+        this.setState({activeContext: contextUri, rightComponent: RIGHT_DISPLAY_S_FORMS,})
+        if (this.state.contextUri !== this.state.activeContext) {
+            this.setState({highlightRecordKey: null, highlightRecordSnapshotKey: null})
+        }
     }
 
     displayComparedAnswers(comparedSnapshotUri1, comparedSnapshotUri2) {
@@ -103,7 +106,7 @@ export class RecordsOverview extends React.Component {
                                             displayComparedAnswersFunction={this.displayComparedAnswers}
                                             displayCount={true}
                                             highlightRecordKey={this.state.highlightRecordKey}
-                                            highlightRecordSnapshotKey={this.props.match.params.recordSnapshotKey}/>
+                                            highlightRecordSnapshotKey={this.state.highlightRecordSnapshotKey}/>
                 break;
             default:
                 leftComponent = <div/>

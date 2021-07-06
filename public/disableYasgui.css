@@ -1,16 +1,16 @@
 
-#yasgui div.controlbar {
+.yasgui-disable-styles div.controlbar {
     display: none;
 }
 
-#yasgui div.tabsList {
+.yasgui-disable-styles div.tabsList {
     display: none;
 }
 
-#yasgui div.yasqe_buttons {
+.yasgui-disable-styles div.yasqe_buttons {
     display: none;
 }
 
-#yasgui div.yasr {
+.yasgui-disable-styles div.yasr {
     display: none;
 }

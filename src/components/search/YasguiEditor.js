@@ -12,7 +12,7 @@ export default class YasguiEditor extends React.Component {
     }
 
     componentDidMount() {
-        let yasgui = new Yasgui(document.getElementById("yasgui"));
+        let yasgui = new Yasgui(document.getElementById("yasgui" + this.props.editorNumber));
         yasgui.getTab().setQuery(this.props.query)
 
         this.setState({yasguiEditor: yasgui})
@@ -26,6 +26,6 @@ export default class YasguiEditor extends React.Component {
 
 
     render() {
-        return <div id="yasgui"/>;
+        return <div className={"yasgui-disable-styles"} id={"yasgui" + this.props.editorNumber}/>;
     }
 }

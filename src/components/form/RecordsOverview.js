@@ -149,7 +149,7 @@ export class RecordsOverview extends React.Component {
                     <hr/>
                     <Button variant="outline-primary" type="submit"
                             onClick={() => this.setState({leftComponent: LEFT_DISPLAY_RECORDS_LIST})}>
-                        Show records
+                        Show user records
                     </Button>
                     {' '}
                     <Button variant="outline-primary" type="submit"
@@ -165,10 +165,10 @@ export class RecordsOverview extends React.Component {
                         Show versions graph
                     </Button>
                     {' '}
-                    <Button variant="outline-primary" type="submit"
-                            onClick={() => this.setState({rightComponent: RIGHT_COMPARE_VERSIONS})}>
-                        Compare versions
-                    </Button>
+                    {/*<Button variant="outline-primary" type="submit"*/}
+                    {/*        onClick={() => this.setState({rightComponent: RIGHT_COMPARE_VERSIONS})}>*/}
+                    {/*    Compare versions*/}
+                    {/*</Button>*/}
                     <br/><br/>
                 </Container>
                 <Row>

@@ -132,6 +132,9 @@ export class SearchOptionsPicker extends React.Component {
                     <Col xs={4} className={"text-center"}>
                         {this.createEntityUseCaseLine("QuestionTemplateSnapshot", "question-template-snapshot")}
                     </Col>
+                    <Col xs={4} className={"text-right"}>
+                        {this.createEntityUseCaseLine("SubmittedAnswer", "submitted-answer")}
+                    </Col>
                 </Row>
                 <br/>
             </ListGroup.Item>

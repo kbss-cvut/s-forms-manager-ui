@@ -63,7 +63,7 @@ export class ProjectsOverview extends React.Component {
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
-                                    <Col xs={3}><p className="font-weight-bold"> FormGen Repository URl</p></Col>
+                                    <Col xs={3}><p className="font-weight-bold"> FormGen Repository URL</p></Col>
                                     <Col>{formGenRepositoryUrl}</Col>
                                 </Row>
                             </ListGroup.Item>

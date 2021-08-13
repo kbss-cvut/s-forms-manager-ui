@@ -96,7 +96,7 @@ class AddProjectForm extends React.Component {
                     <Form.Group controlId="formBasicAppRecordRecognitionSPARQL">
                         <Form.Label>Record recognition SPARQL</Form.Label>
                         <Form.Control as="textarea"
-                                      placeholder="SELECT ?recordCreateDate ?recordModifiedDate ?remoteRecordURI ?question"
+                                      placeholder="SELECT ?recordCreateDate ?recordModifiedDate ?remoteRecordURI ?rootQuestionOrigin"
                                       name="recordRecognitionSPARQL" rows={5}
                                       onChange={this.onChangeSetState}/>
                     </Form.Group>

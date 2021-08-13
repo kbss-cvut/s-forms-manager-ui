@@ -36,17 +36,17 @@ class HeaderNavigationBar extends React.Component {
                         <Nav.Link as={Link} to="/projects">
                             Projects
                         </Nav.Link>
-                        <NavDropdown title="Browse Forms">
+                        <NavDropdown title="Browse in Imported data">
                             {browseFormLinks}
                         </NavDropdown>
-                        <NavDropdown title="Browse Contexts">
-                            {browseContextLinks}
-                        </NavDropdown>
-                        <NavDropdown title="Search in Forms">
+                        <NavDropdown title="Search in Imported data">
                             {searchInFormsLinks}
                         </NavDropdown>
-                        <NavDropdown title="Browse Tickets">
+                        <NavDropdown title="Browse in Tickets">
                             {browseTicketsLinks}
+                        </NavDropdown>
+                        <NavDropdown title="Browse Remote data">
+                            {browseContextLinks}
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

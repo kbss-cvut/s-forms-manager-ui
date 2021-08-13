@@ -10,8 +10,7 @@ export class WelcomePage extends React.Component {
                 <Container>
                     <h1>Welcome to SForms Manager!</h1>
                     <p>
-                        This is a modified jumbotron that occupies the entire horizontal space of
-                        its parent.
+                        You can manager SForms data with this app!
                     </p>
                 </Container>
             </Jumbotron>

@@ -39,7 +39,6 @@ export class RecordSnapshotLine extends React.Component {
                         <Col xs={3}>
                             <Button variant="outline-primary" type="submit" size="sm" className="float-right"
                                     onClick={() => this.props.clickHandler(this.props.remoteSampleContextURI)}>
-                                {/*TODO: change everywhere to "update s-forms context" */}
                                 Display
                             </Button>
                             {' '}

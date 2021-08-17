@@ -58,7 +58,7 @@ export class CreateTicketForm extends React.Component {
             });
         }).catch((error) => {
                 console.log(error)
-                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
+                this.setState({showError: true, showSuccess: false});
             }
         );
     }

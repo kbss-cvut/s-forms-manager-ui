@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import {FormTemplateVersionList} from "../formtemplate/FormTemplateVersionList";
 import {ProjectStatistics} from "../form/ProjectStatistics";
-import {SearchOptionsPicker} from "./SearchOptionsPicker";
+import {SearchQueryHelper} from "./SearchQueryHelper";
 import {SearchResultList} from "./SearchResultList";
 import API from "../../api";
 import "@triply/yasgui/build/yasgui.min.css";
@@ -139,8 +139,11 @@ export class SearchOverview extends React.Component {
                 <Row>
                     <Col xs={6}>
                         <div>
-                            <SearchOptionsPicker projectName={this.props.match.params.projectName}
-                                                 changeQuery={this.changeQueryInEditor}/>
+                            <SearchQueryHelper projectName={this.props.match.params.projectName}
+                                               changeQuery={this.changeQueryInEditor}
+                                               displayEditor1={this.state.displayEditor1}
+                                               displayEditor3={this.state.displayEditor3}
+                            />
                         </div>
                     </Col>
                     <Col xs={6}>

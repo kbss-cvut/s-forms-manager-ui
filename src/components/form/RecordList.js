@@ -60,8 +60,7 @@ export class RecordList extends React.Component {
             />;
         }) : <Alert variant={"light"} className={"h-10"}>
             The list is empty.
-        </Alert>; // TODO: create a function for that
-        // TODO: introduce this concept to the whole app
+        </Alert>;
 
         return <div>
             <h4>Records</h4>

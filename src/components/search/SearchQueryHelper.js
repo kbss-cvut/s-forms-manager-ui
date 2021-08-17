@@ -6,7 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Col from "react-bootstrap/Col";
 
 
-export class SearchOptionsPicker extends React.Component {
+export class SearchQueryHelper extends React.Component {
 
     constructor() {
         super();
@@ -31,25 +31,7 @@ export class SearchOptionsPicker extends React.Component {
             this.props.changeQuery(response.data, editorNumber);
         }).catch((error) => {
                 console.log(error)
-                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
-            }
-        );
-    }
-
-    getAutocompleteValues() {
-        API.get("/rest/search/getAutocomplete", {
-            params: {
-                projectName: this.props.projectName,
-                depth: 0,
-                questionOriginPath: "http://vfn.cz/ontologies/fss-form/light-treatment--d-h--size-of-the-tumor--latero-lateral-q-qo"
-            }
-        }).then((response) => {
-            // this.setState({query: response.data})
-            // this.props.changeQuery(response.data);
-            console.log(response)
-        }).catch((error) => {
-                console.log(error)
-                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
+                this.setState({showError: true, showSuccess: false});
             }
         );
     }
@@ -58,20 +40,24 @@ export class SearchOptionsPicker extends React.Component {
         return <div><Row>
             <Col>
                 <h5>{name}</h5>
-                <Button variant="light"
-                        onClick={() => this.updateQueryEditor(useCaseId, 1)}>
-                    1
-                </Button>
+                {this.props.displayEditor1 ?
+                    <Button variant="light"
+                            onClick={() => this.updateQueryEditor(useCaseId, 1)}>
+                        1
+                    </Button> : <div/>
+                }
                 {' '}
                 <Button variant="light"
                         onClick={() => this.updateQueryEditor(useCaseId, 2)}>
-                    2
+                    Load
                 </Button>
                 {' '}
-                <Button variant="light"
-                        onClick={() => this.updateQueryEditor(useCaseId, 3)}>
-                    3
-                </Button>
+                {this.props.displayEditor3 ?
+                    <Button variant="light"
+                            onClick={() => this.updateQueryEditor(useCaseId, 3)}>
+                        3
+                    </Button> : <div/>
+                }
             </Col>
         </Row>
         </div>
@@ -85,15 +71,24 @@ export class SearchOptionsPicker extends React.Component {
                     {descriptionDiv}
                 </Col>
                 <Col>
-                    <Button variant="light"
-                            onClick={() => this.updateQueryEditor(useCaseId, 2)}>
-                        2
-                    </Button>
+                    {this.props.displayEditor1 ?
+                        <Button variant="light"
+                                onClick={() => this.updateQueryEditor(useCaseId, 1)}>
+                            1
+                        </Button> : <div/>
+                    }
                     {' '}
                     <Button variant="light"
-                            onClick={() => this.updateQueryEditor(useCaseId, 3)}>
-                        3
+                            onClick={() => this.updateQueryEditor(useCaseId, 2)}>
+                        Load
                     </Button>
+                    {' '}
+                    {this.props.displayEditor3 ?
+                        <Button variant="light"
+                                onClick={() => this.updateQueryEditor(useCaseId, 3)}>
+                            3
+                        </Button> : <div/>
+                    }
                 </Col>
             </Row>
             <br/>

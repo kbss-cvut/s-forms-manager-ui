@@ -10,7 +10,7 @@ export class WelcomePage extends React.Component {
                 <Container>
                     <h1>Welcome to SForms Manager!</h1>
                     <p>
-                        You can manager SForms data with this app!
+                        You can manage SForms data with this app!
                     </p>
                 </Container>
             </Jumbotron>

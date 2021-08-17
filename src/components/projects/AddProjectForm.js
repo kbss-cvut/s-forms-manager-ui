@@ -55,7 +55,7 @@ class AddProjectForm extends React.Component {
             this.setState({showError: false, showSuccess: true});
         }).catch((error) => {
                 console.log(error)
-                this.setState({showError: true, showSuccess: false}); // todo: improve handling individual messages
+                this.setState({showError: true, showSuccess: false});
             }
         );
     }

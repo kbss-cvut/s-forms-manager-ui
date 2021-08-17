@@ -49,7 +49,7 @@ export class RecordsOverview extends React.Component {
             }).then(response => {
                 this.updateActiveContextUri(response.data.sampleRemoteContextUri)
             })
-        } else if (this.props.match.params?.recordSnapshotKey) { // TODO
+        } else if (this.props.match.params?.recordSnapshotKey) {
             this.setState({leftComponent: LEFT_DISPLAY_RECORDS_LIST});
             API.get("/rest/record/find", {
                 params: {
@@ -120,7 +120,7 @@ export class RecordsOverview extends React.Component {
                 break;
             case RIGHT_COMPARE_VERSIONS:
                 rightComponent =
-                    <FormTemplateVersionCompareBoard key={this.state.activeContext} // TODO: remove this key???
+                    <FormTemplateVersionCompareBoard key={this.state.activeContext}
                                                      contextUri={this.state.activeContext}
                                                      projectName={this.props.match.params.projectName}/>
                 break;
